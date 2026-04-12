@@ -9,6 +9,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
 import Profile from './pages/Profile';
+import ForgotPassword from './pages/ForgotPassword';
+import ResetPassword from './pages/ResetPassword';
 
 /**
  * 受保护的路由组件
@@ -89,6 +91,26 @@ function App() {
           element={
             <RedirectIfAuthenticated>
               <Register />
+            </RedirectIfAuthenticated>
+          } 
+        />
+        
+        {/* 忘记密码页面 */}
+        <Route 
+          path="/forgot-password" 
+          element={
+            <RedirectIfAuthenticated>
+              <ForgotPassword />
+            </RedirectIfAuthenticated>
+          } 
+        />
+        
+        {/* 密码重置页面 */}
+        <Route 
+          path="/reset-password" 
+          element={
+            <RedirectIfAuthenticated>
+              <ResetPassword />
             </RedirectIfAuthenticated>
           } 
         />

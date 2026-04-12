@@ -22,6 +22,16 @@ export const authApi = {
   // 刷新Token
   refreshToken: () => {
     return request.post('/auth/refresh');
+  },
+
+  // 忘记密码
+  forgotPassword: (data) => {
+    return request.post('/auth/forgot-password', data);
+  },
+
+  // 重置密码
+  resetPassword: (data) => {
+    return request.post('/auth/reset-password', data);
   }
 };
 

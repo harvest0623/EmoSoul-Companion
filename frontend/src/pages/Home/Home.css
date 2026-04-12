@@ -73,7 +73,7 @@
     flex-direction: column;
     align-items: center;
     padding: 20px 22px 18px;
-    background: white;
+    background: linear-gradient(135deg, #f8f4ff 0%, #f0e6ff 50%, #e6d9ff 100%);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-md);
     height: fit-content;

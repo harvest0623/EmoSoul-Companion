@@ -4,6 +4,14 @@
   width: 220px;
   height: 220px;
   margin: 0 auto;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  perspective: 1000px;
+}
+
+/* 鼠标悬停时的容器效果 */
+.avatar-container:hover {
+  transform: scale(1.05);
 }
 
 /* 背景光晕环 */
@@ -13,6 +21,35 @@
   border-radius: 50%;
   background: radial-gradient(circle, rgba(233, 213, 255, 0.4) 0%, rgba(233, 213, 255, 0) 70%);
   animation: pulse 3s ease-in-out infinite;
+  transition: all 0.3s ease;
+}
+
+/* 鼠标悬停时的光晕效果 */
+.avatar-container:hover .avatar-glow-ring {
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.6) 0%, rgba(236, 72, 153, 0.4) 50%, rgba(233, 213, 255, 0) 70%);
+  animation: pulse-hover 2s ease-in-out infinite;
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.4);
+}
+
+/* 情绪色彩变化 */
+.avatar-container.happy .avatar-glow-ring {
+  background: radial-gradient(circle, rgba(252, 211, 77, 0.6) 0%, rgba(245, 158, 11, 0.4) 50%, rgba(252, 211, 77, 0) 70%);
+  box-shadow: 0 0 30px rgba(252, 211, 77, 0.4);
+}
+
+.avatar-container.sad .avatar-glow-ring {
+  background: radial-gradient(circle, rgba(96, 165, 250, 0.6) 0%, rgba(37, 99, 235, 0.4) 50%, rgba(96, 165, 250, 0) 70%);
+  box-shadow: 0 0 30px rgba(96, 165, 250, 0.4);
+}
+
+.avatar-container.surprised .avatar-glow-ring {
+  background: radial-gradient(circle, rgba(244, 114, 182, 0.6) 0%, rgba(219, 39, 119, 0.4) 50%, rgba(244, 114, 182, 0) 70%);
+  box-shadow: 0 0 30px rgba(244, 114, 182, 0.4);
+}
+
+.avatar-container.thinking .avatar-glow-ring {
+  background: radial-gradient(circle, rgba(167, 139, 250, 0.6) 0%, rgba(124, 58, 237, 0.4) 50%, rgba(167, 139, 250, 0) 70%);
+  box-shadow: 0 0 30px rgba(167, 139, 250, 0.4);
 }
 
 /* 图片叠加容器 */
@@ -22,6 +59,18 @@
   height: 100%;
   border-radius: 50%;
   overflow: hidden;
+  transition: all 0.3s ease;
+  transform-style: preserve-3d;
+}
+
+/* 鼠标悬停时的图片容器效果 */
+.avatar-container:hover .avatar-image-wrapper {
+  transform: rotate(5deg) scale(1.05) translateZ(20px);
+}
+
+/* 3D旋转效果 */
+.avatar-container.rotate .avatar-image-wrapper {
+  animation: rotate 10s linear infinite;
 }
 
 /* 所有头像图片基础样式 */
@@ -43,6 +92,7 @@
 .avatar-img.active {
   opacity: 1;
   transform: scale(1);
+  animation: micro-expression 4s ease-in-out infinite;
 }
 
 /* 淡出的表情 */
@@ -61,10 +111,63 @@
   animation: float 4s ease-in-out infinite;
 }
 
+/* 鼠标悬停时的粒子效果容器 */
+.avatar-particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* 粒子元素 */
+.avatar-particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: rgba(139, 92, 246, 0.8);
+  border-radius: 50%;
+  animation: particle-float 3s ease-out forwards;
+}
+
+/* 波纹效果容器 */
+.avatar-ripple {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 5;
+}
+
+/* 波纹元素 */
+.avatar-ripple-effect {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid rgba(139, 92, 246, 0.6);
+  border-radius: 50%;
+  animation: ripple 2s ease-out forwards;
+}
+
+/* 点击效果 */
+.avatar-container.clicked {
+  animation: click-effect 0.3s ease-out;
+}
+
 /* 动画定义 */
 @keyframes pulse {
   0%, 100% { opacity: 0.3; transform: scale(1); }
   50% { opacity: 0.6; transform: scale(1.05); }
+}
+
+@keyframes pulse-hover {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 0.9; transform: scale(1.1); }
 }
 
 @keyframes bounce {
@@ -75,6 +178,47 @@
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-5px); }
+}
+
+@keyframes particle-float {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0) translateY(-50px);
+  }
+}
+
+@keyframes micro-expression {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.02) rotate(1deg); }
+  75% { transform: scale(1.01) rotate(-1deg); }
+}
+
+@keyframes rotate {
+  from { transform: rotateY(0deg); }
+  to { transform: rotateY(360deg); }
+}
+
+@keyframes ripple {
+  0% {
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    width: 300px;
+    height: 300px;
+    opacity: 0;
+  }
+}
+
+@keyframes click-effect {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.95); }
+  100% { transform: scale(1); }
 }
 
 /* 响应式 */
