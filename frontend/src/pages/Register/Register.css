@@ -119,7 +119,7 @@
 /* 右侧注册区域 */
 .register-form-container {
   flex: 1;
-  padding: 40px;
+  padding: 32px 40px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -149,29 +149,29 @@
 .register-card {
   background: white;
   border-radius: 24px;
-  padding: 16px 40px;
+  padding: 12px 40px;
   box-shadow: 0 20px 60px rgba(139, 92, 246, 0.15);
-  margin-top: 8px;
+  margin-top: 4px;
 }
 
 .register-card h2 {
   font-size: 24px;
   font-weight: 600;
-  margin: 8px 0 8px;
+  margin: 4px 0 4px;
   text-align: center;
 }
 
 .register-subtitle {
   color: var(--text-secondary);
   text-align: center;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   font-size: 14px;
 }
 
 .register-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 12px;
 }
 
 .form-group {
@@ -187,14 +187,14 @@
 }
 
 .register-btn {
-  margin-top: 8px;
+  margin-top: 4px;
   padding: 14px;
   font-size: 16px;
   font-weight: 600;
 }
 
 .register-footer {
-  margin-top: 20px;
+  margin-top: 12px;
   text-align: center;
   font-size: 14px;
   color: var(--text-secondary);

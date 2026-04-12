@@ -15,7 +15,7 @@ const Home = () => {
   const navigate = useNavigate();
   const messagesEndRef = useRef(null);
   const pollIntervalRef = useRef(null);
-  
+
   const {
     messages,
     currentEmotion,
@@ -80,7 +80,7 @@ const Home = () => {
         console.error('加载历史记录失败:', error);
       }
     };
-    
+
     loadHistory();
   }, [setMessages]);
 
@@ -105,7 +105,7 @@ const Home = () => {
 
     // 每5秒轮询一次
     pollIntervalRef.current = setInterval(pollMessages, 5000);
-    
+
     return () => {
       if (pollIntervalRef.current) {
         clearInterval(pollIntervalRef.current);
@@ -160,7 +160,7 @@ const Home = () => {
 
   const handleClearHistory = async () => {
     if (!window.confirm('确定要清空所有对话记录吗？')) return;
-    
+
     try {
       await chatApi.clearHistory();
       setMessages([]);
@@ -189,8 +189,8 @@ const Home = () => {
         {/* 左侧 - 数字人展示区 */}
         <div className="avatar-section">
           <div className="avatar-wrapper">
-            <DigitalAvatar 
-              emotion={currentEmotion} 
+            <DigitalAvatar
+              emotion={currentEmotion}
               isTyping={isTyping}
             />
           </div>
@@ -250,7 +250,7 @@ const Home = () => {
               清空记录
             </button>
           </div>
-          
+
           <div className="chat-messages">
             {messages.length === 0 ? (
               <div className="empty-state">
