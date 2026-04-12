@@ -5,8 +5,15 @@ import AvatarCropper from '../../components/AvatarCropper';
 import { userApi } from '../../services/userService';
 import { authApi } from '../../services/authService';
 import { useAuthStore } from '../../store/authStore';
+import useThemeStore from '../../store/themeStore';
 import { validator } from '../../utils/validator';
 import './Profile.css';
+
+// 引入图标字体
+const link = document.createElement('link');
+link.rel = 'stylesheet';
+link.href = '//at.alicdn.com/t/c/font_5158834_czcc22vhf94.css';
+document.head.appendChild(link);
 
 /**
  * 个人中心页面
@@ -26,6 +33,9 @@ const Profile = () => {
     newPassword: ''
   });
   const [loading, setLoading] = useState(false);
+
+  // 从全局主题状态获取
+  const { darkMode, toggleDarkMode } = useThemeStore();
 
   // 初始化用户信息
   useEffect(() => {
@@ -178,7 +188,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="profile-page">
+    <div className={`profile-page ${darkMode ? 'dark-mode' : ''}`}>
       {/* 顶部导航 */}
       <header className="profile-header">
         <div className="header-brand">
@@ -189,6 +199,9 @@ const Profile = () => {
             对话
           </button>
           <button className="nav-btn active">我的</button>
+          <button className="mode-toggle-btn" onClick={toggleDarkMode} aria-label={darkMode ? '切换到白天模式' : '切换到夜间模式'}>
+            <span className={`mode-icon iconfont ${darkMode ? 'icon-taiyang' : 'icon-ansemoshi'}`}></span>
+          </button>
         </nav>
       </header>
 

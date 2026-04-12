@@ -55,6 +55,198 @@
     color: white;
 }
 
+/* 模式切换按钮 */
+.mode-toggle-btn {
+    width: 42px;
+    height: 42px;
+    border: none;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    margin-left: 8px;
+}
+
+.mode-toggle-btn:hover {
+    background: var(--bg-tertiary);
+    transform: scale(1.05);
+}
+
+.mode-icon {
+    line-height: 1;
+}
+
+.mode-toggle-btn .icon-taiyang,
+.mode-toggle-btn .icon-ansemoshi {
+    font-size: 24px !important;
+    font-family: "iconfont" !important;
+    font-style: normal !important;
+    -webkit-font-smoothing: antialiased !important;
+    -moz-osx-font-smoothing: grayscale !important;
+}
+
+/* 深色模式 */
+.home-page.dark-mode {
+    background: #121212;
+}
+
+.home-page.dark-mode .home-header {
+    background: #1e1e1e;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.home-page.dark-mode .nav-btn {
+    color: #a0a0a0;
+}
+
+.home-page.dark-mode .nav-btn.active {
+    color: #000000;
+}
+
+.home-page.dark-mode .nav-btn:hover {
+    background: #2d2d2d;
+    color: #ffffff;
+}
+
+.home-page.dark-mode .mode-toggle-btn {
+    background: #2d2d2d;
+    color: #ffffff;
+}
+
+.home-page.dark-mode .mode-toggle-btn:hover {
+    background: #3d3d3d;
+}
+
+.home-page.dark-mode .avatar-section {
+    background: linear-gradient(135deg, #fef2f2 0%, #fce7f3 50%, #fbcfe8 100%);
+    box-shadow: var(--shadow-md);
+}
+
+.home-page.dark-mode .status-text {
+    color: var(--text-secondary);
+}
+
+.home-page.dark-mode .status-picker {
+    background: white;
+    box-shadow:
+        0 10px 40px rgba(15, 23, 42, 0.12),
+        0 0 0 1px rgba(139, 92, 246, 0.08);
+    border: none;
+}
+
+.home-page.dark-mode .status-picker-title {
+    color: var(--text-secondary);
+}
+
+.home-page.dark-mode .status-picker-item {
+    background: var(--bg-secondary, #f8fafc);
+}
+
+.home-page.dark-mode .status-picker-item:hover {
+    background: #f3e8ff;
+    border-color: #e9d5ff;
+}
+
+.home-page.dark-mode .status-picker-item.selected {
+    background: linear-gradient(135deg, #f3e8ff 0%, #ede9fe 100%);
+    border-color: #c4b5fd;
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.15);
+}
+
+.home-page.dark-mode .status-picker-label {
+    color: var(--text-primary);
+}
+
+.home-page.dark-mode .chat-section {
+    background: #1e1e1e;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.home-page.dark-mode .chat-header {
+    border-bottom: 1px solid #3d3d3d;
+}
+
+.home-page.dark-mode .chat-header h3 {
+    color: #ffffff;
+}
+
+.home-page.dark-mode .clear-btn {
+    border: 1px solid #3d3d3d;
+    background: #2d2d2d;
+    color: #a0a0a0;
+}
+
+.home-page.dark-mode .clear-btn:hover {
+    background: #4d1a1a;
+    color: #f87171;
+    border-color: #6d2a2a;
+}
+
+.home-page.dark-mode .chat-messages {
+    background: #121212;
+}
+
+.home-page.dark-mode .empty-state {
+    color: #a0a0a0;
+}
+
+.home-page.dark-mode .empty-state p {
+    color: #ffffff;
+}
+
+.home-page.dark-mode .chat-input-area {
+    border-top: 1px solid #3d3d3d;
+    background: #1e1e1e;
+}
+
+.home-page.dark-mode .mode-btn {
+    border: 2px solid var(--border-color);
+    background: white;
+    color: var(--text-secondary);
+}
+
+.home-page.dark-mode .mode-btn:hover {
+    border-color: #ec4899;
+    color: #ec4899;
+}
+
+.home-page.dark-mode .mode-btn.active {
+    background: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 2px 8px rgba(236, 72, 153, 0.3);
+}
+
+.home-page.dark-mode .mode-btn.vip:hover {
+    border-color: #F59E0B;
+    color: #F59E0B;
+}
+
+.home-page.dark-mode .mode-btn.vip.active {
+    background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+    color: white;
+    border-color: transparent;
+    box-shadow: 0 2px 8px rgba(245, 158, 11, 0.3);
+}
+
+.home-page.dark-mode .chat-input {
+    border: 2px solid #3d3d3d;
+    background: #2d2d2d;
+    color: #ffffff;
+}
+
+.home-page.dark-mode .chat-input:focus {
+    border-color: var(--primary-light);
+}
+
+.home-page.dark-mode .input-hint {
+    color: #6d6d6d;
+}
+
 /* 主内容区 */
 .home-content {
     flex: 1;

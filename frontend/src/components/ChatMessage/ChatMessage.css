@@ -101,6 +101,17 @@
     }
 }
 
+/* 深色模式 */
+.home-page.dark-mode .chat-message.ai .message-bubble {
+    background: #2d2d2d;
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.home-page.dark-mode .message-time {
+    color: #6d6d6d;
+}
+
 /* 响应式 */
 @media (max-width: 768px) {
     .message-content {

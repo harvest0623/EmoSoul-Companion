@@ -5,8 +5,15 @@ import DigitalAvatar from '../../components/DigitalAvatar';
 import ChatMessage from '../../components/ChatMessage';
 import { chatApi } from '../../services/chatService';
 import { useChatStore } from '../../store/chatStore';
+import useThemeStore from '../../store/themeStore';
 import { COMPANION_STATUSES, getCompanionStatusById } from '../../constants/companionStatus';
 import './Home.css';
+
+// 引入图标字体
+const link = document.createElement('link');
+link.rel = 'stylesheet';
+link.href = '//at.alicdn.com/t/c/font_5158834_czcc22vhf94.css';
+document.head.appendChild(link);
 
 /**
  * 主页 - 数字人对话页面
@@ -36,6 +43,9 @@ const Home = () => {
   const [isTyping, setIsTyping] = useState(false);
   const [statusMenuOpen, setStatusMenuOpen] = useState(false);
   const statusPickerRef = useRef(null);
+
+  // 从全局主题状态获取
+  const { darkMode, toggleDarkMode } = useThemeStore();
 
   const currentCompanion = getCompanionStatusById(companionStatus);
 
@@ -171,7 +181,7 @@ const Home = () => {
   };
 
   return (
-    <div className="home-page">
+    <div className={`home-page ${darkMode ? 'dark-mode' : ''}`}>
       {/* 顶部导航 */}
       <header className="home-header">
         <div className="header-brand">
@@ -181,6 +191,9 @@ const Home = () => {
           <button className="nav-btn active">对话</button>
           <button className="nav-btn" onClick={() => navigate('/profile')}>
             我的
+          </button>
+          <button className="mode-toggle-btn" onClick={toggleDarkMode} aria-label={darkMode ? '切换到白天模式' : '切换到夜间模式'}>
+            <span className={`mode-icon iconfont ${darkMode ? 'icon-taiyang' : 'icon-ansemoshi'}`}></span>
           </button>
         </nav>
       </header>

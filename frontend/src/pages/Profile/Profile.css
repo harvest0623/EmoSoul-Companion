@@ -51,6 +51,164 @@
   color: white;
 }
 
+/* 模式切换按钮 */
+.mode-toggle-btn {
+  width: 48px;
+  height: 48px;
+  border: none;
+  border-radius: 50%;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  margin-left: 8px;
+}
+
+.mode-toggle-btn:hover {
+  background: var(--bg-tertiary);
+  transform: scale(1.05);
+}
+
+.mode-icon {
+  line-height: 1;
+}
+
+.mode-toggle-btn .icon-taiyang,
+.mode-toggle-btn .icon-ansemoshi {
+  font-size: 24px !important;
+  font-family: "iconfont" !important;
+  font-style: normal !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+
+/* 深色模式 */
+.profile-page.dark-mode {
+  background: #121212;
+}
+
+.profile-page.dark-mode .profile-header {
+  background: #1e1e1e;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.profile-page.dark-mode .nav-btn {
+  color: #a0a0a0;
+}
+
+.profile-page.dark-mode .nav-btn:hover {
+  background: #2d2d2d;
+  color: #ffffff;
+}
+
+.profile-page.dark-mode .nav-btn.active {
+  color: #000000;
+}
+
+.profile-page.dark-mode .mode-toggle-btn {
+  background: #2d2d2d;
+  color: #ffffff;
+}
+
+.profile-page.dark-mode .mode-toggle-btn:hover {
+  background: #3d3d3d;
+}
+
+.profile-page.dark-mode .profile-card {
+  background: #1e1e1e;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.profile-page.dark-mode .avatar-upload {
+  border-color: #ec4899;
+}
+
+.profile-page.dark-mode .avatar-placeholder {
+  background: linear-gradient(135deg, #f472b6 0%, #ec4899 100%);
+}
+
+.profile-page.dark-mode .avatar-hint {
+  color: #6d6d6d;
+}
+
+.profile-page.dark-mode .profile-field label {
+  color: #a0a0a0;
+}
+
+.profile-page.dark-mode .field-value {
+  background: #2d2d2d;
+}
+
+.profile-page.dark-mode .field-value.read-only {
+  background: #3d3d3d;
+}
+
+.profile-page.dark-mode .field-value span:first-child {
+  color: #ffffff;
+}
+
+.profile-page.dark-mode .field-tag {
+  background: #2d2d2d;
+  color: #6d6d6d;
+}
+
+.profile-page.dark-mode .edit-btn {
+  border-color: #ec4899;
+  color: #ec4899;
+}
+
+.profile-page.dark-mode .edit-btn:hover {
+  background: #ec4899;
+  color: white;
+}
+
+.profile-page.dark-mode .profile-actions {
+  border-top: 1px solid #3d3d3d;
+}
+
+.profile-page.dark-mode .action-btn {
+  background: #2d2d2d;
+  color: #ffffff;
+}
+
+.profile-page.dark-mode .action-btn:hover {
+  background: #3d3d3d;
+}
+
+.profile-page.dark-mode .logout-btn {
+  color: #f87171;
+}
+
+.profile-page.dark-mode .logout-btn:hover {
+  background: #4d1a1a;
+}
+
+.profile-page.dark-mode .modal-content {
+  background: #1e1e1e;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+.profile-page.dark-mode .modal-content h3 {
+  color: #ffffff;
+}
+
+.profile-page.dark-mode .form-group label {
+  color: #a0a0a0;
+}
+
+.profile-page.dark-mode .input {
+  border: 2px solid #3d3d3d;
+  background: #2d2d2d;
+  color: #ffffff;
+}
+
+.profile-page.dark-mode .input:focus {
+  border-color: #ec4899;
+}
+
 /* 内容区 */
 .profile-content {
   flex: 1;
@@ -247,6 +405,21 @@
 
 .logout-btn:hover {
   background: #FEE2E2;
+}
+
+/* 输入框 */
+.input {
+  padding: 12px 16px;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.input:focus {
+  border-color: var(--primary-color);
 }
 
 /* 弹窗 */
