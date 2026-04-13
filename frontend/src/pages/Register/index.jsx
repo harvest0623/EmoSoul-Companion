@@ -21,7 +21,7 @@ const avatars = {
 // 引入图标字体
 const link = document.createElement('link');
 link.rel = 'stylesheet';
-link.href = '//at.alicdn.com/t/c/font_5158834_czcc22vhf94.css';
+link.href = '//at.alicdn.com/t/c/font_5158834_g48mg3g9h7b.css';
 document.head.appendChild(link);
 
 /**

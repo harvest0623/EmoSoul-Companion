@@ -12,7 +12,7 @@ import './Profile.css';
 // 引入图标字体
 const link = document.createElement('link');
 link.rel = 'stylesheet';
-link.href = '//at.alicdn.com/t/c/font_5158834_czcc22vhf94.css';
+link.href = '//at.alicdn.com/t/c/font_5158834_g48mg3g9h7b.css';
 document.head.appendChild(link);
 
 /**
@@ -235,8 +235,8 @@ const Profile = () => {
           <div className="profile-form">
             {/* 账号 */}
             <div className="profile-field">
-              <label>账号</label>
               <div className="field-value read-only">
+                <span className="field-icon iconfont icon-dianhua"></span>
                 <span>{user?.account || '-'}</span>
                 <span className="field-tag">不可修改</span>
               </div>
@@ -244,17 +244,19 @@ const Profile = () => {
 
             {/* 昵称 */}
             <div className="profile-field">
-              <label>昵称</label>
               {isEditingNickname ? (
                 <div className="field-edit">
-                  <input
-                    type="text"
-                    className="input"
-                    value={nickname}
-                    onChange={(e) => setNickname(e.target.value)}
-                    maxLength={16}
-                    autoFocus
-                  />
+                  <div className="input-with-icon">
+                    <span className="input-icon iconfont icon-zhanghao"></span>
+                    <input
+                      type="text"
+                      className="input"
+                      value={nickname}
+                      onChange={(e) => setNickname(e.target.value)}
+                      maxLength={16}
+                      autoFocus
+                    />
+                  </div>
                   <div className="field-actions">
                     <button 
                       className="btn btn-secondary"
@@ -276,6 +278,7 @@ const Profile = () => {
                 </div>
               ) : (
                 <div className="field-value">
+                  <span className="field-icon iconfont icon-zhanghao"></span>
                   <span>{user?.nickname || '-'}</span>
                   <button 
                     className="edit-btn"
@@ -289,8 +292,8 @@ const Profile = () => {
 
             {/* 注册时间 */}
             <div className="profile-field">
-              <label>注册时间</label>
               <div className="field-value read-only">
+                <span className="field-label">注册时间</span>
                 <span>
                   {user?.created_at 
                     ? new Date(user.created_at).toLocaleDateString('zh-CN')
@@ -307,14 +310,14 @@ const Profile = () => {
               className="btn btn-secondary action-btn"
               onClick={() => setShowPasswordModal(true)}
             >
-              <span className="btn-icon">🔒</span>
+              <span className="btn-icon iconfont icon-mima"></span>
               修改密码
             </button>
             <button 
               className="btn btn-secondary action-btn logout-btn"
               onClick={handleLogout}
             >
-              <span className="btn-icon">🚪</span>
+              <span className="btn-icon iconfont icon-tuichudenglu"></span>
               退出登录
             </button>
           </div>
@@ -338,29 +341,35 @@ const Profile = () => {
             <div className="modal-form">
               <div className="form-group">
                 <label>原密码</label>
-                <input
-                  type="password"
-                  className="input"
-                  placeholder="请输入原密码"
-                  value={passwordForm.oldPassword}
-                  onChange={(e) => setPasswordForm(prev => ({
-                    ...prev,
-                    oldPassword: e.target.value
-                  }))}
-                />
+                <div className="input-with-icon">
+                  <span className="input-icon iconfont icon-mima"></span>
+                  <input
+                    type="password"
+                    className="input"
+                    placeholder="请输入原密码"
+                    value={passwordForm.oldPassword}
+                    onChange={(e) => setPasswordForm(prev => ({
+                      ...prev,
+                      oldPassword: e.target.value
+                    }))}
+                  />
+                </div>
               </div>
               <div className="form-group">
                 <label>新密码</label>
-                <input
-                  type="password"
-                  className="input"
-                  placeholder="至少8位，包含字母和数字/特殊字符"
-                  value={passwordForm.newPassword}
-                  onChange={(e) => setPasswordForm(prev => ({
-                    ...prev,
-                    newPassword: e.target.value
-                  }))}
-                />
+                <div className="input-with-icon">
+                  <span className="input-icon iconfont icon-mima"></span>
+                  <input
+                    type="password"
+                    className="input"
+                    placeholder="至少8位，包含字母和数字/特殊字符"
+                    value={passwordForm.newPassword}
+                    onChange={(e) => setPasswordForm(prev => ({
+                      ...prev,
+                      newPassword: e.target.value
+                    }))}
+                  />
+                </div>
               </div>
             </div>
             <div className="modal-actions">
