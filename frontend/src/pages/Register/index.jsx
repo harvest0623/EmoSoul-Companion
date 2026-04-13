@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { authApi } from '../../services/authService';
-import { useAuthStore } from '../../store/authStore';
 import { validator } from '../../utils/validator';
 import './Register.css';
 
@@ -29,7 +28,6 @@ document.head.appendChild(link);
  */
 const Register = () => {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuthStore();
   
   const [formData, setFormData] = useState({
     account: '',
@@ -54,13 +52,6 @@ const Register = () => {
     const nextIndex = (currentIndex + 1) % avatarKeys.length;
     setCurrentAvatar(avatarKeys[nextIndex]);
   };
-
-  // 如果已登录，跳转到首页
-  useEffect(() => {
-    if (isAuthenticated) {
-      navigate('/');
-    }
-  }, [isAuthenticated, navigate]);
 
   const validateForm = () => {
     const newErrors = {};

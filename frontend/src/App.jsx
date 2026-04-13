@@ -16,7 +16,11 @@ import ResetPassword from './pages/ResetPassword';
  * 受保护的路由组件
  */
 const ProtectedRoute = ({ children }) => {
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, isHydrated } = useAuthStore();
+  
+  if (!isHydrated) {
+    return null;
+  }
   
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
@@ -29,7 +33,11 @@ const ProtectedRoute = ({ children }) => {
  * 已登录用户重定向
  */
 const RedirectIfAuthenticated = ({ children }) => {
-  const { isAuthenticated } = useAuthStore();
+  const { isAuthenticated, isHydrated } = useAuthStore();
+  
+  if (!isHydrated) {
+    return null;
+  }
   
   if (isAuthenticated) {
     return <Navigate to="/" replace />;

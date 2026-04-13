@@ -12,6 +12,7 @@ export const useAuthStore = create(
       user: null,
       token: null,
       isAuthenticated: false,
+      isHydrated: false,
 
       // Actions
       login: (userData, token) => {
@@ -51,6 +52,7 @@ export const useAuthStore = create(
             isAuthenticated: true
           });
         }
+        set({ isHydrated: true });
       }
     }),
     {
