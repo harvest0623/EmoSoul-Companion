@@ -8,6 +8,7 @@ import './styles/global.css';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
+import Chat from './pages/Chat';
 import Profile from './pages/Profile';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
@@ -32,7 +33,7 @@ const RedirectIfAuthenticated = ({ children }) => {
   const { isAuthenticated } = useAuthStore();
   
   if (isAuthenticated) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/home" replace />;
   }
   
   return children;
@@ -117,10 +118,20 @@ function App() {
         
         {/* 首页 - 需要登录 */}
         <Route 
-          path="/" 
+          path="/home" 
           element={
             <ProtectedRoute>
               <Home />
+            </ProtectedRoute>
+          } 
+        />
+        
+        {/* 聊天页面 - 需要登录 */}
+        <Route 
+          path="/home/chat" 
+          element={
+            <ProtectedRoute>
+              <Chat />
             </ProtectedRoute>
           } 
         />
@@ -136,7 +147,7 @@ function App() {
         />
         
         {/* 默认重定向 */}
-        <Route path="*" element={<Navigate to="/" replace />} />
+        <Route path="*" element={<Navigate to="/home" replace />} />
       </Routes>
     </Router>
   );

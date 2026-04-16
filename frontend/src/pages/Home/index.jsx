@@ -1,343 +1,350 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import toast from 'react-hot-toast';
-import DigitalAvatar from '../../components/DigitalAvatar';
-import ChatMessage from '../../components/ChatMessage';
-import { chatApi } from '../../services/chatService';
-import { useChatStore } from '../../store/chatStore';
-import useThemeStore from '../../store/themeStore';
-import { COMPANION_STATUSES, getCompanionStatusById } from '../../constants/companionStatus';
 import './Home.css';
 
-// 引入图标字体
-const link = document.createElement('link');
-link.rel = 'stylesheet';
-link.href = '//at.alicdn.com/t/c/font_5158834_czcc22vhf94.css';
-document.head.appendChild(link);
-
 /**
- * 主页 - 数字人对话页面
+ * 首页 - 主页面
  */
 const Home = () => {
   const navigate = useNavigate();
-  const messagesEndRef = useRef(null);
-  const pollIntervalRef = useRef(null);
-
-  const {
-    messages,
-    currentEmotion,
-    isLoading,
-    lastMessageId,
-    chatMode,
-    addMessage,
-    setMessages,
-    setEmotion,
-    setLoading,
-    setChatMode,
-    updateMessageResponse,
-    companionStatus,
-    setCompanionStatus
-  } = useChatStore();
-
-  const [inputMessage, setInputMessage] = useState('');
-  const [isTyping, setIsTyping] = useState(false);
-  const [statusMenuOpen, setStatusMenuOpen] = useState(false);
-  const statusPickerRef = useRef(null);
-
-  // 从全局主题状态获取
-  const { darkMode, toggleDarkMode } = useThemeStore();
-
-  const currentCompanion = getCompanionStatusById(companionStatus);
+  const featureRefs = useRef([]);
+  const [scrollY, setScrollY] = useState(0);
 
   useEffect(() => {
-    const onPointerDown = (e) => {
-      if (!statusMenuOpen) return;
-      if (statusPickerRef.current && !statusPickerRef.current.contains(e.target)) {
-        setStatusMenuOpen(false);
-      }
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
     };
-    document.addEventListener('mousedown', onPointerDown);
-    return () => document.removeEventListener('mousedown', onPointerDown);
-  }, [statusMenuOpen]);
 
-  // 滚动到底部
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate-fade-in');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
 
-  // 加载历史对话
-  useEffect(() => {
-    const loadHistory = async () => {
-      try {
-        const result = await chatApi.getHistory({ limit: 50 });
-        if (result.code === 200) {
-          const historyMessages = result.data.map(item => ({
-            id: item.id,
-            text: item.message,
-            response: item.response,
-            emotion: item.emotion,
-            isUser: true,
-            hasResponse: !!item.response,
-            timestamp: item.created_at
-          }));
-          setMessages(historyMessages.reverse());
-        }
-      } catch (error) {
-        console.error('加载历史记录失败:', error);
-      }
-    };
-
-    loadHistory();
-  }, [setMessages]);
-
-  // 轮询获取新消息
-  useEffect(() => {
-    const pollMessages = async () => {
-      try {
-        const result = await chatApi.pollMessages(lastMessageId);
-        if (result.code === 200 && result.data.hasNew) {
-          const newMessage = result.data.message;
-          updateMessageResponse(
-            newMessage.id,
-            newMessage.response,
-            newMessage.emotion
-          );
-          setEmotion(newMessage.emotion);
-        }
-      } catch (error) {
-        console.error('轮询消息失败:', error);
-      }
-    };
-
-    // 每5秒轮询一次
-    pollIntervalRef.current = setInterval(pollMessages, 5000);
-
-    return () => {
-      if (pollIntervalRef.current) {
-        clearInterval(pollIntervalRef.current);
-      }
-    };
-  }, [lastMessageId, setEmotion, updateMessageResponse]);
-
-  const handleSend = async () => {
-    if (!inputMessage.trim() || isLoading) return;
-
-    const messageText = inputMessage.trim();
-    setInputMessage('');
-    setIsTyping(true);
-    setLoading(true);
-
-    // 添加用户消息
-    const tempId = Date.now();
-    addMessage({
-      id: tempId,
-      text: messageText,
-      isUser: true,
-      hasResponse: false,
-      timestamp: new Date().toISOString()
+    const currentRefs = featureRefs.current;
+    currentRefs.forEach((ref) => {
+      if (ref) observer.observe(ref);
     });
 
-    try {
-      const result = await chatApi.sendMessage(messageText, chatMode);
-      if (result.code === 200) {
-        // 更新消息，添加AI回复
-        updateMessageResponse(
-          tempId,
-          result.data.response,
-          result.data.emotion
-        );
-        setEmotion(result.data.emotion);
-        setIsTyping(false);
-      }
-    } catch (error) {
-      toast.error('发送失败，请重试');
-      setIsTyping(false);
-    } finally {
-      setLoading(false);
-    }
-  };
+    return () => {
+      currentRefs.forEach((ref) => {
+        if (ref) observer.unobserve(ref);
+      });
+    };
+  }, []);
 
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSend();
+  const features = [
+    {
+      id: 1,
+      title: '情感识别与反馈',
+      description: '实时分析用户情绪，自动调整回应语气，提供情绪调节建议',
+      icon: '😊',
+      color: 'feature-emotion'
+    },
+    {
+      id: 2,
+      title: '个性化定制',
+      description: '支持数字人形象定制、性格设定和对话风格调整',
+      icon: '🎨',
+      color: 'feature-custom'
+    },
+    {
+      id: 3,
+      title: '多模态交互',
+      description: '支持语音对话、表情互动和动作反馈',
+      icon: '🎭',
+      color: 'feature-modal'
+    },
+    {
+      id: 4,
+      title: '日常管理',
+      description: '提供日程提醒、待办事项和习惯养成功能',
+      icon: '📅',
+      color: 'feature-daily'
+    },
+    {
+      id: 5,
+      title: '健康管理',
+      description: '记录情绪日记、追踪睡眠质量、提供减压建议',
+      icon: '💪',
+      color: 'feature-health'
+    },
+    {
+      id: 6,
+      title: '内容创作',
+      description: '根据用户提供的主题生成故事、诗歌和创意写作',
+      icon: '✍️',
+      color: 'feature-create'
+    },
+    {
+      id: 7,
+      title: '休闲互动',
+      description: '提供文字游戏、兴趣话题讨论和音乐推荐',
+      icon: '🎮',
+      color: 'feature-leisure'
+    },
+    {
+      id: 8,
+      title: '知识学习',
+      description: '提供学科辅导、语言学习和技能培训',
+      icon: '📚',
+      color: 'feature-learn'
+    },
+    {
+      id: 9,
+      title: '思维训练',
+      description: '通过问题引导用户思考，提供创意激发和决策辅助',
+      icon: '🧠',
+      color: 'feature-think'
+    },
+    {
+      id: 10,
+      title: '社交连接',
+      description: '提供虚拟朋友圈、兴趣社群和数字人社交功能',
+      icon: '🤝',
+      color: 'feature-social'
+    },
+    {
+      id: 11,
+      title: '分享功能',
+      description: '支持对话分享、情绪卡片生成和成就系统',
+      icon: '📤',
+      color: 'feature-share'
+    },
+    {
+      id: 12,
+      title: '心理疏导',
+      description: '提供情绪倾诉空间、心理支持和专业建议',
+      icon: '❤️',
+      color: 'feature-psych'
+    },
+    {
+      id: 13,
+      title: '自我探索',
+      description: '提供人格测试、价值观探索和目标设定功能',
+      icon: '🔍',
+      color: 'feature-explore'
+    },
+    {
+      id: 14,
+      title: '智能记忆',
+      description: '记住用户偏好、保持对话连贯性、从对话中学习',
+      icon: '💾',
+      color: 'feature-memory'
     }
-  };
+  ];
 
-  const handleClearHistory = async () => {
-    if (!window.confirm('确定要清空所有对话记录吗？')) return;
-
-    try {
-      await chatApi.clearHistory();
-      setMessages([]);
-      toast.success('对话记录已清空');
-    } catch (error) {
-      toast.error('清空失败');
+  const advantages = [
+    {
+      title: 'AI 驱动',
+      description: '利用先进的 AI 技术进行情感分析和智能交互',
+      icon: '🤖'
+    },
+    {
+      title: '24/7 陪伴',
+      description: '随时在线，为您提供全天候的情感支持',
+      icon: '⏰'
+    },
+    {
+      title: '安全隐私',
+      description: '所有数据本地处理，确保您的隐私安全',
+      icon: '🔒'
+    },
+    {
+      title: '持续学习',
+      description: '不断学习您的偏好，提供越来越个性化的服务',
+      icon: '📈'
     }
-  };
+  ];
 
   return (
-    <div className={`home-page ${darkMode ? 'dark-mode' : ''}`}>
+    <div className="home-page">
       {/* 顶部导航 */}
-      <header className="home-header">
+      <header className={`home-header ${scrollY > 50 ? 'header-scrolled' : ''}`}>
         <div className="header-brand">
           <h1>语你相伴</h1>
         </div>
         <nav className="header-nav">
-          <button className="nav-btn active">对话</button>
+          <button className="nav-btn active">首页</button>
+          <button className="nav-btn" onClick={() => navigate('/home/chat')}>
+            对话
+          </button>
           <button className="nav-btn" onClick={() => navigate('/profile')}>
             我的
-          </button>
-          <button className="mode-toggle-btn" onClick={toggleDarkMode} aria-label={darkMode ? '切换到白天模式' : '切换到夜间模式'}>
-            <span className={`mode-icon iconfont ${darkMode ? 'icon-taiyang' : 'icon-ansemoshi'}`}></span>
           </button>
         </nav>
       </header>
 
-      <div className="home-content">
-        {/* 左侧 - 数字人展示区 */}
-        <div className="avatar-section">
-          <div className="avatar-wrapper">
-            <DigitalAvatar
-              emotion={currentEmotion}
-              isTyping={isTyping}
-            />
+      {/* 英雄区域 */}
+      <section className="hero-section">
+        <div className="hero-content">
+          <div className="hero-text">
+            <div className="hero-badge">AI 赋能的情感陪伴</div>
+            <h2>语你相伴</h2>
+            <p>您的AI数字伙伴，随时为您提供陪伴和支持，理解您的情绪，与您共同成长</p>
+            <div className="hero-buttons">
+              <button 
+                className="hero-btn primary" 
+                onClick={() => navigate('/home/chat')}
+              >
+                开始对话
+              </button>
+              <button 
+                className="hero-btn secondary" 
+                onClick={() => {
+                  document.querySelector('.features-section').scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                了解更多
+              </button>
+            </div>
           </div>
-          <div className="avatar-status">
-            <span className={`status-dot ${isTyping ? 'typing' : 'online'}`}></span>
-            <span className="status-text">
-              {isTyping ? '正在输入...' : '在线陪伴中'}
-            </span>
+          <div className="hero-visual">
+            <div className="hero-avatar">
+              <div className="avatar-glow"></div>
+              <div className="avatar-content">
+                <div className="avatar-face">😊</div>
+              </div>
+            </div>
           </div>
-          <div className="emotion-tags" ref={statusPickerRef}>
-            <button
-              type="button"
-              className={`emotion-tag emotion-tag-pickable ${companionStatus}`}
-              onClick={() => setStatusMenuOpen((o) => !o)}
-              aria-expanded={statusMenuOpen}
-              aria-haspopup="listbox"
-              aria-label="选择我的状态"
+        </div>
+      </section>
+
+      {/* 核心功能 */}
+      <section className="features-section">
+        <div className="container">
+          <div className="section-header">
+            <div className="section-badge">核心功能</div>
+            <h3>我们提供全方位的情感陪伴解决方案</h3>
+            <p className="section-description">满足您的各种情感需求，让AI成为您最贴心的伙伴</p>
+          </div>
+          <div className="features-grid">
+            {features.map((feature, index) => (
+              <div 
+                key={feature.id} 
+                className="feature-card" 
+                ref={(el) => (featureRefs.current[index] = el)}
+              >
+                <div className={`feature-icon ${feature.color}`}>{feature.icon}</div>
+                <h4>{feature.title}</h4>
+                <p>{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 优势展示 */}
+      <section className="advantages-section">
+        <div className="container">
+          <div className="section-header">
+            <div className="section-badge">为什么选择我们</div>
+            <h3>我们的系统具有显著的优势</h3>
+            <p className="section-description">让您的情感陪伴体验更加优质和高效</p>
+          </div>
+          <div className="advantages-grid">
+            {advantages.map((item, index) => (
+              <div key={index} className="advantage-card">
+                <div className="advantage-icon">{item.icon}</div>
+                <h4>{item.title}</h4>
+                <p>{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 统计信息 */}
+      <section className="stats-section">
+        <div className="container">
+          <div className="section-header">
+            <div className="section-badge">用户数据</div>
+            <h3>我们的影响力</h3>
+          </div>
+          <div className="stats-grid">
+            <div className="stat-item">
+              <div className="stat-number">10,000+</div>
+              <div className="stat-label">活跃用户</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">100,000+</div>
+              <div className="stat-label">对话次数</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">98%</div>
+              <div className="stat-label">用户满意度</div>
+            </div>
+            <div className="stat-item">
+              <div className="stat-number">24/7</div>
+              <div className="stat-label">随时陪伴</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 底部行动区 */}
+      <section className="cta-section">
+        <div className="container">
+          <div className="cta-content">
+            <h3>开始您的AI情感陪伴之旅</h3>
+            <p>与语你相伴一起，探索更多可能性，让AI成为您生活中的得力助手</p>
+            <button 
+              className="cta-btn" 
+              onClick={() => navigate('/home/chat')}
             >
-              <span>
-                {currentCompanion.emoji} {currentCompanion.label}
-              </span>
-              <span className="emotion-tag-chevron" aria-hidden>
-                ▾
-              </span>
-            </button>
-            {statusMenuOpen && (
-              <div className="status-picker" role="listbox" aria-label="状态列表">
-                <p className="status-picker-title">换个状态</p>
-                <div className="status-picker-grid">
-                  {COMPANION_STATUSES.map((s) => (
-                    <button
-                      key={s.id}
-                      type="button"
-                      role="option"
-                      aria-selected={companionStatus === s.id}
-                      className={`status-picker-item ${companionStatus === s.id ? 'selected' : ''}`}
-                      onClick={() => {
-                        setCompanionStatus(s.id);
-                        setStatusMenuOpen(false);
-                      }}
-                    >
-                      <span className="status-picker-emoji">{s.emoji}</span>
-                      <span className="status-picker-label">{s.label}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* 右侧 - 对话区 */}
-        <div className="chat-section">
-          <div className="chat-header">
-            <h3>对话记录</h3>
-            <button className="clear-btn" onClick={handleClearHistory}>
-              清空记录
+              立即开始
             </button>
           </div>
+        </div>
+      </section>
 
-          <div className="chat-messages">
-            {messages.length === 0 ? (
-              <div className="empty-state">
-                <div className="empty-icon">💬</div>
-                <p>开始和AI伙伴对话吧</p>
-                <span>分享你的想法和感受</span>
+      {/* 页脚 */}
+      <footer className="footer">
+        <div className="container">
+          <div className="footer-content">
+            <div className="footer-brand">
+              <h2>语你相伴</h2>
+              <p>您的AI数字伙伴，随时为您提供陪伴和支持</p>
+            </div>
+            <div className="footer-links">
+              <div className="footer-link-group">
+                <h4>功能</h4>
+                <ul>
+                  <li><a href="/home/chat">对话</a></li>
+                  <li><a href="/profile">个人中心</a></li>
+                </ul>
               </div>
-            ) : (
-              messages.map((msg) => (
-                <React.Fragment key={msg.id}>
-                  <ChatMessage
-                    message={msg.text}
-                    isUser={true}
-                  />
-                  {msg.hasResponse && (
-                    <ChatMessage
-                      message={msg.response}
-                      isUser={false}
-                      emotion={msg.emotion || 'gentle'}
-                    />
-                  )}
-                </React.Fragment>
-              ))
-            )}
-            {isTyping && (
-              <ChatMessage
-                message=""
-                isUser={false}
-                emotion={currentEmotion}
-                isTyping={true}
-              />
-            )}
-            <div ref={messagesEndRef} />
+              <div className="footer-link-group">
+                <h4>关于我们</h4>
+                <ul>
+                  <li><a href="/#">公司简介</a></li>
+                  <li><a href="/#">联系我们</a></li>
+                </ul>
+              </div>
+              <div className="footer-link-group">
+                <h4>支持</h4>
+                <ul>
+                  <li><a href="/#">帮助中心</a></li>
+                  <li><a href="/#">隐私政策</a></li>
+                </ul>
+              </div>
+            </div>
           </div>
-
-          <div className="chat-input-area">
-            <div className="mode-toggle">
-              <button
-                className={`mode-btn ${chatMode === 'normal' ? 'active' : ''}`}
-                onClick={() => setChatMode('normal')}
-              >
-                普通模式
-              </button>
-              <button
-                className={`mode-btn vip ${chatMode === 'vip' ? 'active' : ''}`}
-                onClick={() => setChatMode('vip')}
-              >
-                <span className="vip-crown">👑</span> VIP模式
-              </button>
-            </div>
-            <div className="input-wrapper">
-              <textarea
-                className="chat-input"
-                placeholder="输入你想说的话..."
-                value={inputMessage}
-                onChange={(e) => setInputMessage(e.target.value)}
-                onKeyPress={handleKeyPress}
-                rows={1}
-                disabled={isLoading}
-              />
-              <button
-                className="send-btn"
-                onClick={handleSend}
-                disabled={!inputMessage.trim() || isLoading}
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
-                </svg>
-              </button>
-            </div>
-            <p className="input-hint">按 Enter 发送，Shift + Enter 换行</p>
+          <div className="footer-bottom">
+            <p>© 2026 语你相伴. 保留所有权利.</p>
           </div>
         </div>
-      </div>
+      </footer>
     </div>
   );
 };
