@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import DigitalAvatar from '../../components/DigitalAvatar';
-import Live2DAvatar from '../../components/Live2DAvatar';
 import ChatMessage from '../../components/ChatMessage';
 import { chatApi } from '../../services/chatService';
 import { useChatStore } from '../../store/chatStore';
@@ -43,7 +42,6 @@ const Chat = () => {
   } = useChatStore();
 
   const [inputMessage, setInputMessage] = useState('');
-  const [live2dFailed, setLive2dFailed] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const [statusMenuOpen, setStatusMenuOpen] = useState(false);
   const [latestAdvice, setLatestAdvice] = useState(null);
@@ -240,19 +238,10 @@ const Chat = () => {
         {/* 左侧 - 数字人展示区 */}
         <div className="avatar-section">
           <div className="avatar-wrapper">
-            {live2dFailed ? (
-              <DigitalAvatar
-                emotion={currentEmotion}
-                isTyping={isTyping}
-              />
-            ) : (
-              <Live2DAvatar
-                emotion={currentEmotion}
-                companionStatus={companionStatus}
-                isTyping={isTyping}
-                onError={() => setLive2dFailed(true)}
-              />
-            )}
+            <DigitalAvatar
+              emotion={currentEmotion}
+              isTyping={isTyping}
+            />
           </div>
           <div className="avatar-status">
             <span className={`status-dot ${isTyping ? 'typing' : 'online'}`}></span>

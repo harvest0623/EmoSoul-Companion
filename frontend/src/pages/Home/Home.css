@@ -336,6 +336,34 @@
     border-color: #e9d5ff;
 }
 
+/* 可点击的功能卡片 */
+.feature-clickable {
+    cursor: pointer;
+    position: relative;
+}
+
+.feature-clickable::after {
+    content: '→';
+    position: absolute;
+    right: 16px;
+    top: 16px;
+    font-size: 18px;
+    color: #8B5CF6;
+    opacity: 0;
+    transition: all 0.3s ease;
+    transform: translateX(-5px);
+}
+
+.feature-clickable:hover::after {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.feature-clickable:hover {
+    border-color: #c4b5fd;
+    background: linear-gradient(135deg, #faf5ff 0%, #f3e8ff 100%);
+}
+
 .feature-icon {
     font-size: 48px;
     margin-bottom: 24px;

@@ -1,0 +1,20 @@
+# EmoSoul 情感识别 Python 推理服务依赖
+# 安装命令: pip install -r requirements.txt
+
+# Web 框架
+flask>=2.3.0
+flask-cors>=4.0.0
+
+# 人脸情绪识别 (DeepFace)
+# 注意: DeepFace 会自动安装 tensorflow/keras 等深度学习依赖
+# 首次运行时会自动下载模型权重（约 100MB）
+deepface>=0.0.87
+tf-keras>=2.16.0
+
+# 中文文本情感分析
+snownlp>=0.12.3
+
+# 图像处理（DeepFace 依赖，通常会被自动安装）
+Pillow>=9.0.0
+numpy>=1.21.0
+opencv-python>=4.6.0

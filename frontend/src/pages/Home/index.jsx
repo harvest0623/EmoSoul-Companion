@@ -49,14 +49,16 @@ const Home = () => {
       title: '情感识别与反馈',
       description: '实时分析用户情绪，自动调整回应语气，提供情绪调节建议',
       icon: '😊',
-      color: 'feature-emotion'
+      color: 'feature-emotion',
+      route: '/home/emotion-analysis'
     },
     {
       id: 2,
       title: '个性化定制',
       description: '支持数字人形象定制、性格设定和对话风格调整',
       icon: '🎨',
-      color: 'feature-custom'
+      color: 'feature-custom',
+      route: '/home/digital-human'
     },
     {
       id: 3,
@@ -232,8 +234,10 @@ const Home = () => {
             {features.map((feature, index) => (
               <div 
                 key={feature.id} 
-                className="feature-card" 
+                className={`feature-card${feature.route ? ' feature-clickable' : ''}`}
                 ref={(el) => (featureRefs.current[index] = el)}
+                onClick={() => feature.route && navigate(feature.route)}
+                style={feature.route ? { cursor: 'pointer' } : undefined}
               >
                 <div className={`feature-icon ${feature.color}`}>{feature.icon}</div>
                 <h4>{feature.title}</h4>

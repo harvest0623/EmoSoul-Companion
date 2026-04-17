@@ -6,6 +6,7 @@ const EmotionDiaryController = require('../controllers/emotionDiaryController');
 const MomentController = require('../controllers/momentController');
 const TodoController = require('../controllers/todoController');
 const ShareController = require('../controllers/shareController');
+const EmotionAnalysisController = require('../controllers/emotionAnalysisController');
 const authMiddleware = require('../middleware/auth');
 const validateMiddleware = require('../middleware/validator');
 const loginLimiter = require('../middleware/loginLimiter');
@@ -153,5 +154,13 @@ router.delete('/moments/:id', authMiddleware, MomentController.deleteMoment);
 router.post('/moments/:id/like', authMiddleware, MomentController.toggleLike);
 router.get('/moments/:id/comments', authMiddleware, MomentController.getComments);
 router.post('/moments/:id/comments', authMiddleware, MomentController.addComment);
+
+/**
+ * 情绪识别分析相关路由
+ */
+router.get('/emotion-analysis/health', EmotionAnalysisController.checkHealth);
+router.post('/emotion-analysis/start-service', authMiddleware, EmotionAnalysisController.startService);
+router.post('/emotion-analysis/analyze', authMiddleware, EmotionAnalysisController.analyzeFrame);
+router.get('/emotion-analysis/history', authMiddleware, EmotionAnalysisController.getHistory);
 
 module.exports = router;

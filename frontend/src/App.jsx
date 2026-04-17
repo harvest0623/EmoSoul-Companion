@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+﻿import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { useAuthStore } from './store/authStore';
@@ -16,6 +16,8 @@ import Diary from './pages/Diary';
 import Todo from './pages/Todo';
 import Social from './pages/Social';
 import Achievement from './pages/Achievement';
+import EmotionAnalysis from './pages/EmotionAnalysis';
+import DigitalHuman from './pages/DigitalHuman';
 
 /**
  * 受保护的路由组件
@@ -168,6 +170,27 @@ function App() {
         
         {/* 成就系统 - 需要登录 */}
         <Route path="/achievements" element={<ProtectedRoute><Achievement /></ProtectedRoute>} />
+        
+        {/* 数字人 - 需要登录 */}
+        <Route
+          path="/home/digital-human"
+          element={
+            <ProtectedRoute>
+              <DigitalHuman />
+            </ProtectedRoute>
+          }
+        />
+        
+        {/* 情绪识别与反馈 - 需要登录 */}
+        <Route 
+          path="/home/emotion-analysis" 
+          element={
+            <ProtectedRoute>
+              <EmotionAnalysis />
+            </ProtectedRoute>
+          } 
+        />
+        
         
         {/* 默认重定向 */}
         <Route path="*" element={<Navigate to="/home" replace />} />
