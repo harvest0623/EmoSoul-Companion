@@ -100,6 +100,48 @@ class UserModel {
     static async updateNickname(id, nickname) {
         return await this.update(id, { nickname });
     }
+
+    /**
+     * 获取用户的数字人设置
+     */
+    static async getCompanionSettings(userId) {
+        const results = await query(
+            'SELECT companion_name, companion_personality, chat_style FROM users WHERE id = ?',
+            [Number(userId)]
+        );
+        return results[0] || null;
+    }
+
+    /**
+     * 更新用户的数字人设置
+     */
+    static async updateCompanionSettings(userId, settings) {
+        const { companion_name, companion_personality, chat_style } = settings;
+        const fields = [];
+        const values = [];
+
+        if (companion_name !== undefined) {
+            fields.push('companion_name = ?');
+            values.push(companion_name);
+        }
+        if (companion_personality !== undefined) {
+            fields.push('companion_personality = ?');
+            values.push(companion_personality);
+        }
+        if (chat_style !== undefined) {
+            fields.push('chat_style = ?');
+            values.push(chat_style);
+        }
+
+        if (fields.length === 0) return false;
+
+        values.push(Number(userId));
+        await query(
+            `UPDATE users SET ${fields.join(', ')} WHERE id = ?`,
+            values
+        );
+        return true;
+    }
 }
 
 module.exports = UserModel;

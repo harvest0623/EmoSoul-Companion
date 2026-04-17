@@ -61,7 +61,8 @@ const loginLimiter = async (ctx, next) => {
         }
     } catch (error) {
         console.error('登录限制中间件错误:', error);
-        await next();
+        // 错误时不再调用 next，让错误处理中间件处理
+        throw error;
     }
 };
 

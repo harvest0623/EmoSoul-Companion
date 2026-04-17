@@ -7,10 +7,10 @@ class ConversationModel {
     /**
      * 创建对话记录
      */
-    static async create({ userId, message, response, emotion = 'gentle' }) {
+    static async create({ userId, message, response, emotion = 'gentle', source = 'user' }) {
         const result = await query(
-            'INSERT INTO conversations (user_id, message, response, emotion) VALUES (?, ?, ?, ?)',
-            [Number(userId), message, response, emotion]
+            'INSERT INTO conversations (user_id, message, response, emotion, source) VALUES (?, ?, ?, ?, ?)',
+            [Number(userId), message, response, emotion, source]
         );
         return { id: result.insertId };
     }
@@ -22,7 +22,7 @@ class ConversationModel {
         const params = [Number(userId), Number(limit), Number(offset)];
         console.log('📊 SQL params:', params, 'types:', params.map(p => typeof p));
         const results = await query(
-            `SELECT id, message, response, emotion, created_at 
+            `SELECT id, message, response, emotion, source, created_at 
             FROM conversations 
             WHERE user_id = ? 
             ORDER BY created_at DESC 

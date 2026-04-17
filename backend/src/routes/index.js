@@ -2,6 +2,7 @@ const Router = require('koa-router');
 const AuthController = require('../controllers/authController');
 const UserController = require('../controllers/userController');
 const ChatController = require('../controllers/chatController');
+const EmotionDiaryController = require('../controllers/emotionDiaryController');
 const authMiddleware = require('../middleware/auth');
 const validateMiddleware = require('../middleware/validator');
 const loginLimiter = require('../middleware/loginLimiter');
@@ -77,6 +78,18 @@ router.put(
     UserController.updatePassword
 );
 
+router.get(
+    '/user/companion',
+    authMiddleware,
+    UserController.getCompanionSettings
+);
+
+router.put(
+    '/user/companion',
+    authMiddleware,
+    UserController.updateCompanionSettings
+);
+
 /**
  * 对话相关路由
  */
@@ -104,5 +117,14 @@ router.delete(
     authMiddleware,
     ChatController.clearHistory
 );
+
+/**
+ * 情绪日记相关路由
+ */
+router.get('/diary', authMiddleware, EmotionDiaryController.getDiary);
+router.post('/diary', authMiddleware, EmotionDiaryController.createEntry);
+router.get('/diary/stats', authMiddleware, EmotionDiaryController.getStats);
+router.get('/diary/calendar', authMiddleware, EmotionDiaryController.getCalendar);
+router.delete('/diary/:id', authMiddleware, EmotionDiaryController.deleteEntry);
 
 module.exports = router;
