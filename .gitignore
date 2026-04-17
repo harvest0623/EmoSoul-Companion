@@ -9,7 +9,6 @@ pnpm-lock.yaml
 .env.development
 .env.test
 .env.production
-.env.example
 
 # Logs
 logs/

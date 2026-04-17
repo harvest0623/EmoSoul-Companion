@@ -185,6 +185,72 @@ const initDatabase = async () => {
           console.log('Added column source to conversations table');
         }
 
+        // 创建待办事项表
+        await query(`
+        CREATE TABLE IF NOT EXISTS todos (
+          id INT PRIMARY KEY AUTO_INCREMENT,
+          user_id INT NOT NULL,
+          title VARCHAR(200) NOT NULL,
+          description TEXT,
+          due_date DATETIME,
+          priority ENUM('low','medium','high') DEFAULT 'medium',
+          completed BOOLEAN DEFAULT FALSE,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          FOREIGN KEY (user_id) REFERENCES users(id)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='待办事项表'
+      `);
+
+        // 创建心情动态表
+        await query(`
+        CREATE TABLE IF NOT EXISTS moments (
+          id INT PRIMARY KEY AUTO_INCREMENT,
+          user_id INT NOT NULL,
+          content TEXT NOT NULL,
+          emotion VARCHAR(20),
+          likes_count INT DEFAULT 0,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          FOREIGN KEY (user_id) REFERENCES users(id)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='心情动态表'
+      `);
+
+        // 创建动态评论表
+        await query(`
+        CREATE TABLE IF NOT EXISTS moment_comments (
+          id INT PRIMARY KEY AUTO_INCREMENT,
+          moment_id INT NOT NULL,
+          user_id INT NOT NULL,
+          content VARCHAR(500) NOT NULL,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          FOREIGN KEY (moment_id) REFERENCES moments(id),
+          FOREIGN KEY (user_id) REFERENCES users(id)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='动态评论表'
+      `);
+
+        // 创建动态点赞表
+        await query(`
+        CREATE TABLE IF NOT EXISTS moment_likes (
+          id INT PRIMARY KEY AUTO_INCREMENT,
+          moment_id INT NOT NULL,
+          user_id INT NOT NULL,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          UNIQUE KEY unique_like (moment_id, user_id),
+          FOREIGN KEY (moment_id) REFERENCES moments(id),
+          FOREIGN KEY (user_id) REFERENCES users(id)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='动态点赞表'
+      `);
+
+        // 创建成就表
+        await query(`
+        CREATE TABLE IF NOT EXISTS achievements (
+          id INT PRIMARY KEY AUTO_INCREMENT,
+          user_id INT NOT NULL,
+          achievement_key VARCHAR(50) NOT NULL,
+          unlocked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          UNIQUE KEY unique_achievement (user_id, achievement_key),
+          FOREIGN KEY (user_id) REFERENCES users(id)
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='成就表'
+      `);
+
         console.log('✅ 数据库表初始化完成');
     } catch (error) {
         console.error('❌ 数据库初始化失败:', error.message);

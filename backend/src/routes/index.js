@@ -3,6 +3,9 @@ const AuthController = require('../controllers/authController');
 const UserController = require('../controllers/userController');
 const ChatController = require('../controllers/chatController');
 const EmotionDiaryController = require('../controllers/emotionDiaryController');
+const MomentController = require('../controllers/momentController');
+const TodoController = require('../controllers/todoController');
+const ShareController = require('../controllers/shareController');
 const authMiddleware = require('../middleware/auth');
 const validateMiddleware = require('../middleware/validator');
 const loginLimiter = require('../middleware/loginLimiter');
@@ -126,5 +129,29 @@ router.post('/diary', authMiddleware, EmotionDiaryController.createEntry);
 router.get('/diary/stats', authMiddleware, EmotionDiaryController.getStats);
 router.get('/diary/calendar', authMiddleware, EmotionDiaryController.getCalendar);
 router.delete('/diary/:id', authMiddleware, EmotionDiaryController.deleteEntry);
+
+/**
+ * 成就相关路由
+ */
+router.get('/achievements', authMiddleware, ShareController.getAchievements);
+router.post('/achievements/check', authMiddleware, ShareController.checkAchievements);
+
+/**
+ * 待办事项相关路由
+ */
+router.get('/todos', authMiddleware, TodoController.getTodos);
+router.post('/todos', authMiddleware, TodoController.createTodo);
+router.put('/todos/:id', authMiddleware, TodoController.updateTodo);
+router.delete('/todos/:id', authMiddleware, TodoController.deleteTodo);
+
+/**
+ * 心情动态相关路由
+ */
+router.get('/moments', authMiddleware, MomentController.getMoments);
+router.post('/moments', authMiddleware, MomentController.createMoment);
+router.delete('/moments/:id', authMiddleware, MomentController.deleteMoment);
+router.post('/moments/:id/like', authMiddleware, MomentController.toggleLike);
+router.get('/moments/:id/comments', authMiddleware, MomentController.getComments);
+router.post('/moments/:id/comments', authMiddleware, MomentController.addComment);
 
 module.exports = router;
