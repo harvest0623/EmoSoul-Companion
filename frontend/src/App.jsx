@@ -13,6 +13,9 @@ import Profile from './pages/Profile';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import Diary from './pages/Diary';
+import Todo from './pages/Todo';
+import Social from './pages/Social';
+import Achievement from './pages/Achievement';
 
 /**
  * 受保护的路由组件
@@ -156,6 +159,15 @@ function App() {
             </ProtectedRoute>
           } 
         />
+        
+        {/* 待办事项 - 需要登录 */}
+        <Route path="/todo" element={<ProtectedRoute><Todo /></ProtectedRoute>} />
+        
+        {/* 社交动态 - 需要登录 */}
+        <Route path="/social" element={<ProtectedRoute><Social /></ProtectedRoute>} />
+        
+        {/* 成就系统 - 需要登录 */}
+        <Route path="/achievements" element={<ProtectedRoute><Achievement /></ProtectedRoute>} />
         
         {/* 默认重定向 */}
         <Route path="*" element={<Navigate to="/home" replace />} />
