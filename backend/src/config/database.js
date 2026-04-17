@@ -99,6 +99,25 @@ const initDatabase = async () => {
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户表'
         `);
 
+        // 为 users 表添加个性化字段
+        const columnsToAdd = [
+            { name: 'companion_name', definition: "VARCHAR(32) DEFAULT '小伴'" },
+            { name: 'companion_personality', definition: "VARCHAR(20) DEFAULT 'warm'" },
+            { name: 'chat_style', definition: "VARCHAR(20) DEFAULT 'friendly'" }
+        ];
+
+        for (const col of columnsToAdd) {
+            const [rows] = await getPool().execute(
+                `SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS 
+                 WHERE TABLE_SCHEMA = ? AND TABLE_NAME = 'users' AND COLUMN_NAME = ?`,
+                [process.env.DB_NAME || 'yu_ni_xiang_ban', col.name]
+            );
+            if (rows.length === 0) {
+                await query(`ALTER TABLE users ADD COLUMN ${col.name} ${col.definition}`);
+                console.log(`Added column ${col.name} to users table`);
+            }
+        }
+
         // 创建登录失败记录表
         await query(`
         CREATE TABLE IF NOT EXISTS login_attempts (
@@ -137,6 +156,34 @@ const initDatabase = async () => {
           INDEX idx_expired (expired_at)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Token黑名单表'
       `);
+
+        // 创建情绪日记表
+        await query(`
+        CREATE TABLE IF NOT EXISTS emotion_diary (
+          id INT AUTO_INCREMENT PRIMARY KEY,
+          user_id INT NOT NULL,
+          date DATE NOT NULL,
+          emotion VARCHAR(20) NOT NULL DEFAULT 'calm',
+          intensity INT DEFAULT 3 COMMENT '情绪强度 1-5',
+          note TEXT COMMENT '备注',
+          source VARCHAR(10) DEFAULT 'auto' COMMENT 'auto=对话自动记录, manual=手动记录',
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          INDEX idx_user_date (user_id, date),
+          INDEX idx_emotion (emotion),
+          FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='情绪日记表'
+      `);
+
+        // 为 conversations 表添加 source 字段
+        const [sourceCol] = await getPool().execute(
+          `SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS 
+           WHERE TABLE_SCHEMA = ? AND TABLE_NAME = 'conversations' AND COLUMN_NAME = 'source'`,
+          [process.env.DB_NAME || 'yu_ni_xiang_ban']
+        );
+        if (sourceCol.length === 0) {
+          await query("ALTER TABLE conversations ADD COLUMN source VARCHAR(10) DEFAULT 'user'");
+          console.log('Added column source to conversations table');
+        }
 
         console.log('✅ 数据库表初始化完成');
     } catch (error) {

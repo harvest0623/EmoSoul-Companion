@@ -12,17 +12,18 @@ class ChatController {
      */
     static async sendMessage(ctx) {
         const { userId } = ctx.state.user;
-        const { message, mode = 'normal' } = ctx.request.body;
+        const { message, mode = 'normal', facial_image } = ctx.request.body;
 
-        // VIP模式携带最近10条对话上下文，普通模式不带上下文
-        const context = mode === 'vip'
-            ? await ChatService.getConversationContext(userId, 10)
-            : [];
+        // 调用扣子工作流（VIP上下文获取已移入 chatService 内部）
+        const result = await ChatService.callCozeWorkflow(message, mode || 'normal', userId, facial_image || null);
 
-        // 调用扣子工作流（模拟）
-        const result = await ChatService.callCozeWorkflow(userId, message, context, mode);
-
-        ResponseUtil.success(ctx, result);
+        ResponseUtil.success(ctx, {
+            response: result.response,
+            emotion: result.emotion,
+            intensity: result.intensity,
+            emotion_advice: result.advice,
+            timestamp: result.timestamp
+        }, '发送成功');
     }
 
     /**

@@ -56,6 +56,29 @@ class UserController {
         await UserService.updatePassword(userId, oldPassword, newPassword);
         ResponseUtil.success(ctx, null, '密码修改成功');
     }
+
+    /**
+     * 获取数字人设置
+     * GET /api/user/companion
+     */
+    static async getCompanionSettings(ctx) {
+        const { userId } = ctx.state.user;
+        const settings = await UserService.getCompanionSettings(userId);
+        ResponseUtil.success(ctx, settings, '获取成功');
+    }
+
+    /**
+     * 更新数字人设置
+     * PUT /api/user/companion
+     */
+    static async updateCompanionSettings(ctx) {
+        const { userId } = ctx.state.user;
+        const { companion_name, companion_personality, chat_style } = ctx.request.body;
+        const settings = await UserService.updateCompanionSettings(userId, {
+            companion_name, companion_personality, chat_style
+        });
+        ResponseUtil.success(ctx, settings, '更新成功');
+    }
 }
 
 module.exports = UserController;
