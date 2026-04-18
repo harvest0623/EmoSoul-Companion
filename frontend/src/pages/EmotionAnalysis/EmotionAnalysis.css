@@ -168,10 +168,10 @@
 
 .ea-detection-box {
   position: absolute;
-  top: 15%;
-  left: 25%;
-  width: 50%;
-  height: 55%;
+  top: 10%;  
+  left: 20%; 
+  width: 60%; 
+  height: 70%; 
   border: 2px solid #22c55e;
   border-radius: 8px;
   animation: ea-detection-pulse 2s ease-in-out infinite;

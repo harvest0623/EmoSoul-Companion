@@ -87,6 +87,12 @@ const EmotionAnalysis = () => {
     }
   }, []);
 
+
+
+  
+
+  
+
   /**
    * 初始化时静默检测 Python 服务可用性
    * 无论服务是否在线，始终显示弹窗让用户选择模式
@@ -234,6 +240,10 @@ const EmotionAnalysis = () => {
       console.error('情绪分析失败:', err);
     }
   }, [latestFrame]);
+
+  
+
+  
 
   /**
    * 本地模拟情绪分析（无需后端）
@@ -659,6 +669,8 @@ const EmotionAnalysis = () => {
           )}
         </div>
       </div>
+
+
 
       {/* 服务选择弹窗 */}
       {showServiceModal && (

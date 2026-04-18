@@ -80,14 +80,16 @@ const Home = () => {
       title: '健康管理',
       description: '记录情绪日记、追踪睡眠质量、提供减压建议',
       icon: '💪',
-      color: 'feature-health'
+      color: 'feature-health',
+      route: '/home/health-management'
     },
     {
       id: 6,
       title: '内容创作',
       description: '根据用户提供的主题生成故事、诗歌和创意写作',
       icon: '✍️',
-      color: 'feature-create'
+      color: 'feature-create',
+      route: '/content-creation'
     },
     {
       id: 7,

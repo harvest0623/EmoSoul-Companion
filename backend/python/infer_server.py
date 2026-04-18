@@ -20,6 +20,7 @@ import traceback
 import tempfile
 import random
 from datetime import datetime
+from collections import deque
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -45,6 +46,9 @@ deepface_available = False
 
 # SnowNLP 实例
 snownlp_available = False
+
+# 情绪历史队列，用于平滑处理（保留最近 5 帧）
+emotion_history = deque(maxlen=5)
 
 # DeepFace 支持的情绪映射到我们的 8 分类
 DEEPFACE_TO_OURS = {
@@ -157,19 +161,29 @@ def analyze_face_emotion(image_base64):
 
             if isinstance(result, dict) and 'emotion' in result:
                 emotions = result['emotion']
-                # 获取最高概率的情绪
-                dominant = result.get('dominant_emotion', 'neutral')
-                confidence = emotions.get(dominant, 0) / 100.0  # 转换为 0-1
+                
+                # 转换 NumPy float32 为普通 float
+                emotions = {k: float(v) for k, v in emotions.items()}
+                
+                # 调整情绪分布，提高开心情绪权重
+                adjusted_emotions = adjust_emotion_distribution(emotions)
+                
+                # 从调整后的分布中获取主导情绪
+                dominant = max(adjusted_emotions.items(), key=lambda x: x[1])[0]
+                confidence = adjusted_emotions.get(dominant, 0) / 100.0  # 转换为 0-1
 
                 # 映射到我们的分类
                 mapped = DEEPFACE_TO_OURS.get(dominant, 'neutral')
+                
+                # 应用情绪平滑处理
+                smoothed_emotion, smoothed_confidence = smooth_emotion(mapped, confidence)
 
-                logger.info(f"DeepFace 检测: {dominant} -> {mapped}, 置信度: {confidence:.2%}")
+                logger.info(f"DeepFace 检测: 原始={dominant}({confidence:.1%}) -> 映射={mapped} -> 平滑={smoothed_emotion}({smoothed_confidence:.1%})")
 
                 return {
-                    'emotion': mapped,
-                    'confidence': round(confidence, 4),
-                    'raw_emotions': emotions  # 原始分布
+                    'emotion': smoothed_emotion,
+                    'confidence': round(smoothed_confidence, 4),
+                    'raw_emotions': adjusted_emotions  # 使用调整后的分布
                 }
         finally:
             # 清理临时文件
@@ -216,6 +230,70 @@ def analyze_text_sentiment(text):
     except Exception as e:
         logger.warning(f"文本情感分析异常: {e}")
         return None
+
+
+def smooth_emotion(new_emotion, new_confidence):
+    """
+    使用历史情绪平滑处理，避免结果跳跃
+    """
+    global emotion_history
+    
+    # 将新结果加入历史
+    emotion_history.append((new_emotion, new_confidence))
+    
+    # 如果历史少于 2 个结果，直接返回新结果
+    if len(emotion_history) < 2:
+        return new_emotion, new_confidence
+    
+    # 加权平均平滑：越新的结果权重越高
+    weights = [0.1, 0.2, 0.3, 0.4, 0.5]  # 最近的结果权重最高
+    weights = weights[-len(emotion_history):]  # 截取适用的权重
+    total_weight = sum(weights)
+    
+    # 计算加权平均
+    weighted_emotions = {}
+    weighted_confidences = {}
+    
+    for i, (emo, conf) in enumerate(emotion_history):
+        weight = weights[i]
+        if emo not in weighted_emotions:
+            weighted_emotions[emo] = 0
+            weighted_confidences[emo] = 0
+        weighted_emotions[emo] += weight
+        weighted_confidences[emo] += conf * weight
+    
+    # 找出权重最高的情绪
+    most_common_emo = max(weighted_emotions.items(), key=lambda x: x[1])[0]
+    
+    # 计算加权平均置信度
+    avg_confidence = weighted_confidences[most_common_emo] / weighted_emotions[most_common_emo]
+    
+    return most_common_emo, round(avg_confidence, 4)
+
+
+def adjust_emotion_distribution(raw_emotions):
+    """
+    调整情绪分布，提高某些情绪的权重
+    特别是对于开心情绪更难识别，提高其优先级
+    """
+    adjusted = raw_emotions.copy()
+    
+    # 大幅提高开心情绪的权重
+    if 'happy' in adjusted:
+        # 微笑很难识别，大幅提高权重
+        adjusted['happy'] = min(100, adjusted['happy'] * 3.0)  # 进一步提高权重
+    
+    # 大幅降低恐惧和轻蔑的权重
+    if 'fear' in adjusted:
+        adjusted['fear'] = adjusted['fear'] * 0.2  # 更强烈地降低恐惧
+    if 'contempt' in adjusted:
+        adjusted['contempt'] = adjusted['contempt'] * 0.1  # 更强烈地降低轻蔑
+    
+    # 降低中性的权重
+    if 'neutral' in adjusted:
+        adjusted['neutral'] = adjusted['neutral'] * 0.7  # 进一步降低中性
+    
+    return adjusted
 
 
 def build_fusion_distribution(dominant_emotion, confidence, raw_emotions=None):
