@@ -96,28 +96,32 @@ const Home = () => {
       title: '休闲互动',
       description: '提供文字游戏、兴趣话题讨论和音乐推荐',
       icon: '🎮',
-      color: 'feature-leisure'
+      color: 'feature-leisure',
+      route: '/home/leisureinteraction'
     },
     {
       id: 8,
       title: '知识学习',
       description: '提供学科辅导、语言学习和技能培训',
       icon: '📚',
-      color: 'feature-learn'
+      color: 'feature-learn',
+      route: '/home/knowledge-learning'
     },
     {
       id: 9,
       title: '思维训练',
       description: '通过问题引导用户思考，提供创意激发和决策辅助',
       icon: '🧠',
-      color: 'feature-think'
+      color: 'feature-think',
+      route: '/home/thinking-training'
     },
     {
       id: 10,
       title: '社交连接',
       description: '提供虚拟朋友圈、兴趣社群和数字人社交功能',
       icon: '🤝',
-      color: 'feature-social'
+      color: 'feature-social',
+      route: '/home/social-connection'
     },
     {
       id: 11,
@@ -131,21 +135,24 @@ const Home = () => {
       title: '心理疏导',
       description: '提供情绪倾诉空间、心理支持和专业建议',
       icon: '❤️',
-      color: 'feature-psych'
+      color: 'feature-psych',
+      route: '/home/chat'
     },
     {
       id: 13,
       title: '自我探索',
       description: '提供人格测试、价值观探索和目标设定功能',
       icon: '🔍',
-      color: 'feature-explore'
+      color: 'feature-explore',
+      route: '/home/self-exploration'
     },
     {
       id: 14,
       title: '智能记忆',
       description: '记住用户偏好、保持对话连贯性、从对话中学习',
       icon: '💾',
-      color: 'feature-memory'
+      color: 'feature-memory',
+      route: '/home/chat'
     }
   ];
 

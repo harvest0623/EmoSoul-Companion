@@ -1,0 +1,723 @@
+/* 休闲互动页面样式 */
+.leisure-page {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #e0f7fa 0%, #b2ebf2 100%);
+    color: #333;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+}
+
+.leisure-page.dark-mode {
+    background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+    color: #e0e0e0;
+}
+
+/* 顶部导航 */
+.leisure-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.leisure-page.dark-mode .leisure-header {
+    background: rgba(30, 30, 60, 0.95);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.leisure-back-btn {
+    background: rgba(0, 188, 212, 0.1);
+    border: 1px solid rgba(0, 188, 212, 0.2);
+    color: #00bcd4;
+    border-radius: 10px;
+    padding: 8px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.leisure-back-btn:hover {
+    background: rgba(0, 188, 212, 0.2);
+    border-color: rgba(0, 188, 212, 0.4);
+}
+
+.leisure-title {
+    font-size: 20px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #00bcd4, #00acc1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* 标签切换 */
+.leisure-tabs {
+    display: flex;
+    gap: 8px;
+    padding: 16px 24px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+}
+
+.leisure-page.dark-mode .leisure-tabs {
+    background: rgba(30, 30, 60, 0.5);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+}
+
+.leisure-tab {
+    flex: 1;
+    min-width: 80px;
+    padding: 12px 16px;
+    border: none;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.leisure-page.dark-mode .leisure-tab {
+    background: rgba(255, 255, 255, 0.05);
+    color: #999;
+}
+
+.leisure-tab.active {
+    background: linear-gradient(135deg, #00bcd4, #00acc1);
+    color: white;
+    box-shadow: 0 4px 14px rgba(0, 188, 212, 0.35);
+}
+
+.leisure-tab:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.leisure-page.dark-mode .leisure-tab:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.leisure-tab-icon {
+    font-size: 18px;
+}
+
+/* 主体内容 */
+.leisure-content {
+    flex: 1;
+    padding: 20px 24px;
+    overflow-y: auto;
+}
+
+/* 文字游戏样式 */
+.games-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.game-welcome {
+    text-align: center;
+    padding: 60px 24px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.leisure-page.dark-mode .game-welcome {
+    background: rgba(30, 30, 60, 0.8);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.welcome-icon {
+    font-size: 80px;
+    margin-bottom: 24px;
+}
+
+.game-welcome h3 {
+    font-size: 28px;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.leisure-page.dark-mode .game-welcome h3 {
+    color: #e0e0e0;
+}
+
+.game-welcome p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.leisure-page.dark-mode .game-welcome p {
+    color: #999;
+}
+
+.game-info {
+    font-size: 14px;
+    color: #00bcd4 !important;
+    font-weight: 500;
+    margin-bottom: 24px !important;
+}
+
+.start-btn {
+    padding: 14px 40px;
+    background: linear-gradient(135deg, #00bcd4, #00acc1);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px rgba(0, 188, 212, 0.35);
+}
+
+.start-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 188, 212, 0.45);
+}
+
+.game-playing {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.leisure-page.dark-mode .game-playing {
+    background: rgba(30, 30, 60, 0.8);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.game-header {
+    margin-bottom: 24px;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.leisure-page.dark-mode .progress-bar {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #00bcd4, #00acc1);
+    transition: width 0.3s ease;
+}
+
+.game-info-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #666;
+}
+
+.leisure-page.dark-mode .game-info-top {
+    color: #999;
+}
+
+.question-card {
+    text-align: center;
+    padding: 32px 24px;
+}
+
+.question-card h4 {
+    font-size: 22px;
+    margin-bottom: 32px;
+    color: #333;
+}
+
+.leisure-page.dark-mode .question-card h4 {
+    color: #e0e0e0;
+}
+
+.options-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.option-btn {
+    padding: 16px 24px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #333;
+}
+
+.leisure-page.dark-mode .option-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+}
+
+.option-btn:hover:not(:disabled) {
+    border-color: #00bcd4;
+    background: rgba(0, 188, 212, 0.1);
+}
+
+.option-btn.correct {
+    background: rgba(76, 175, 80, 0.1);
+    border-color: #4caf50;
+    color: #4caf50;
+}
+
+.option-btn.wrong {
+    background: rgba(244, 67, 54, 0.1);
+    border-color: #f44336;
+    color: #f44336;
+}
+
+.next-btn {
+    margin-top: 24px;
+    padding: 14px 40px;
+    background: linear-gradient(135deg, #00bcd4, #00acc1);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px rgba(0, 188, 212, 0.35);
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.next-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 188, 212, 0.45);
+}
+
+/* 兴趣话题样式 */
+.topics-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.topics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.topic-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.leisure-page.dark-mode .topic-card {
+    background: rgba(30, 30, 60, 0.8);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.topic-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.topic-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    margin: 0 auto 16px;
+}
+
+.topic-icon.topic-scifi {
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+}
+
+.topic-icon.topic-literature {
+    background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+}
+
+.topic-icon.topic-food {
+    background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+}
+
+.topic-icon.topic-travel {
+    background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+}
+
+.topic-icon.topic-music {
+    background: linear-gradient(135deg, #fce4ec, #f8bbd9);
+}
+
+.topic-icon.topic-sport {
+    background: linear-gradient(135deg, #ffebee, #ffcdd2);
+}
+
+.topic-card h4 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.leisure-page.dark-mode .topic-card h4 {
+    color: #e0e0e0;
+}
+
+.topic-card p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 16px;
+}
+
+.leisure-page.dark-mode .topic-card p {
+    color: #999;
+}
+
+.topic-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.favorite-btn,
+.discuss-btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.favorite-btn {
+    background: rgba(244, 67, 54, 0.1);
+    color: #f44336;
+}
+
+.favorite-btn.favorited {
+    background: rgba(244, 67, 54, 0.2);
+}
+
+.discuss-btn {
+    background: rgba(0, 188, 212, 0.1);
+    color: #00bcd4;
+}
+
+.favorite-btn:hover,
+.discuss-btn:hover {
+    transform: translateY(-2px);
+}
+
+/* 音乐推荐样式 */
+.music-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.music-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.music-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.2s ease;
+}
+
+.leisure-page.dark-mode .music-card {
+    background: rgba(30, 30, 60, 0.8);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.music-card.playing {
+    border: 2px solid #00bcd4;
+    box-shadow: 0 4px 20px rgba(0, 188, 212, 0.2);
+}
+
+.music-card:hover {
+    transform: translateX(4px);
+}
+
+.music-cover {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #e0f7fa, #b2ebf2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    flex-shrink: 0;
+}
+
+.music-info {
+    flex: 1;
+}
+
+.music-info h4 {
+    font-size: 18px;
+    margin-bottom: 4px;
+    color: #333;
+}
+
+.leisure-page.dark-mode .music-info h4 {
+    color: #e0e0e0;
+}
+
+.music-info p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
+}
+
+.leisure-page.dark-mode .music-info p {
+    color: #999;
+}
+
+.music-tags {
+    display: flex;
+    gap: 8px;
+}
+
+.tag {
+    padding: 4px 12px;
+    background: rgba(0, 188, 212, 0.1);
+    color: #00bcd4;
+    border-radius: 16px;
+    font-size: 12px;
+}
+
+.music-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.play-btn,
+.favorite-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.play-btn {
+    background: linear-gradient(135deg, #00bcd4, #00acc1);
+    color: white;
+    box-shadow: 0 4px 14px rgba(0, 188, 212, 0.35);
+}
+
+.play-btn:hover {
+    transform: scale(1.1);
+}
+
+.favorite-btn {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.favorite-btn.favorited {
+    background: rgba(244, 67, 54, 0.1);
+}
+
+/* 收藏样式 */
+.favorites-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.empty-favorites {
+    text-align: center;
+    padding: 60px 24px;
+}
+
+.empty-icon {
+    font-size: 80px;
+    margin-bottom: 24px;
+}
+
+.empty-favorites h3 {
+    font-size: 24px;
+    margin-bottom: 12px;
+    color: #333;
+}
+
+.leisure-page.dark-mode .empty-favorites h3 {
+    color: #e0e0e0;
+}
+
+.empty-favorites p {
+    font-size: 16px;
+    color: #666;
+}
+
+.leisure-page.dark-mode .empty-favorites p {
+    color: #999;
+}
+
+.favorites-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.favorite-item {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.leisure-page.dark-mode .favorite-item {
+    background: rgba(30, 30, 60, 0.8);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.favorite-type {
+    font-size: 14px;
+    color: #00bcd4;
+    font-weight: 500;
+    min-width: 80px;
+}
+
+.favorite-content {
+    flex: 1;
+}
+
+.favorite-content h4 {
+    font-size: 16px;
+    margin-bottom: 4px;
+    color: #333;
+}
+
+.leisure-page.dark-mode .favorite-content h4 {
+    color: #e0e0e0;
+}
+
+.favorite-content p {
+    font-size: 14px;
+    color: #666;
+}
+
+.leisure-page.dark-mode .favorite-content p {
+    color: #999;
+}
+
+.remove-btn {
+    padding: 8px 16px;
+    background: rgba(244, 67, 54, 0.1);
+    color: #f44336;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.remove-btn:hover {
+    background: rgba(244, 67, 54, 0.2);
+}
+
+/* 响应式适配 */
+@media (max-width: 768px) {
+    .leisure-content {
+        padding: 16px;
+    }
+
+    .topics-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .options-list {
+        grid-template-columns: 1fr;
+    }
+
+    .music-card {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .leisure-header {
+        padding: 12px 16px;
+    }
+
+    .leisure-title {
+        font-size: 18px;
+    }
+
+    .leisure-tabs {
+        padding: 8px 12px;
+    }
+
+    .leisure-tab {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
+}
+
+/* 动画效果 */
+@keyframes leisure-fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.game-welcome,
+.topic-card,
+.music-card,
+.favorite-item {
+    animation: leisure-fadeIn 0.3s ease;
+}

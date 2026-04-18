@@ -15,11 +15,14 @@ import ResetPassword from './pages/ResetPassword';
 import HealthManagement from './pages/HealthManagement';
 import DailyManagement from './pages/DailyManagement';
 import Todo from './pages/Todo';
-import Social from './pages/Social';
 import Achievement from './pages/Achievement';
 import EmotionAnalysis from './pages/EmotionAnalysis';
 import DigitalHuman from './pages/DigitalHuman';
 import ContentCreation from './pages/ContentCreation';
+import LeisureInteraction from './pages/LeisureInteraction';
+import ThinkingTraining from './pages/ThinkingTraining';
+import KnowledgeLearning from './pages/KnowledgeLearning';
+import SocialConnection from './pages/SocialConnection';  
 
 /**
  * 受保护的路由组件
@@ -206,14 +209,6 @@ function App() {
           } 
         />
         
-        {/* 待办事项 - 需要登录 */}
-        <Route path="/todo" element={<ProtectedRoute path="/todo"><Todo /></ProtectedRoute>} />
-        
-        {/* 社交动态 - 需要登录 */}
-        <Route path="/social" element={<ProtectedRoute path="/social"><Social /></ProtectedRoute>} />
-        
-        {/* 成就系统 - 需要登录 */}
-        <Route path="/achievements" element={<ProtectedRoute path="/achievements"><Achievement /></ProtectedRoute>} />
         
         {/* 数字人 - 需要登录 */}
         <Route
@@ -241,6 +236,46 @@ function App() {
           element={
             <ProtectedRoute path="/content-creation">
               <ContentCreation />
+            </ProtectedRoute>
+          } 
+        />
+        
+        {/* 休闲互动 - 需要登录 */}
+        <Route 
+          path="/home/leisureinteraction" 
+          element={
+            <ProtectedRoute path="/home/leisureinteraction">
+              <LeisureInteraction />
+            </ProtectedRoute>
+          } 
+        />
+
+        {/* 知识学习 - 需要登录 */}
+        <Route 
+          path="/home/knowledge-learning" 
+          element={
+            <ProtectedRoute path="/home/knowledge-learning">
+              <KnowledgeLearning />
+            </ProtectedRoute>
+          } 
+        />
+        
+        {/* 思维训练 - 需要登录 */}
+        <Route 
+          path="/home/thinking-training" 
+          element={
+            <ProtectedRoute path="/home/thinking-training">
+              <ThinkingTraining />
+            </ProtectedRoute>
+          } 
+        />
+        
+        {/* 社交连接 - 需要登录 */}
+        <Route 
+          path="/home/social-connection" 
+          element={
+            <ProtectedRoute path="/home/social-connection">
+              <SocialConnection />
             </ProtectedRoute>
           } 
         />

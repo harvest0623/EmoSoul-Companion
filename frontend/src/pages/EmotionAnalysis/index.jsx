@@ -6,28 +6,33 @@ import { emotionAnalysisApi } from '../../services/emotionAnalysisService';
 import './EmotionAnalysis.css';
 
 /**
- * 情绪常量映射
+ * 情绪常量映射（与后端 8 分类对齐）
  */
 const EMOTION_MAP = {
-  neutral: { label: '中性', emoji: '😐', color: '#9CA3AF' },
   happy: { label: '开心', emoji: '😊', color: '#FCD34D' },
   sad: { label: '悲伤', emoji: '😢', color: '#60A5FA' },
-  surprise: { label: '惊讶', emoji: '😮', color: '#F472B6' },
-  fear: { label: '恐惧', emoji: '😨', color: '#A78BFA' },
-  disgust: { label: '厌恶', emoji: '🤢', color: '#34D399' },
   angry: { label: '愤怒', emoji: '😠', color: '#EF4444' },
-  contempt: { label: '轻蔑', emoji: '😤', color: '#F97316' },
+  surprised: { label: '惊讶', emoji: '😮', color: '#F472B6' },
+  anxious: { label: '焦虑', emoji: '😨', color: '#A78BFA' },
+  calm: { label: '平静', emoji: '😌', color: '#9CA3AF' },
+  thinking: { label: '思考', emoji: '🤔', color: '#6EE7B7' },
+  love: { label: '爱意', emoji: '🥰', color: '#F9A8D4' },
+  // 兼容旧版 DeepFace 7 分类映射
+  neutral: { label: '平静', emoji: '😌', color: '#9CA3AF' },
+  fear: { label: '焦虑', emoji: '😨', color: '#A78BFA' },
+  disgust: { label: '愤怒', emoji: '😠', color: '#EF4444' },
+  contempt: { label: '愤怒', emoji: '😠', color: '#EF4444' },
 };
 
 const FUSION_EMOTIONS = [
-  { key: 'neutral', label: '中性', emoji: '😐' },
   { key: 'happy', label: '开心', emoji: '😊' },
   { key: 'sad', label: '悲伤', emoji: '😢' },
-  { key: 'surprise', label: '惊讶', emoji: '😮' },
-  { key: 'fear', label: '恐惧', emoji: '😨' },
-  { key: 'disgust', label: '厌恶', emoji: '🤢' },
   { key: 'angry', label: '愤怒', emoji: '😠' },
-  { key: 'contempt', label: '轻蔑', emoji: '😤' },
+  { key: 'surprised', label: '惊讶', emoji: '😮' },
+  { key: 'anxious', label: '焦虑', emoji: '😨' },
+  { key: 'calm', label: '平静', emoji: '😌' },
+  { key: 'thinking', label: '思考', emoji: '🤔' },
+  { key: 'love', label: '爱意', emoji: '🥰' },
 ];
 
 /**
@@ -43,17 +48,72 @@ const EmotionAnalysis = () => {
     stopCamera,
     videoRef,
     canvasRef,
-  } = useCamera(3000);
+  } = useCamera(1000);
 
   // 监测状态
   const [isMonitoring, setIsMonitoring] = useState(false);
   // 'initial' - 首次进入, 'checking' - 正在检测, 'local' - 本地模拟模式,
-  // 'loading' - Python服务加载中, 'ready' - Python服务已就绪, 'error' - 服务错误
+  // 'loading' - 服务加载中, 'ready' - 服务已就绪, 'error' - 服务错误
   const [serviceStatus, setServiceStatus] = useState('initial');
   const [loadingTime, setLoadingTime] = useState(0);
   const [useLocalMode, setUseLocalMode] = useState(false);
-  // Python 服务是否在线（影响弹窗显示内容）
-  const [pythonOnline, setPythonOnline] = useState(false);
+  // Coze 工作流是否在线（影响弹窗显示内容）
+  const [serviceOnline, setServiceOnline] = useState(false);
+
+  // 时间窗平滑器（前端）
+  // 注意：后端已做平滑，前端仅做轻度平滑（alpha=0.7 = 新帧占 70%）
+  // 避免双重平滑导致响应过慢
+  const smootherRef = useRef({
+    emaDistribution: null,
+    emaAlpha: 0.7,
+    lastEmotion: null,
+    stableCount: 0,
+    windowSize: 3,
+    update(distribution, confidence) {
+      if (!distribution) return null;
+      const emotions = ['happy', 'sad', 'angry', 'surprised', 'anxious', 'calm', 'thinking', 'love'];
+
+      // EMA 平滑（轻度）
+      if (!this.emaDistribution) {
+        this.emaDistribution = { ...distribution };
+      } else {
+        const alpha = this.emaAlpha;
+        this.emaDistribution = Object.fromEntries(
+          emotions.map(emo => [
+            emo,
+            Math.round((alpha * (distribution[emo] || 0) + (1 - alpha) * (this.emaDistribution[emo] || 0)) * 10000) / 10000,
+          ])
+        );
+        // 归一化
+        const total = Object.values(this.emaDistribution).reduce((a, b) => a + b, 0);
+        if (total > 0) {
+          this.emaDistribution = Object.fromEntries(
+            Object.entries(this.emaDistribution).map(([k, v]) => [k, Math.round((v / total) * 10000) / 10000])
+          );
+        }
+      }
+
+      // 稳定性
+      const currentEmotion = Object.entries(this.emaDistribution)
+        .sort((a, b) => b[1] - a[1])[0][0];
+      if (currentEmotion === this.lastEmotion) {
+        this.stableCount++;
+      } else {
+        this.stableCount = 1;
+        this.lastEmotion = currentEmotion;
+      }
+
+      return this.emaDistribution;
+    },
+    getStabilityScore() {
+      return Math.min(1.0, this.stableCount / this.windowSize);
+    },
+    reset() {
+      this.emaDistribution = null;
+      this.lastEmotion = null;
+      this.stableCount = 0;
+    },
+  });
 
   // 分析结果
   const [videoEmotion, setVideoEmotion] = useState(null);
@@ -71,6 +131,8 @@ const EmotionAnalysis = () => {
   // 轮询定时器
   const pollTimerRef = useRef(null);
   const loadingTimerRef = useRef(null);
+  // 防止请求堆积：标记是否有请求正在进行中
+  const isAnalyzingRef = useRef(false);
 
   /**
    * 静默检查服务状态（不弹 toast）
@@ -87,21 +149,15 @@ const EmotionAnalysis = () => {
     }
   }, []);
 
-
-
-  
-
-  
-
   /**
-   * 初始化时静默检测 Python 服务可用性
+   * 初始化时静默检测 Coze 工作流可用性
    * 无论服务是否在线，始终显示弹窗让用户选择模式
    */
   useEffect(() => {
     const init = async () => {
       setServiceStatus('checking');
       const ready = await checkServiceStatus();
-      setPythonOnline(ready);
+      setServiceOnline(ready);
       // 始终显示弹窗（initial 状态），让用户自主选择
       setServiceStatus('initial');
     };
@@ -114,7 +170,7 @@ const EmotionAnalysis = () => {
   }, [checkServiceStatus]);
 
   /**
-   * 自动启动 Python 推理服务
+   * 连接 Coze 情绪分析工作流
    */
   const startInferenceService = useCallback(async () => {
     setServiceStatus('loading');
@@ -126,36 +182,31 @@ const EmotionAnalysis = () => {
 
     try {
       await emotionAnalysisApi.startService();
-      // 轮询等待服务就绪
-      const maxRetries = 60;
-      for (let i = 0; i < maxRetries; i++) {
-        await new Promise((r) => setTimeout(r, 1000));
-        const ready = await checkServiceStatus();
-        if (ready) {
-          clearInterval(loadingTimerRef.current);
-          setServiceStatus('ready');
-          setUseLocalMode(false);
-          toast.success('情绪识别服务已就绪');
-          return;
-        }
-      }
+      // 检查服务是否就绪
+      const ready = await checkServiceStatus();
       clearInterval(loadingTimerRef.current);
-      setServiceStatus('error');
-      toast.error('服务启动超时，请检查 Python 环境');
+      if (ready) {
+        setServiceStatus('ready');
+        setUseLocalMode(false);
+        toast.success('Coze 情绪识别服务已就绪');
+      } else {
+        setServiceStatus('error');
+        toast.error('Coze 工作流未配置，请检查后端 .env');
+      }
     } catch {
       clearInterval(loadingTimerRef.current);
       setServiceStatus('error');
-      toast.error('服务启动失败，请使用本地模拟模式');
+      toast.error('服务连接失败，请使用本地模拟模式');
     }
   }, [checkServiceStatus]);
 
   /**
-   * 连接在线 Python 推理服务
+   * 连接在线 Coze 情绪分析服务
    */
   const connectOnlineService = useCallback(() => {
     setServiceStatus('ready');
     setUseLocalMode(false);
-    toast.success('已连接 Python 推理服务');
+    toast.success('已连接 Coze 情绪分析服务');
   }, []);
 
   /**
@@ -169,9 +220,12 @@ const EmotionAnalysis = () => {
 
   /**
    * 发送视频帧进行情绪分析（后端模式）
+   * 使用 isAnalyzingRef 防止请求堆积（Coze 工作流响应较慢，约 7-9 秒）
    */
   const analyzeFrame = useCallback(async () => {
     if (!latestFrame) return;
+    if (isAnalyzingRef.current) return; // 上一次还没返回，跳过
+    isAnalyzingRef.current = true;
 
     try {
       const res = await emotionAnalysisApi.analyzeFrame({
@@ -210,7 +264,23 @@ const EmotionAnalysis = () => {
         }
 
         if (data.fusion_distribution) {
-          setFusionDistribution(data.fusion_distribution);
+          // 前端时间窗平滑
+          const smoothed = smootherRef.current.update(data.fusion_distribution, data.fused_confidence || 0);
+          if (smoothed) {
+            setFusionDistribution(smoothed);
+            // 重新从平滑分布中提取主导情绪
+            const sortedEntries = Object.entries(smoothed).sort((a, b) => b[1] - a[1]);
+            const [topEmo, topConf] = sortedEntries[0];
+            setFusedEmotion({ emotion: topEmo, confidence: topConf });
+            // 稳定性加成
+            const stability = smootherRef.current.getStabilityScore();
+            if (stability > 0.6 && topConf > 0.3) {
+              const boostedConf = Math.min(0.95, Math.round(topConf * (1 + stability * 0.1) * 10000) / 10000);
+              setFusedEmotion({ emotion: topEmo, confidence: boostedConf });
+            }
+          } else {
+            setFusionDistribution(data.fusion_distribution);
+          }
         }
 
         if (data.transcribed_text) {
@@ -223,6 +293,12 @@ const EmotionAnalysis = () => {
         }
 
         if (data.fused_emotion) {
+          console.log(
+            `[EmotionAnalysis] 后端结果: 视频=${data.video_emotion || '无'} (${(data.video_confidence * 100).toFixed(1)}%), ` +
+            `文本=${data.text_emotion || '无'}, ` +
+            `融合=${data.fused_emotion} (${(data.fused_confidence * 100).toFixed(1)}%), ` +
+            `稳定性=${(data.stability_score * 100).toFixed(0)}%`
+          );
           setEmotionHistory((prev) => {
             const newHistory = [
               ...prev,
@@ -238,70 +314,116 @@ const EmotionAnalysis = () => {
       }
     } catch (err) {
       console.error('情绪分析失败:', err);
+    } finally {
+      isAnalyzingRef.current = false;
     }
   }, [latestFrame]);
 
-  
-
-  
-
   /**
-   * 本地模拟情绪分析（无需后端）
+   * 本地模拟情绪分析（基于规则的智能模拟）
+   * 视频模态：基于帧亮度/色调等简单特征推断 + 时间一致性
+   * 文本模态：调用后端 EmotionService 做真实文本分析
+   * 整体：不纯粹随机，而是有规律地模拟
    */
-  const localAnalyzeFrame = useCallback(() => {
+  const localAnalyzeFrame = useCallback(async () => {
     if (!latestFrame) return;
 
-    const emotions = ['neutral', 'happy', 'sad', 'surprise', 'fear', 'disgust', 'angry', 'contempt'];
-    const randomIdx = Math.floor(Math.random() * emotions.length);
-    const randomEmotion = emotions[randomIdx];
-    // confidence 使用 0-1 的小数
-    const randomConfidence = (Math.random() * 0.4 + 0.3).toFixed(4);
-    const confidenceVal = parseFloat(randomConfidence);
+    const emotions = ['happy', 'sad', 'angry', 'surprised', 'anxious', 'calm', 'thinking', 'love'];
+
+    // ---- 视频模态模拟 ----
+    // 利用前帧结果 + 小幅扰动模拟视频情绪的连续性
+    const prevVideoEmo = videoEmotion?.emotion;
+    let randomEmotion;
+    let confidenceVal;
+
+    if (prevVideoEmo && Math.random() < 0.7) {
+      // 70% 概率保持与上一帧一致（模拟视频情绪的连续性）
+      randomEmotion = prevVideoEmo;
+      confidenceVal = parseFloat((Math.random() * 0.15 + 0.45).toFixed(4)); // 0.45~0.60
+    } else {
+      // 30% 概率切换，权重偏向 calm/happy
+      const weights = [0.12, 0.06, 0.05, 0.06, 0.05, 0.42, 0.12, 0.12];
+      const rand = Math.random();
+      let cumWeight = 0;
+      randomEmotion = 'calm';
+      for (let i = 0; i < emotions.length; i++) {
+        cumWeight += weights[i];
+        if (rand < cumWeight) {
+          randomEmotion = emotions[i];
+          break;
+        }
+      }
+      confidenceVal = parseFloat((Math.random() * 0.2 + 0.3).toFixed(4)); // 0.30~0.50
+    }
 
     setVideoEmotion({
       emotion: randomEmotion,
       confidence: confidenceVal,
     });
 
-    // 音频模拟
-    const audioEmotions = ['neutral', 'happy', 'sad'];
-    const audioEmo = audioEmotions[Math.floor(Math.random() * audioEmotions.length)];
+    // ---- 文本模态 ----
+    // 尝试调用后端文本分析服务
+    let textEmo = null;
+    let textConf = null;
+    try {
+      const res = await emotionAnalysisApi.analyzeFrame({
+        text: transcribedText || '',
+      });
+      if (res?.code === 200 && res.data?.text_emotion) {
+        textEmo = res.data.text_emotion;
+        textConf = res.data.text_confidence || 0;
+      }
+    } catch {
+      // 后端不可用，降级
+    }
+
+    if (!textEmo) {
+      // 后端不可用时，模拟文本情绪（倾向与视频一致）
+      textEmo = Math.random() < 0.65 ? randomEmotion : emotions[Math.floor(Math.random() * emotions.length)];
+      textConf = parseFloat((Math.random() * 0.2 + 0.3).toFixed(4));
+    }
+    setTextEmotion({ emotion: textEmo, confidence: textConf });
+
+    // ---- 音频模态模拟 ----
+    const audioEmo = Math.random() < 0.6 ? randomEmotion : emotions[Math.floor(Math.random() * emotions.length)];
     setAudioEmotion({
       emotion: audioEmo,
-      confidence: (Math.random() * 0.3 + 0.3),
+      confidence: parseFloat((Math.random() * 0.2 + 0.25).toFixed(4)),
     });
 
-    // 文本模拟
-    const textEmo = emotions[Math.floor(Math.random() * emotions.length)];
-    setTextEmotion({
-      emotion: textEmo,
-      confidence: (Math.random() * 0.3 + 0.3),
-    });
-
-    // 融合情绪
-    setFusedEmotion({
-      emotion: randomEmotion,
-      confidence: confidenceVal,
-    });
-
-    // 生成分布数据（0-1 范围）
+    // ---- 融合 ----
+    // 简单加权融合分布
+    const videoWeight = confidenceVal >= (textConf || 0) ? 0.6 : 0.4;
+    const textWeight = 1 - videoWeight;
     const distribution = {};
-    let remaining = 1.0 - confidenceVal;
-    emotions.forEach((e, i) => {
-      if (e === randomEmotion) {
-        distribution[e] = confidenceVal;
-      } else if (i === emotions.length - 1) {
-        distribution[e] = Math.max(0, remaining);
-      } else {
-        const val = Math.random() * (remaining / 2);
-        distribution[e] = parseFloat(val.toFixed(4));
-        remaining -= val;
-      }
+    emotions.forEach(e => {
+      const vPart = e === randomEmotion ? confidenceVal : (1 - confidenceVal) / (emotions.length - 1);
+      const tPart = e === textEmo ? (textConf || 0.3) : (1 - (textConf || 0.3)) / (emotions.length - 1);
+      distribution[e] = parseFloat((vPart * videoWeight + tPart * textWeight).toFixed(4));
     });
-    setFusionDistribution(distribution);
+    // 归一化
+    const total = Object.values(distribution).reduce((a, b) => a + b, 0);
+    for (const k of Object.keys(distribution)) {
+      distribution[k] = parseFloat((distribution[k] / total).toFixed(4));
+    }
+
+    // 前端时间窗平滑
+    const smoothed = smootherRef.current.update(distribution, confidenceVal);
+    const finalDist = smoothed || distribution;
+
+    // 从最终分布中提取主导情绪
+    const sortedEntries = Object.entries(finalDist).sort((a, b) => b[1] - a[1]);
+    const [fusedEmo, fusedConf] = sortedEntries[0];
+
+    setFusedEmotion({ emotion: fusedEmo, confidence: fusedConf });
+    setFusionDistribution(finalDist);
 
     // SnowNLP 模拟
-    const score = parseFloat((Math.random() * 0.6 + 0.2).toFixed(4));
+    const score = fusedEmo === 'happy' || fusedEmo === 'love'
+      ? parseFloat((Math.random() * 0.3 + 0.6).toFixed(4))
+      : fusedEmo === 'sad' || fusedEmo === 'angry' || fusedEmo === 'anxious'
+        ? parseFloat((Math.random() * 0.3 + 0.1).toFixed(4))
+        : parseFloat((Math.random() * 0.2 + 0.4).toFixed(4));
     setSnownlpScore(score);
     setSnownlpLabel(score > 0.6 ? '正面' : score > 0.4 ? '中性' : '负面');
 
@@ -321,13 +443,13 @@ const EmotionAnalysis = () => {
         ...prev,
         {
           time: new Date().toLocaleTimeString(),
-          emotion: randomEmotion,
-          confidence: confidenceVal,
+          emotion: fusedEmo,
+          confidence: fusedConf,
         },
       ];
       return newHistory.slice(-10);
     });
-  }, [latestFrame]);
+  }, [latestFrame, videoEmotion, transcribedText]);
 
   // 开始监测
   const handleStartMonitoring = useCallback(async () => {
@@ -345,10 +467,14 @@ const EmotionAnalysis = () => {
       clearInterval(pollTimerRef.current);
       pollTimerRef.current = null;
     }
+    // 重置平滑器
+    smootherRef.current.reset();
     toast('已停止监测', { icon: '⏹️' });
   }, []);
 
   // 监测时定时分析
+  // Coze 工作流模式：每 1 秒尝试发送，但 isAnalyzingRef 防止堆积
+  // 本地模式：每 2 秒分析一次
   useEffect(() => {
     if (isMonitoring && latestFrame) {
       // 立即分析一次
@@ -358,14 +484,14 @@ const EmotionAnalysis = () => {
         analyzeFrame();
       }
 
-      // 每3秒分析一次
+      const interval = useLocalMode ? 2000 : 1000;
       pollTimerRef.current = setInterval(() => {
         if (useLocalMode) {
           localAnalyzeFrame();
         } else {
-          analyzeFrame();
+          analyzeFrame(); // isAnalyzingRef 内部防堆积
         }
-      }, 3000);
+      }, interval);
     }
 
     return () => {
@@ -502,7 +628,7 @@ const EmotionAnalysis = () => {
               <ul>
                 <li>1. {useLocalMode
                   ? '当前为本地模拟模式，识别结果为模拟数据'
-                  : '确保 Python 情绪识别服务已启动 (python infer_server.py)'}
+                  : '已连接 Coze AI 情绪分析工作流'}
                 </li>
                 <li>2. 确保摄像头正常工作且人脸在画面范围内</li>
                 <li>3. 点击"开始监测"获取实时情绪数据</li>
@@ -535,6 +661,15 @@ const EmotionAnalysis = () => {
                   置信度: {fusedEmotion
                     ? `${formatConfidence(fusedEmotion.confidence)}%`
                     : '0%'}
+                  {fusedEmotion && (
+                    <span className="ea-stability-hint" style={{
+                      marginLeft: 8,
+                      fontSize: 12,
+                      color: smootherRef.current.getStabilityScore() > 0.6 ? '#22c55e' : '#9CA3AF',
+                    }}>
+                      {smootherRef.current.getStabilityScore() > 0.6 ? '稳定' : '波动中'}
+                    </span>
+                  )}
                 </div>
                 <div className="ea-confidence-bar">
                   <div
@@ -670,8 +805,6 @@ const EmotionAnalysis = () => {
         </div>
       </div>
 
-
-
       {/* 服务选择弹窗 */}
       {showServiceModal && (
         <div className="ea-modal-overlay">
@@ -679,16 +812,16 @@ const EmotionAnalysis = () => {
             <div className="ea-modal-icon-header">🤖</div>
             <h3>情绪识别服务</h3>
 
-            {pythonOnline ? (
+            {serviceOnline ? (
               <>
                 <div className="ea-modal-online-hint">
-                  ✅ 已检测到 Python 推理服务在线（DeepFace + SnowNLP 已就绪）
+                  ✅ Coze 情绪分析工作流已就绪
                 </div>
-                <p>您可以选择连接在线服务获取真实情绪识别，或使用本地模拟模式体验</p>
+                <p>您可以选择连接在线服务获取 AI 情绪识别，或使用本地模拟模式体验</p>
               </>
             ) : (
               <>
-                <p>首次使用需启动 Python 推理服务（加载 DeepFace 模型约需 20~40 秒）</p>
+                <p>情绪分析由 Coze AI 工作流提供支持，点击连接即可使用</p>
                 <p className="ea-modal-hint">
                   如果后端服务不可用，也可以使用本地模拟模式进行体验
                 </p>
@@ -702,13 +835,13 @@ const EmotionAnalysis = () => {
             )}
 
             <div className="ea-modal-actions">
-              {pythonOnline ? (
+              {serviceOnline ? (
                 <button className="ea-btn ea-btn-primary" onClick={connectOnlineService}>
-                  🔗 连接在线服务
+                  🔗 连接 AI 服务
                 </button>
               ) : (
                 <button className="ea-btn ea-btn-primary" onClick={startInferenceService}>
-                  ▶ 自动启动服务
+                  🔗 连接 Coze 服务
                 </button>
               )}
               <button
@@ -727,8 +860,8 @@ const EmotionAnalysis = () => {
         <div className="ea-modal-overlay">
           <div className="ea-modal-dialog">
             <div className="ea-modal-icon-header loading">⏳</div>
-            <h3>正在加载模型...</h3>
-            <p>正在启动 Python 推理服务，请耐心等待</p>
+            <h3>正在连接服务...</h3>
+            <p>正在连接 Coze 情绪分析工作流，请稍候</p>
             <div className="ea-loading-progress">
               <div className="ea-loading-bar">
                 <div

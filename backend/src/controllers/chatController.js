@@ -18,10 +18,14 @@ class ChatController {
         const result = await ChatService.callCozeWorkflow(message, mode || 'normal', userId, facial_image || null);
 
         ResponseUtil.success(ctx, {
+            id: result.id,
             response: result.response,
+            reply: result.response,              // 前端 DigitalHuman 页面期望的字段
+            expression: result.emotion,          // 前端 DigitalHuman 页面期望的字段
             emotion: result.emotion,
             intensity: result.intensity,
             emotion_advice: result.advice,
+            lipSync: null,                       // 前端 DigitalHuman 页面期望的字段
             timestamp: result.timestamp
         }, '发送成功');
     }

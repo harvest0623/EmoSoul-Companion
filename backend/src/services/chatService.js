@@ -125,7 +125,7 @@ class ChatService {
                 const advice = EmotionService.getEmotionAdvice(emotion, intensity);
 
                 // 保存对话记录（使用备用回复）
-                await ConversationModel.create({
+                const earlyRecord = await ConversationModel.create({
                     userId,
                     message,
                     response: fallbackResponse,
@@ -143,6 +143,7 @@ class ChatService {
                 }
 
                 return {
+                    id: earlyRecord.id,
                     response: fallbackResponse,
                     emotion,
                     intensity,
@@ -156,15 +157,16 @@ class ChatService {
                 'Authorization': `Bearer ${apiToken}`
             };
 
-            // VIP模式：获取历史对话上下文
+            // 获取历史对话上下文（所有模式都带上下文，分角色标识）
             let historyDialog = '';
-            if (mode === 'vip' && userId) {
-                const context = await this.getConversationContext(userId, 10);
+            if (userId) {
+                const contextLimit = 10; // 最近10轮对话
+                const context = await this.getConversationContext(userId, contextLimit);
                 if (context.length > 0) {
-                    // 将历史对话格式化为字符串
+                    // 分角色格式化，便于 LLM 理解对话脉络
                     historyDialog = context.map(item =>
-                        `用户：${item.message}\nAI：${item.response}`
-                    ).join('\n');
+                        `[user]: ${item.message}\n[assistant]: ${item.response}`
+                    ).join('\n\n');
                 }
             }
 
@@ -212,6 +214,12 @@ class ChatService {
                 aiResponse = responseData;
             } else if (responseData && typeof responseData === 'object') {
                 // JSON 响应
+                // 检查 Coze API 是否返回了错误响应（如 code: 4101 token 无效）
+                if (responseData.code && responseData.code !== 0) {
+                    const errorMsg = responseData.msg || responseData.message || 'Coze API 返回错误';
+                    console.error('Coze API 业务错误:', responseData.code, errorMsg);
+                    throw new Error(`Coze API 错误(${responseData.code}): ${errorMsg}`);
+                }
                 // 尝试从常见的响应字段中提取
                 if (responseData.response) {
                     structuredResult = responseData;
@@ -256,7 +264,7 @@ class ChatService {
             }
 
             // 保存对话记录
-            await ConversationModel.create({
+            const savedRecord = await ConversationModel.create({
                 userId,
                 message,
                 response: aiResponse,
@@ -274,6 +282,7 @@ class ChatService {
             }
 
             return {
+                id: savedRecord.id,
                 response: aiResponse,
                 emotion,
                 intensity,
@@ -295,7 +304,7 @@ class ChatService {
             const advice = EmotionService.getEmotionAdvice(emotion, intensity);
 
             // 保存对话记录（使用备用回复）
-            await ConversationModel.create({
+            const fallbackRecord = await ConversationModel.create({
                 userId,
                 message,
                 response: fallbackResponse,
@@ -313,6 +322,7 @@ class ChatService {
             }
 
             return {
+                id: fallbackRecord.id,
                 response: fallbackResponse,
                 emotion,
                 intensity,

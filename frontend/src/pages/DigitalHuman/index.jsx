@@ -275,9 +275,10 @@ const DigitalHuman = () => {
       const facialImage = isMonitoring && latestFrame ? latestFrame : undefined;
       const res = await chatApi.sendMessage(message, facialImage, 'normal');
 
-      if (res.data) {
-        const reply = res.data.reply || res.data.message || '...';
-        const expression = res.data.expression || 'calm';
+      if (res.data && res.data.data) {
+        // 正确解析后端返回的格式：{ code: 200, data: { response, emotion, intensity, emotion_advice, timestamp } }
+        const reply = res.data.data.response || res.data.data.reply || res.data.data.message || '...';
+        const expression = res.data.data.emotion || res.data.data.expression || 'calm';
 
         // 添加AI回复到历史
         const aiMsg = { role: 'assistant', content: reply, time: new Date().toLocaleTimeString() };
@@ -293,7 +294,7 @@ const DigitalHuman = () => {
           success: true,
           reply,
           expression,
-          lipSync: res.data.lipSync || null,
+          lipSync: null,
         });
 
         // 添加数据流日志
@@ -302,8 +303,27 @@ const DigitalHuman = () => {
           input: { message, facialImage: !!facialImage },
           output: { reply, expression },
         }]);
+      } else if (res.data) {
+        // 兼容旧格式
+        const reply = res.data.reply || res.data.message || '...';
+        const expression = res.data.expression || 'calm';
+
+        const aiMsg = { role: 'assistant', content: reply, time: new Date().toLocaleTimeString() };
+        setConversationHistory(prev => [...prev, aiMsg]);
+
+        setCurrentEmotion(expression);
+        setAvatarStatus(expression.toUpperCase());
+        setActiveExpression(expression);
+
+        setLlmOutput({
+          success: true,
+          reply,
+          expression,
+          lipSync: null,
+        });
       }
     } catch (err) {
+      console.error('聊天请求失败:', err);
       const errorMsg = '抱歉，回复出现问题，请稍后再试。';
       setConversationHistory(prev => [...prev, { role: 'assistant', content: errorMsg, time: new Date().toLocaleTimeString() }]);
       setLlmOutput({ success: false, reply: '', expression: '', lipSync: null });
