@@ -65,7 +65,8 @@ const Home = () => {
       title: '多模态交互',
       description: '支持语音对话、表情互动和动作反馈',
       icon: '🎭',
-      color: 'feature-modal'
+      color: 'feature-modal',
+      route: '/home/chat'
     },
     {
       id: 4,
@@ -89,7 +90,7 @@ const Home = () => {
       description: '根据用户提供的主题生成故事、诗歌和创意写作',
       icon: '✍️',
       color: 'feature-create',
-      route: '/content-creation'
+      route: '/home/content-creation'
     },
     {
       id: 7,
@@ -97,7 +98,7 @@ const Home = () => {
       description: '提供文字游戏、兴趣话题讨论和音乐推荐',
       icon: '🎮',
       color: 'feature-leisure',
-      route: '/home/leisureinteraction'
+      route: '/home/leisure-interaction'
     },
     {
       id: 8,
@@ -128,7 +129,8 @@ const Home = () => {
       title: '分享功能',
       description: '支持对话分享、情绪卡片生成和成就系统',
       icon: '📤',
-      color: 'feature-share'
+      color: 'feature-share',
+      route: '/home/share'
     },
     {
       id: 12,

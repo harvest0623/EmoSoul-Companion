@@ -160,23 +160,19 @@ const ThinkingTraining = () => {
   };
 
   return (
-    <div className={`thinking-training-container ${darkMode ? 'dark' : ''}`}>
+    <div className={`thinking-training-container ${darkMode ? 'dark-mode' : ''}`}>
       {/* 顶部导航 */}
-      <div className="thinking-training-header">
-        <div className="header-left">
-          <button className="back-button" onClick={() => navigate('/home')}>
-            <span className="back-arrow">←</span>
-          </button>
-        </div>
-        <div className="header-center">
-          <h1>🧠 思维训练</h1>
-        </div>
-        <div className="header-right">
-          <button className="theme-toggle" onClick={toggleDarkMode}>
-            <span className="theme-icon">{darkMode ? '☀️' : '🌙'}</span>
-          </button>
-        </div>
-      </div>
+      <header className="content-header thinking-training-header">
+        <button className="content-back-btn thinking-training-back-btn" onClick={() => navigate('/home')}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <h1 className="content-title thinking-training-title">🧠 思维训练</h1>
+        <button className="mode-toggle-btn" onClick={toggleDarkMode} aria-label={darkMode ? '切换到白天模式' : '切换到夜间模式'}>
+          <span className={`mode-icon iconfont ${darkMode ? 'icon-taiyang' : 'icon-ansemoshi'}`}></span>
+        </button>
+      </header>
 
       {/* 学习进度 */}
       <div className="progress-section">

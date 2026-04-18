@@ -22,7 +22,10 @@ import ContentCreation from './pages/ContentCreation';
 import LeisureInteraction from './pages/LeisureInteraction';
 import ThinkingTraining from './pages/ThinkingTraining';
 import KnowledgeLearning from './pages/KnowledgeLearning';
-import SocialConnection from './pages/SocialConnection';  
+import SocialConnection from './pages/SocialConnection';
+import SelfExploration from './pages/SelfExploration';
+import Share from './pages/Share';  
+
 
 /**
  * 受保护的路由组件
@@ -232,9 +235,9 @@ function App() {
         
         {/* 内容创作 - 需要登录 */}
         <Route 
-          path="/content-creation" 
+          path="/home/content-creation" 
           element={
-            <ProtectedRoute path="/content-creation">
+            <ProtectedRoute path="/home/content-creation">
               <ContentCreation />
             </ProtectedRoute>
           } 
@@ -242,9 +245,9 @@ function App() {
         
         {/* 休闲互动 - 需要登录 */}
         <Route 
-          path="/home/leisureinteraction" 
+          path="/home/leisure-interaction" 
           element={
-            <ProtectedRoute path="/home/leisureinteraction">
+            <ProtectedRoute path="/home/leisure-interaction">
               <LeisureInteraction />
             </ProtectedRoute>
           } 
@@ -276,6 +279,26 @@ function App() {
           element={
             <ProtectedRoute path="/home/social-connection">
               <SocialConnection />
+            </ProtectedRoute>
+          } 
+        />
+
+        {/* 自我探索 - 需要登录 */}
+        <Route 
+          path="/home/self-exploration" 
+          element={
+            <ProtectedRoute path="/home/self-exploration">
+              <SelfExploration />
+            </ProtectedRoute>
+          } 
+        />
+
+        {/* 分享功能 - 需要登录 */}
+        <Route 
+          path="/home/share" 
+          element={
+            <ProtectedRoute path="/home/share">
+              <Share />
             </ProtectedRoute>
           } 
         />

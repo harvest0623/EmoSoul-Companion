@@ -5,7 +5,7 @@ import './SocialConnection.css';
 
 const SocialConnection = () => {
   const navigate = useNavigate();
-  const { isDarkMode, toggleTheme } = useThemeStore();
+  const { darkMode, toggleDarkMode } = useThemeStore();
   const [selectedTab, setSelectedTab] = useState('friends');
   const [activeCommunity, setActiveCommunity] = useState(null);
   const [postContent, setPostContent] = useState('');
@@ -117,23 +117,19 @@ const SocialConnection = () => {
   };
 
   return (
-    <div className={`social-connection-container ${isDarkMode ? 'dark' : ''}`}>
+    <div className={`social-connection-container ${darkMode ? 'dark-mode' : ''}`}>
       {/* 顶部导航 */}
-      <div className="social-connection-header">
-        <div className="header-left">
-          <button className="back-button" onClick={() => navigate('/home')}>
-            ←
-          </button>
-        </div>
-        <div className="header-center">
-          <h1>社交连接</h1>
-        </div>
-        <div className="header-right">
-          <button className="theme-toggle" onClick={toggleTheme}>
-            {isDarkMode ? '☀️' : '🌙'}
-          </button>
-        </div>
-      </div>
+      <header className="content-header social-connection-header">
+        <button className="content-back-btn social-connection-back-btn" onClick={() => navigate('/home')}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <h1 className="content-title social-connection-title">社交连接</h1>
+        <button className="mode-toggle-btn" onClick={toggleDarkMode} aria-label={darkMode ? '切换到白天模式' : '切换到夜间模式'}>
+          <span className={`mode-icon iconfont ${darkMode ? 'icon-taiyang' : 'icon-ansemoshi'}`}></span>
+        </button>
+      </header>
 
       {/* 内容区域 */}
       <div className="social-content">

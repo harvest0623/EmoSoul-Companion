@@ -6,7 +6,7 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark {
+.social-connection-container.dark-mode {
   background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
   color: #e2e8f0;
 }
@@ -26,9 +26,98 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark .social-connection-header {
+.social-connection-container.dark-mode .social-connection-header {
   background: rgba(30, 27, 75, 0.95);
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* 社交连接页面头部样式 */
+.social-connection-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.social-connection-container.dark-mode .social-connection-header {
+  background: rgba(30, 30, 60, 0.95);
+  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+.social-connection-back-btn {
+  background: rgba(139, 92, 246, 0.1);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+  color: #8b5cf6;
+  border-radius: 10px;
+  padding: 8px 10px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.social-connection-back-btn:hover {
+  background: rgba(139, 92, 246, 0.2);
+  border-color: rgba(139, 92, 246, 0.4);
+}
+
+.social-connection-title {
+  font-size: 20px;
+  font-weight: 600;
+  background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 模式切换按钮 */
+.mode-toggle-btn {
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 50%;
+  background: #f3f4f6;
+  color: #1f2937;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  margin-left: 8px;
+}
+
+.mode-toggle-btn:hover {
+  background: #e5e7eb;
+  transform: scale(1.05);
+}
+
+.mode-icon {
+  line-height: 1;
+}
+
+.mode-toggle-btn .icon-taiyang,
+.mode-toggle-btn .icon-ansemoshi {
+  font-size: 24px !important;
+  font-family: "iconfont" !important;
+  font-style: normal !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+
+.social-connection-container.dark-mode .mode-toggle-btn {
+  background: #2d2d2d;
+  color: #ffffff;
+}
+
+.social-connection-container.dark-mode .mode-toggle-btn:hover {
+  background: #3d3d3d;
 }
 
 .header-left .back-button {
@@ -46,7 +135,7 @@
   border-radius: 50%;
 }
 
-.social-connection-container.dark .header-left .back-button {
+.social-connection-container.dark-mode .header-left .back-button {
   color: #a78bfa;
 }
 
@@ -63,7 +152,7 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark .header-center h1 {
+.social-connection-container.dark-mode .header-center h1 {
   color: #a78bfa;
 }
 
@@ -82,7 +171,7 @@
   border-radius: 50%;
 }
 
-.social-connection-container.dark .header-right .theme-toggle {
+.social-connection-container.dark-mode .header-right .theme-toggle {
   color: #a78bfa;
 }
 
@@ -108,7 +197,7 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark .tab-container {
+.social-connection-container.dark-mode .tab-container {
   background: rgba(49, 46, 129, 0.8);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
@@ -126,7 +215,7 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark .tab-button {
+.social-connection-container.dark-mode .tab-button {
   color: #94a3b8;
 }
 
@@ -135,7 +224,7 @@
   transform: translateY(-2px);
 }
 
-.social-connection-container.dark .tab-button:hover {
+.social-connection-container.dark-mode .tab-button:hover {
   color: #a78bfa;
 }
 
@@ -190,7 +279,7 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark .post-card {
+.social-connection-container.dark-mode .post-card {
   background: rgba(49, 46, 129, 0.8);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
@@ -219,7 +308,7 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark .post-avatar {
+.social-connection-container.dark-mode .post-avatar {
   background: rgba(167, 139, 250, 0.2);
 }
 
@@ -229,7 +318,7 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark .post-info h4 {
+.social-connection-container.dark-mode .post-info h4 {
   color: #e2e8f0;
 }
 
@@ -239,7 +328,7 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark .post-time {
+.social-connection-container.dark-mode .post-time {
   color: #94a3b8;
 }
 
@@ -254,7 +343,7 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark .post-content p {
+.social-connection-container.dark-mode .post-content p {
   color: #e2e8f0;
 }
 
@@ -266,7 +355,7 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark .post-actions {
+.social-connection-container.dark-mode .post-actions {
   border-top-color: rgba(167, 139, 250, 0.2);
 }
 
@@ -282,7 +371,7 @@
   gap: 0.5rem;
 }
 
-.social-connection-container.dark .action-btn {
+.social-connection-container.dark-mode .action-btn {
   color: #94a3b8;
 }
 
@@ -291,7 +380,7 @@
   transform: translateY(-2px);
 }
 
-.social-connection-container.dark .action-btn:hover {
+.social-connection-container.dark-mode .action-btn:hover {
   color: #a78bfa;
 }
 
@@ -319,7 +408,7 @@
   border: 2px solid transparent;
 }
 
-.social-connection-container.dark .community-card {
+.social-connection-container.dark-mode .community-card {
   background: rgba(49, 46, 129, 0.8);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
@@ -336,7 +425,7 @@
   background: linear-gradient(135deg, #f3e8ff 0%, #e9d5ff 100%);
 }
 
-.social-connection-container.dark .community-card.active {
+.social-connection-container.dark-mode .community-card.active {
   background: rgba(167, 139, 250, 0.1);
 }
 
@@ -352,7 +441,7 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark .community-card h3 {
+.social-connection-container.dark-mode .community-card h3 {
   color: #a78bfa;
 }
 
@@ -363,7 +452,7 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark .community-description {
+.social-connection-container.dark-mode .community-description {
   color: #94a3b8;
 }
 
@@ -376,7 +465,7 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark .community-stats {
+.social-connection-container.dark-mode .community-stats {
   color: #94a3b8;
 }
 
@@ -393,7 +482,7 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark .join-community-btn {
+.social-connection-container.dark-mode .join-community-btn {
   background: rgba(49, 46, 129, 0.8);
   border-color: #a78bfa;
   color: #a78bfa;
@@ -433,7 +522,7 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark .digital-human-card {
+.social-connection-container.dark-mode .digital-human-card {
   background: rgba(49, 46, 129, 0.8);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
@@ -455,7 +544,7 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark .digital-human-card h3 {
+.social-connection-container.dark-mode .digital-human-card h3 {
   color: #a78bfa;
 }
 
@@ -467,7 +556,7 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark .digital-personality {
+.social-connection-container.dark-mode .digital-personality {
   color: #a78bfa;
 }
 
@@ -478,7 +567,7 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark .digital-description {
+.social-connection-container.dark-mode .digital-description {
   color: #94a3b8;
 }
 
@@ -547,7 +636,7 @@
   animation: slideUp 0.3s ease;
 }
 
-.social-connection-container.dark .modal-content {
+.social-connection-container.dark-mode .modal-content {
   background: rgba(49, 46, 129, 0.95);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
@@ -561,7 +650,7 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark .modal-header {
+.social-connection-container.dark-mode .modal-header {
   border-bottom-color: rgba(167, 139, 250, 0.2);
 }
 
@@ -571,7 +660,7 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark .modal-header h3 {
+.social-connection-container.dark-mode .modal-header h3 {
   color: #a78bfa;
 }
 
@@ -590,7 +679,7 @@
   border-radius: 50%;
 }
 
-.social-connection-container.dark .close-modal {
+.social-connection-container.dark-mode .close-modal {
   color: #94a3b8;
 }
 
@@ -599,7 +688,7 @@
   color: #6b21a8;
 }
 
-.social-connection-container.dark .close-modal:hover {
+.social-connection-container.dark-mode .close-modal:hover {
   background: rgba(167, 139, 250, 0.2);
   color: #a78bfa;
 }
@@ -622,7 +711,7 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark .modal-body textarea {
+.social-connection-container.dark-mode .modal-body textarea {
   background: rgba(30, 27, 75, 0.8);
   border-color: rgba(167, 139, 250, 0.3);
   color: #e2e8f0;
@@ -634,7 +723,7 @@
   box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
 }
 
-.social-connection-container.dark .modal-body textarea:focus {
+.social-connection-container.dark-mode .modal-body textarea:focus {
   box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2);
 }
 
@@ -647,7 +736,7 @@
   transition: all 0.3s ease;
 }
 
-.social-connection-container.dark .modal-footer {
+.social-connection-container.dark-mode .modal-footer {
   border-top-color: rgba(167, 139, 250, 0.2);
 }
 
@@ -667,7 +756,7 @@
   border: 2px solid #e9d5ff;
 }
 
-.social-connection-container.dark .cancel-btn {
+.social-connection-container.dark-mode .cancel-btn {
   background: rgba(167, 139, 250, 0.1);
   color: #a78bfa;
   border-color: rgba(167, 139, 250, 0.3);
@@ -678,7 +767,7 @@
   transform: translateY(-2px);
 }
 
-.social-connection-container.dark .cancel-btn:hover {
+.social-connection-container.dark-mode .cancel-btn:hover {
   background: rgba(167, 139, 250, 0.2);
 }
 
@@ -819,14 +908,14 @@
   background: #8b5cf6;
 }
 
-.social-connection-container.dark::-webkit-scrollbar-track {
+.social-connection-container.dark-mode::-webkit-scrollbar-track {
   background: rgba(30, 27, 75, 0.5);
 }
 
-.social-connection-container.dark::-webkit-scrollbar-thumb {
+.social-connection-container.dark-mode::-webkit-scrollbar-thumb {
   background: #a78bfa;
 }
 
-.social-connection-container.dark::-webkit-scrollbar-thumb:hover {
+.social-connection-container.dark-mode::-webkit-scrollbar-thumb:hover {
   background: #8b5cf6;
 }
