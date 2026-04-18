@@ -114,6 +114,43 @@ class ChatService {
             const apiUrl = process.env.COZE_API_URL || 'https://bszwsh44nb.coze.site/run';
             const apiToken = process.env.COZE_API_TOKEN;
 
+            // 检查 API token 是否存在
+            if (!apiToken) {
+                console.warn('Coze API token 未配置，使用本地备用回复');
+                // API 调用失败时，使用本地备用回复
+                const emotionAnalysis = EmotionService.analyzeEmotion(message);
+                const emotion = emotionAnalysis.emotion;
+                const intensity = emotionAnalysis.intensity;
+                const fallbackResponse = this.getRandomResponse(emotion);
+                const advice = EmotionService.getEmotionAdvice(emotion, intensity);
+
+                // 保存对话记录（使用备用回复）
+                await ConversationModel.create({
+                    userId,
+                    message,
+                    response: fallbackResponse,
+                    emotion,
+                    source
+                });
+
+                // 自动记录情绪日记
+                if (userId) {
+                    try {
+                        await EmotionDiaryService.createAutoEntry(userId, emotion, intensity);
+                    } catch (diaryError) {
+                        console.log('自动记录情绪日记失败:', diaryError.message);
+                    }
+                }
+
+                return {
+                    response: fallbackResponse,
+                    emotion,
+                    intensity,
+                    advice,
+                    timestamp: new Date().toISOString()
+                };
+            }
+
             const headers = {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${apiToken}`

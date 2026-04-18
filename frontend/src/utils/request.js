@@ -1,5 +1,6 @@
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { useAuthStore } from '../store/authStore';
 
 // 创建axios实例
 const request = axios.create({
@@ -34,8 +35,7 @@ request.interceptors.response.use(
     if (data.code !== 200) {
       // Token过期或无效
       if (data.code === 401) {
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        useAuthStore.getState().logout();
         window.location.href = '/login';
       }
       
@@ -51,8 +51,7 @@ request.interceptors.response.use(
       switch (response.status) {
         case 401:
           toast.error('登录已过期，请重新登录');
-          localStorage.removeItem('token');
-          localStorage.removeItem('user');
+          useAuthStore.getState().logout();
           window.location.href = '/login';
           break;
         case 403:
