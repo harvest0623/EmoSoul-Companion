@@ -1,77 +1,173 @@
-# 语你相伴 - AI情感陪护虚拟数字人
+# 🎭 语你相伴 - AI情感陪护虚拟数字人
 
 <p align="center">
-  <img src="https://img.shields.io/badge/React-18-blue" alt="React">
-  <img src="https://img.shields.io/badge/Koa-2.15-green" alt="Koa">
-  <img src="https://img.shields.io/badge/Node.js-18+-brightgreen" alt="Node.js">
-  <img src="https://img.shields.io/badge/MySQL-8.0-orange" alt="MySQL">
+  <img src="https://img.shields.io/badge/React-18-blue?logo=react&logoColor=61DAFB" alt="React">
+  <img src="https://img.shields.io/badge/Koa-2.15-green?logo=koa&logoColor=33333D" alt="Koa">
+  <img src="https://img.shields.io/badge/Node.js-18+-brightgreen?logo=node.js&logoColor=339933" alt="Node.js">
+  <img src="https://img.shields.io/badge/MySQL-8.0-orange?logo=mysql&logoColor=4479A1" alt="MySQL">
+  <img src="https://img.shields.io/badge/Zustand-5.0+-0070f3?logo=npm&logoColor=0070f3" alt="Zustand">
   <img src="https://img.shields.io/badge/License-MIT-yellow" alt="License">
 </p>
 
-## 项目介绍
+**本项目使用：**
 
-「语你相伴」是一个面向用户的AI情感陪伴类全栈应用，通过虚拟数字人实现情感对话交互，为用户提供温暖的陪伴体验。
+<p align="center">
+  <img src="https://img.shields.io/badge/React-18.0.0-61DAFB?logo=react&logoColor=61DAFB" alt="React">
+  <img src="https://img.shields.io/badge/Koa-2.15.0-33333D?logo=koa&logoColor=33333D" alt="Koa">
+  <img src="https://img.shields.io/badge/Node.js-18.0.0-339933?logo=node.js&logoColor=339933" alt="Node.js">
+  <img src="https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql&logoColor=4479A1" alt="MySQL">
+  <img src="https://img.shields.io/badge/Zustand-5.0.0-0070f3?logo=npm&logoColor=0070f3" alt="Zustand">
+  <img src="https://img.shields.io/badge/React_Router-6.0.0-CA4245?logo=reactrouter&logoColor=CA4245" alt="React Router">
+  <img src="https://img.shields.io/badge/Axios-1.0.0-5A29E4?logo=axios&logoColor=5A29E4" alt="Axios">
+</p>
 
-### 核心功能
+> **一个面向用户的AI情感陪伴类全栈应用**，通过虚拟数字人实现情感对话交互，为用户提供温暖的陪伴体验。系统支持用户注册登录、实时情感对话、个人中心管理等功能，打造智能化的情感陪伴平台。
 
-- **用户系统**：支持手机号/邮箱注册登录，JWT认证，密码加密存储
-- **数字人对话**：虚拟数字人根据对话内容展示不同情绪表情，支持实时对话
-- **个人中心**：支持头像裁剪上传、昵称修改、密码修改
-- **安全防护**：登录防刷、Token黑名单、接口参数校验
+## ✨ 项目亮点
 
-## 技术栈
+### 🎭 数字人情感交互
+- **智能情感识别**
+  - 预设5种情绪表情：开心、温柔、思考、难过、惊讶
+  - 根据用户输入内容智能分析情绪
+  - 情绪切换带有平滑过渡动画
+  - 支持实时对话，响应迅速
 
-### 前端
-- React 18 + React Router 6
-- Zustand 状态管理
-- Axios HTTP请求
-- react-cropper 头像裁剪
-- react-hot-toast 消息提示
+- **Live2D 数字人**
+  - 采用 Live2D 技术实现生动的虚拟形象
+  - 支持多种动作和表情切换
+  - 流畅的动画效果，提升用户体验
 
-### 后端
-- Koa 2.15 + Node.js
-- MySQL 8.0 + mysql2
-- JWT 认证
-- bcrypt 密码加密
-- Joi 参数校验
+### 🔐 安全可靠的用户系统
+- **JWT 身份认证**
+  - 登录成功后签发 Token，存储于 localStorage
+  - 请求时携带 Authorization 头
+  - Token 过期自动跳转登录页
+  - 支持无感刷新 Token
 
-## 项目结构
+- **登录防刷机制**
+  - 连续失败5次锁定账号15分钟
+  - 登录成功自动清除失败记录
+  - 基于 MySQL 记录，服务重启不影响
 
-```
-.
-├── backend/                # 后端项目
+- **密码加密存储**
+  - 使用 bcrypt 进行密码哈希
+  - 数据库只存储加密后的密码
+  - 安全性与性能平衡
+
+### 📱 现代化前端设计
+- **响应式布局**
+  - 适配不同屏幕尺寸
+  - 移动端友好的界面设计
+  - 清晰的视觉层次
+
+- **状态管理**
+  - 使用 Zustand 轻量级状态管理
+  - 模块化的状态管理架构
+  - 易于维护和扩展
+
+- **用户体验优化**
+  - 头像裁剪上传功能
+  - 实时消息提示
+  - 流畅的页面切换动画
+  - 友好的错误提示
+
+### 🏗️ 完整架构
+- **前后端分离**
+  - 前端：React + React Router + Zustand
+  - 后端：Koa + MySQL + JWT
+  - RESTful API 设计
+  - 支持跨域请求（CORS）
+
+- **分层架构**
+  - 后端：路由层 → 控制层 → 服务层 → 数据层
+  - 前端：页面层 → 组件层 → 服务层 → 状态管理层
+  - 模块化设计，易于扩展
+
+## 🚀 功能特性
+
+| 功能模块 | 描述 |
+|---------|------|
+| 🔐 用户系统 | 手机号/邮箱注册登录、JWT 认证、密码加密存储 |
+| 🎭 数字人对话 | 虚拟数字人根据对话内容展示不同情绪表情，支持实时对话 |
+| 👤 个人中心 | 支持头像裁剪上传、昵称修改、密码修改 |
+| 📝 情绪日记 | 记录用户情感状态，提供情感分析 |
+| ✅ 待办事项 | 管理日常任务，提高用户 productivity |
+| 📊 情感分析 | 分析用户情感趋势，提供情感洞察 |
+| 🌟 成就系统 | 记录用户使用成就，增强用户粘性 |
+| 🌐 社交分享 | 分享心情和成就，增强社交互动 |
+
+## 🛠️ 技术栈
+
+### 前端 (Frontend)
+
+| 技术 | 版本 | 用途 |
+|------|------|------|
+| React | 18.0.0 | 现代 UI 框架，函数式组件 + Hooks |
+| React Router | 6.0.0 | 前端路由管理 |
+| Zustand | 5.0.0 | 轻量级状态管理 |
+| Axios | 1.0.0 | HTTP 请求库 |
+| react-cropper | 2.0.0 | 头像裁剪组件 |
+| react-hot-toast | 2.0.0 | 消息提示组件 |
+| Live2D | - | 虚拟数字人技术 |
+
+### 后端 (Backend)
+
+| 技术 | 版本 | 用途 |
+|------|------|------|
+| Koa | 2.15.0 | Node.js Web 框架 |
+| MySQL | 8.0 | 关系型数据库 |
+| JWT | 9.0.0 | 身份认证 |
+| bcrypt | 6.0.0 | 密码加密 |
+| Joi | 17.0.0 | 参数校验 |
+| mysql2 | 3.0.0 | MySQL 数据库连接 |
+| axios | 1.0.0 | HTTP 请求库 |
+
+## 📁 项目结构
+
+```plaintext
+EmoSoul-Companion/
+├── backend/                    # 后端项目
 │   ├── src/
-│   │   ├── config/         # 配置（MySQL连接等）
-│   │   ├── controllers/    # 控制器层
-│   │   ├── middleware/     # 中间件
-│   │   ├── models/         # 数据模型层
-│   │   ├── routes/         # 路由层
-│   │   ├── services/       # 服务层
-│   │   ├── utils/          # 工具函数
-│   │   └── app.js          # 应用入口
-│   ├── .env                # 环境变量
-│   ├── .env.example        # 环境变量示例
-│   ├── README.md           # 后端开发文档
-│   └── package.json
-├── frontend/               # 前端项目
+│   │   ├── config/             # 配置（MySQL连接等）
+│   │   ├── controllers/        # 控制器层
+│   │   ├── middleware/         # 中间件
+│   │   ├── models/             # 数据模型层
+│   │   ├── routes/             # 路由层
+│   │   ├── services/           # 服务层
+│   │   ├── utils/              # 工具函数
+│   │   └── app.js              # 应用入口
+│   ├── python/                 # Python 情感分析服务
+│   ├── .env.example            # 环境变量示例
+│   ├── README.md               # 后端开发文档
+│   └── package.json            # 后端依赖配置
+│
+├── frontend/                   # 前端项目
+│   ├── public/                 # 静态资源
+│   │   └── models/             # Live2D 模型资源
 │   ├── src/
-│   │   ├── components/     # 组件层
-│   │   ├── pages/          # 页面层
-│   │   ├── services/       # API服务
-│   │   ├── store/          # 状态管理
-│   │   ├── styles/         # 样式
-│   │   ├── utils/          # 工具函数
-│   │   ├── App.jsx         # 应用入口
-│   │   └── index.js
-│   ├── README.md           # 前端开发文档
-│   └── package.json
-├── Dockerfile              # Docker构建文件
-├── docker-compose.yml      # Docker Compose配置（含MySQL）
-├── nginx.conf              # Nginx配置
-└── readme.md               # 项目文档
+│   │   ├── assets/             # 静态资源
+│   │   ├── components/         # 组件层
+│   │   ├── constants/          # 常量定义
+│   │   ├── hooks/              # 自定义 Hooks
+│   │   ├── pages/              # 页面层
+│   │   ├── services/           # API 服务
+│   │   ├── store/              # 状态管理
+│   │   ├── styles/             # 样式
+│   │   ├── utils/              # 工具函数
+│   │   ├── App.jsx             # 应用入口
+│   │   └── index.js            # 前端入口
+│   ├── README.md               # 前端开发文档
+│   └── package.json            # 前端依赖配置
+│
+├── Dockerfile                  # Docker 构建文件
+├── docker-compose.yml          # Docker Compose 配置（含 MySQL）
+├── docker-compose.mysql-dev.yml # MySQL 开发环境配置
+├── nginx.conf                  # Nginx 配置
+├── README.md                   # 项目文档
+└── .gitignore                  # Git 忽略文件
 ```
 
-## 快速开始
+## 🏃 快速开始
 
 ### 环境要求
 - Node.js 18+
@@ -81,8 +177,8 @@
 
 ### 1. 克隆项目
 ```bash
-git clone <repository-url>
-cd yu-ni-xiang-ban
+git clone https://github.com/harvest0623/EmoSoul-Companion.git
+cd EmoSoul-Companion
 ```
 
 ### 2. 创建数据库
@@ -141,87 +237,273 @@ docker-compose logs -f
 docker-compose down
 ```
 
-## 开发文档
+## 🔍 核心实现原理
 
-- [后端开发文档](backend/README.md) - 后端架构、API接口、数据库操作
-- [前端开发文档](frontend/README.md) - 组件开发、状态管理、API调用
+### 1. JWT 认证机制
 
-## 架构说明
-
-### 后端分层架构
-
-```
-请求 → 路由层(routes) → 控制层(controllers) → 服务层(services) → 数据层(models)
-         ↓                    ↓                      ↓
-      中间件层(middleware)  工具层(utils)        MySQL数据库
-```
-
-### 前端分层架构
-
-```
-页面层(pages) → 组件层(components) → 工具层(utils)
-     ↓                                    ↓
-状态管理层(store) ←─────────────── API服务层(services)
-```
-
-## 核心特性详解
-
-### 1. JWT认证机制
-- 登录成功后签发Token，存储于localStorage
-- 请求时携带Authorization头
-- Token过期自动跳转登录页
-- 支持无感刷新Token
-
-### 2. 登录防刷机制
-- 连续失败5次锁定账号15分钟
-- 登录成功自动清除失败记录
-- 基于MySQL记录，服务重启不影响
-
-### 3. 数字人情绪系统
-- 预设5种情绪表情：开心、温柔、思考、难过、惊讶
-- 根据用户输入内容智能分析情绪
-- 情绪切换带有平滑过渡动画
-
-### 4. 头像裁剪功能
-- 支持JPG/PNG格式
-- 最大2MB限制
-- 圆形裁剪预览
-- 支持缩放、拖动调整
-
-## 扩展开发
-
-### 接入扣子工作流
-修改 `backend/src/services/chatService.js`：
+**后端 - 登录成功生成 Token**
 
 ```javascript
-static async callCozeWorkflow(userId, message, context = []) {
-  // 替换为真实的扣子API调用
-  const response = await axios.post('https://api.coze.com/workflow', {
-    user_id: userId,
-    message,
-    context
-  });
-  
-  return {
-    response: response.data.content,
-    emotion: response.data.emotion,
-    timestamp: new Date().toISOString()
-  };
+// backend/src/controllers/authController.js
+const jwt = require('jsonwebtoken');
+
+async function login(ctx) {
+    const { username, password } = ctx.request.body;
+    
+    // 验证用户存在
+    const user = await userService.findUserByUsername(username);
+    if (!user) {
+        ctx.status = 400;
+        ctx.body = { message: '账号不存在' };
+        return;
+    }
+
+    // 验证密码
+    const ok = await bcrypt.compare(password, user.password);
+    if (!ok) {
+        ctx.status = 400;
+        ctx.body = { message: '密码错误' };
+        return;
+    }
+
+    // 生成 JWT Token
+    const token = jwt.sign(
+        { id: user.id, username: user.username },
+        process.env.JWT_SECRET,
+        { expiresIn: '7d' }
+    );
+
+    ctx.body = {
+        code: 1,
+        message: '登录成功',
+        token,
+        user: { id: user.id, username: user.username, nickname: user.nickname }
+    };
 }
 ```
 
-## 贡献指南
+**后端 - Token 验证中间件**
+
+```javascript
+// backend/src/middleware/auth.js
+const jwt = require('jsonwebtoken');
+
+function verifyToken() {
+    return async (ctx, next) => {
+        const token = ctx.request.header.authorization;
+        
+        if (!token) {
+            ctx.status = 401;
+            ctx.body = { code: 0, message: '请先登录' };
+            return;
+        }
+
+        try {
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+            ctx.userId = decoded.id;
+            ctx.username = decoded.username;
+            await next();
+        } catch (error) {
+            ctx.status = 401;
+            ctx.body = { code: 0, message: 'token 无效' };
+        }
+    };
+}
+```
+
+### 2. 数字人情绪系统
+
+**前端 - Live2D 数字人组件**
+
+```jsx
+// frontend/src/components/Live2DAvatar/index.jsx
+import React, { useEffect, useRef } from 'react';
+import * as PIXI from 'pixi.js';
+import * as live2d from 'pixi-live2d-display';
+import './Live2DAvatar.css';
+
+export default function Live2DAvatar({ emotion = 'neutral' }) {
+    const canvasRef = useRef(null);
+    
+    useEffect(() => {
+        // 初始化 Live2D 数字人
+        // 根据情绪切换不同的动作和表情
+    }, [emotion]);
+    
+    return <canvas ref={canvasRef} className="live2d-avatar" />;
+}
+```
+
+### 3. 头像裁剪功能
+
+**前端 - 头像裁剪组件**
+
+```jsx
+// frontend/src/components/AvatarCropper/index.jsx
+import React, { useState } from 'react';
+import Cropper from 'react-cropper';
+import 'cropperjs/dist/cropper.css';
+import './AvatarCropper.css';
+
+export default function AvatarCropper({ onCrop }) {
+    const [image, setImage] = useState(null);
+    const cropperRef = React.useRef(null);
+    
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                setImage(e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+    
+    const handleCrop = () => {
+        if (cropperRef.current) {
+            const cropper = cropperRef.current.cropper;
+            const canvas = cropper.getCroppedCanvas();
+            canvas.toBlob((blob) => {
+                onCrop(blob);
+            });
+        }
+    };
+    
+    return (
+        <div className="avatar-cropper">
+            <input type="file" onChange={handleFileChange} />
+            {image && (
+                <>
+                    <Cropper
+                        ref={cropperRef}
+                        src={image}
+                        style={{ height: 400, width: '100%' }}
+                        aspectRatio={1}
+                        viewMode={1}
+                    />
+                    <button onClick={handleCrop}>确认裁剪</button>
+                </>
+            )}
+        </div>
+    );
+}
+```
+
+### 4. 登录防刷机制
+
+**后端 - 登录防刷中间件**
+
+```javascript
+// backend/src/middleware/loginLimiter.js
+const loginAttempts = new Map();
+
+function loginLimiter() {
+    return async (ctx, next) => {
+        const { username } = ctx.request.body;
+        const attempts = loginAttempts.get(username) || 0;
+        
+        if (attempts >= 5) {
+            ctx.status = 429;
+            ctx.body = { message: '登录失败次数过多，请15分钟后再试' };
+            return;
+        }
+        
+        await next();
+        
+        // 登录失败，增加失败次数
+        if (ctx.status === 400 && ctx.body.message === '密码错误') {
+            loginAttempts.set(username, attempts + 1);
+            // 15分钟后清除失败记录
+            setTimeout(() => {
+                loginAttempts.delete(username);
+            }, 15 * 60 * 1000);
+        }
+        
+        // 登录成功，清除失败记录
+        if (ctx.status === 200 && ctx.body.code === 1) {
+            loginAttempts.delete(username);
+        }
+    };
+}
+```
+
+## 🧩 开发指南
+
+### 添加新页面
+
+1. 在 `frontend/src/pages/` 下创建页面组件
+2. 在 `frontend/src/App.jsx` 中添加路由配置
+3. 在 `frontend/src/styles/` 下创建对应的样式文件
+
+### 添加新接口
+
+1. 在 `backend/src/controllers/` 下创建控制器
+2. 在 `backend/src/services/` 下创建服务
+3. 在 `backend/src/routes/index.js` 中注册路由
+
+### 数据库操作
+
+```javascript
+// backend/src/models/userModel.js
+const db = require('../config/database');
+
+class UserModel {
+    async findByUsername(username) {
+        const [rows] = await db.execute('SELECT * FROM users WHERE username = ?', [username]);
+        return rows[0];
+    }
+    
+    async create(userData) {
+        const [result] = await db.execute(
+            'INSERT INTO users (username, password, nickname) VALUES (?, ?, ?)',
+            [userData.username, userData.password, userData.nickname]
+        );
+        return result;
+    }
+}
+
+export default new UserModel();
+```
+
+## 📦 依赖说明
+
+### 前端依赖
+- **React** & **React DOM**：现代 UI 框架核心
+- **React Router**：前端路由管理
+- **Zustand**：轻量级状态管理
+- **Axios**：HTTP 请求库
+- **react-cropper**：头像裁剪组件
+- **react-hot-toast**：消息提示组件
+- **Live2D**：虚拟数字人技术
+
+### 后端依赖
+- **Koa**：Node.js Web 框架
+- **MySQL2**：MySQL 数据库连接
+- **JWT**：身份认证
+- **bcrypt**：密码加密
+- **Joi**：参数校验
+- **axios**：HTTP 请求库
+
+## 🤝 贡献指南
 
 1. Fork 本仓库
-2. 创建特性分支：`git checkout -b feature/xxx`
-3. 提交更改：`git commit -am 'Add some feature'`
-4. 推送分支：`git push origin feature/xxx`
-5. 提交 Pull Request
+2. 创建特性分支：`git checkout -b feature/YourFeature`
+3. 提交更改：`git commit -m 'Add some YourFeature'`
+4. 推送到分支：`git push origin feature/YourFeature`
+5. 开启 Pull Request
 
-## 许可证
+## 📄 许可证
 
-[MIT](LICENSE)
+本项目采用 MIT 许可证，详见 [LICENSE](LICENSE) 文件。
+
+## 📞 联系方式
+
+- GitHub Issues: [提交问题](https://github.com/harvest0623/EmoSoul-Companion/issues)
+- 邮箱：3367741939@qq.com or harvest060523@gmail.com
 
 ---
 
-<p align="center">Made with ❤️ by 语你相伴团队</p>
+**如果这个项目对你有帮助，欢迎给一个 ⭐ Star！**
+
+> 🎭 语你相伴，用科技传递温暖，让陪伴更有温度
