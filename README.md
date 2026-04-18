@@ -1,24 +1,24 @@
 # 🎭 语你相伴 - AI情感陪护虚拟数字人
 
 <p align="center">
-  <img src="https://img.shields.io/badge/React-18-blue?logo=react&logoColor=61DAFB" alt="React">
-  <img src="https://img.shields.io/badge/Koa-2.15-green?logo=koa&logoColor=33333D" alt="Koa">
-  <img src="https://img.shields.io/badge/Node.js-18+-brightgreen?logo=node.js&logoColor=339933" alt="Node.js">
-  <img src="https://img.shields.io/badge/MySQL-8.0-orange?logo=mysql&logoColor=4479A1" alt="MySQL">
-  <img src="https://img.shields.io/badge/Zustand-5.0+-0070f3?logo=npm&logoColor=0070f3" alt="Zustand">
-  <img src="https://img.shields.io/badge/License-MIT-yellow" alt="License">
+    <img src="https://img.shields.io/badge/React-18-blue?logo=react&logoColor=61DAFB" alt="React">
+    <img src="https://img.shields.io/badge/Koa-2.15-green?logo=koa&logoColor=33333D" alt="Koa">
+    <img src="https://img.shields.io/badge/Node.js-18+-brightgreen?logo=node.js&logoColor=339933" alt="Node.js">
+    <img src="https://img.shields.io/badge/MySQL-8.0-orange?logo=mysql&logoColor=4479A1" alt="MySQL">
+    <img src="https://img.shields.io/badge/Zustand-5.0+-0070f3?logo=npm&logoColor=0070f3" alt="Zustand">
+    <img src="https://img.shields.io/badge/License-MIT-yellow" alt="License">
 </p>
 
 **本项目使用：**
 
 <p align="center">
-  <img src="https://img.shields.io/badge/React-18.0.0-61DAFB?logo=react&logoColor=61DAFB" alt="React">
-  <img src="https://img.shields.io/badge/Koa-2.15.0-33333D?logo=koa&logoColor=33333D" alt="Koa">
-  <img src="https://img.shields.io/badge/Node.js-18.0.0-339933?logo=node.js&logoColor=339933" alt="Node.js">
-  <img src="https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql&logoColor=4479A1" alt="MySQL">
-  <img src="https://img.shields.io/badge/Zustand-5.0.0-0070f3?logo=npm&logoColor=0070f3" alt="Zustand">
-  <img src="https://img.shields.io/badge/React_Router-6.0.0-CA4245?logo=reactrouter&logoColor=CA4245" alt="React Router">
-  <img src="https://img.shields.io/badge/Axios-1.0.0-5A29E4?logo=axios&logoColor=5A29E4" alt="Axios">
+    <img src="https://img.shields.io/badge/React-18.0.0-61DAFB?logo=react&logoColor=61DAFB" alt="React">
+    <img src="https://img.shields.io/badge/Koa-2.15.0-33333D?logo=koa&logoColor=33333D" alt="Koa">
+    <img src="https://img.shields.io/badge/Node.js-18.0.0-339933?logo=node.js&logoColor=339933" alt="Node.js">
+    <img src="https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql&logoColor=4479A1" alt="MySQL">
+    <img src="https://img.shields.io/badge/Zustand-5.0.0-0070f3?logo=npm&logoColor=0070f3" alt="Zustand">
+    <img src="https://img.shields.io/badge/React_Router-6.0.0-CA4245?logo=reactrouter&logoColor=CA4245" alt="React Router">
+    <img src="https://img.shields.io/badge/Axios-1.0.0-5A29E4?logo=axios&logoColor=5A29E4" alt="Axios">
 </p>
 
 > **一个面向用户的AI情感陪伴类全栈应用**，通过虚拟数字人实现情感对话交互，为用户提供温暖的陪伴体验。系统支持用户注册登录、实时情感对话、个人中心管理等功能，打造智能化的情感陪伴平台。
@@ -27,61 +27,61 @@
 
 ### 🎭 数字人情感交互
 - **智能情感识别**
-  - 预设5种情绪表情：开心、温柔、思考、难过、惊讶
-  - 根据用户输入内容智能分析情绪
-  - 情绪切换带有平滑过渡动画
-  - 支持实时对话，响应迅速
+    - 预设5种情绪表情：开心、温柔、思考、难过、惊讶
+    - 根据用户输入内容智能分析情绪
+    - 情绪切换带有平滑过渡动画
+    - 支持实时对话，响应迅速
 
 - **Live2D 数字人**
-  - 采用 Live2D 技术实现生动的虚拟形象
-  - 支持多种动作和表情切换
-  - 流畅的动画效果，提升用户体验
+    - 采用 Live2D 技术实现生动的虚拟形象
+    - 支持多种动作和表情切换
+    - 流畅的动画效果，提升用户体验
 
 ### 🔐 安全可靠的用户系统
 - **JWT 身份认证**
-  - 登录成功后签发 Token，存储于 localStorage
-  - 请求时携带 Authorization 头
-  - Token 过期自动跳转登录页
-  - 支持无感刷新 Token
+    - 登录成功后签发 Token，存储于 localStorage
+    - 请求时携带 Authorization 头
+    - Token 过期自动跳转登录页
+    - 支持无感刷新 Token
 
 - **登录防刷机制**
-  - 连续失败5次锁定账号15分钟
-  - 登录成功自动清除失败记录
-  - 基于 MySQL 记录，服务重启不影响
+    - 连续失败5次锁定账号15分钟
+    - 登录成功自动清除失败记录
+    - 基于 MySQL 记录，服务重启不影响
 
 - **密码加密存储**
-  - 使用 bcrypt 进行密码哈希
-  - 数据库只存储加密后的密码
-  - 安全性与性能平衡
+    - 使用 bcrypt 进行密码哈希
+    - 数据库只存储加密后的密码
+    - 安全性与性能平衡
 
 ### 📱 现代化前端设计
 - **响应式布局**
-  - 适配不同屏幕尺寸
-  - 移动端友好的界面设计
-  - 清晰的视觉层次
+    - 适配不同屏幕尺寸
+    - 移动端友好的界面设计
+    - 清晰的视觉层次
 
 - **状态管理**
-  - 使用 Zustand 轻量级状态管理
-  - 模块化的状态管理架构
-  - 易于维护和扩展
+    - 使用 Zustand 轻量级状态管理
+    - 模块化的状态管理架构
+    - 易于维护和扩展
 
 - **用户体验优化**
-  - 头像裁剪上传功能
-  - 实时消息提示
-  - 流畅的页面切换动画
-  - 友好的错误提示
+    - 头像裁剪上传功能
+    - 实时消息提示
+    - 流畅的页面切换动画
+    - 友好的错误提示
 
 ### 🏗️ 完整架构
 - **前后端分离**
-  - 前端：React + React Router + Zustand
-  - 后端：Koa + MySQL + JWT
-  - RESTful API 设计
-  - 支持跨域请求（CORS）
+    - 前端：React + React Router + Zustand
+    - 后端：Koa + MySQL + JWT
+    - RESTful API 设计
+    - 支持跨域请求（CORS）
 
 - **分层架构**
-  - 后端：路由层 → 控制层 → 服务层 → 数据层
-  - 前端：页面层 → 组件层 → 服务层 → 状态管理层
-  - 模块化设计，易于扩展
+    - 后端：路由层 → 控制层 → 服务层 → 数据层
+    - 前端：页面层 → 组件层 → 服务层 → 状态管理层
+    - 模块化设计，易于扩展
 
 ## 🚀 功能特性
 
@@ -95,6 +95,14 @@
 | 📊 情感分析 | 分析用户情感趋势，提供情感洞察 |
 | 🌟 成就系统 | 记录用户使用成就，增强用户粘性 |
 | 🌐 社交分享 | 分享心情和成就，增强社交互动 |
+| 🔍 自我探索 | 人格测试、价值观探索、目标设定功能 |
+| 🧠 思维训练 | 思维训练题目、学习进度跟踪、类别选择 |
+| 🤝 社交连接 | 虚拟朋友圈、兴趣社群、数字人社交 |
+| ✍️ 内容创作 | 内容生成、历史记录管理 |
+| 🎮 休闲互动 | 休闲游戏、互动活动 |
+| 📚 知识学习 | 知识内容学习、学习进度跟踪 |
+| 🩺 健康管理 | 健康数据记录、健康建议 |
+| 📅 日常管理 | 日程安排、习惯养成 |
 
 ## 🛠️ 技术栈
 
@@ -150,6 +158,26 @@ EmoSoul-Companion/
 │   │   ├── constants/          # 常量定义
 │   │   ├── hooks/              # 自定义 Hooks
 │   │   ├── pages/              # 页面层
+│   │   │   ├── Achievement/        # 成就系统
+│   │   │   ├── Chat/               # 数字人对话
+│   │   │   ├── ContentCreation/    # 内容创作
+│   │   │   ├── DailyManagement/    # 日常管理
+│   │   │   ├── DigitalHuman/       # 数字人管理
+│   │   │   ├── EmotionAnalysis/    # 情感分析
+│   │   │   ├── ForgotPassword/     # 忘记密码
+│   │   │   ├── HealthManagement/   # 健康管理
+│   │   │   ├── Home/               # 首页
+│   │   │   ├── KnowledgeLearning/  # 知识学习
+│   │   │   ├── LeisureInteraction/ # 休闲互动
+│   │   │   ├── Login/              # 登录
+│   │   │   ├── Profile/            # 个人中心
+│   │   │   ├── Register/           # 注册
+│   │   │   ├── ResetPassword/      # 重置密码   
+│   │   │   ├── SelfExploration/    # 自我探索
+│   │   │   ├── Share/              # 分享功能
+│   │   │   ├── SocialConnection/   # 社交连接
+│   │   │   ├── ThinkingTraining/   # 思维训练
+│   │   │   └── Todo/               # 待办事项
 │   │   ├── services/           # API 服务
 │   │   ├── store/              # 状态管理
 │   │   ├── styles/             # 样式
@@ -159,12 +187,12 @@ EmoSoul-Companion/
 │   ├── README.md               # 前端开发文档
 │   └── package.json            # 前端依赖配置
 │
-├── Dockerfile                  # Docker 构建文件
-├── docker-compose.yml          # Docker Compose 配置（含 MySQL）
-├── docker-compose.mysql-dev.yml # MySQL 开发环境配置
-├── nginx.conf                  # Nginx 配置
-├── README.md                   # 项目文档
-└── .gitignore                  # Git 忽略文件
+├── Dockerfile                    # Docker 构建文件
+├── docker-compose.yml            # Docker Compose 配置（含 MySQL）
+├── docker-compose.mysql-dev.yml  # MySQL 开发环境配置
+├── nginx.conf                    # Nginx 配置
+├── README.md                     # 项目文档
+└── .gitignore                    # Git 忽略文件
 ```
 
 ## 🏃 快速开始
@@ -428,13 +456,108 @@ function loginLimiter() {
 }
 ```
 
+### 5. 自我探索功能
+
+**前端 - 人格测试实现**
+
+```jsx
+// frontend/src/pages/SelfExploration/index.jsx
+const personalityQuestions = [
+    {
+        id: 1,
+        question: '在社交场合中，你通常会：',
+        options: [
+        { text: '主动与很多人交流', value: 'E' },
+        { text: '只与少数熟悉的人交谈', value: 'I' }
+        ]
+    },
+    // 更多问题...
+];
+
+const calculateResult = () => {
+    const counts = { E: 0, I: 0, S: 0, N: 0, T: 0, F: 0, J: 0, P: 0 };
+    Object.values(answers).forEach(value => {
+        counts[value]++;
+    });
+
+    const personality = 
+        (counts.E >= counts.I ? 'E' : 'I') +
+        (counts.S >= counts.N ? 'S' : 'N') +
+        (counts.T >= counts.F ? 'T' : 'F') +
+        (counts.J >= counts.P ? 'J' : 'P');
+
+    // 保存结果到本地存储
+    const resultData = {
+        type: personality,
+        ...personalityDescriptions[personality],
+        date: new Date().toISOString()
+    };
+
+    setResult(resultData);
+    localStorage.setItem('selfExplorationPersonality', JSON.stringify(resultData));
+};
+```
+
+### 6. 思维训练功能
+
+**前端 - 思维训练实现**
+
+```jsx
+// frontend/src/pages/ThinkingTraining/index.jsx
+const [selectedCategory, setSelectedCategory] = useState('critical');
+const [progress, setProgress] = useState(0);
+
+const categories = [
+    { id: 'critical', name: '批判性思维', icon: '🧠' },
+    { id: 'creative', name: '创造性思维', icon: '💡' },
+    { id: 'problem-solving', name: '问题解决', icon: '🔍' },
+    { id: 'logical', name: '逻辑推理', icon: '🔢' }
+];
+
+// 学习进度计算
+useEffect(() => {
+    // 模拟学习进度
+    setProgress(65);
+}, []);
+```
+
+### 7. 社交连接功能
+
+**前端 - 社交连接实现**
+
+```jsx
+// frontend/src/pages/SocialConnection/index.jsx
+const [activeTab, setActiveTab] = useState('friends');
+const [posts, setPosts] = useState([]);
+const [newPost, setNewPost] = useState('');
+
+const createPost = () => {
+    if (!newPost.trim()) return;
+    
+    const post = {
+        id: Date.now(),
+        content: newPost,
+        author: '我',
+        avatar: '👤',
+        time: new Date().toLocaleString(),
+        likes: 0,
+        comments: 0
+    };
+  
+    setPosts([post, ...posts]);
+    setNewPost('');
+};
+```
+
 ## 🧩 开发指南
 
 ### 添加新页面
 
-1. 在 `frontend/src/pages/` 下创建页面组件
+1. 在 `frontend/src/pages/` 下创建页面文件夹，包含 `index.jsx` 和对应的 CSS 文件
 2. 在 `frontend/src/App.jsx` 中添加路由配置
-3. 在 `frontend/src/styles/` 下创建对应的样式文件
+3. 为页面添加页面特定的类名，避免样式冲突
+4. 实现页面功能，包括状态管理和用户交互
+5. 确保页面支持暗黑模式
 
 ### 添加新接口
 
