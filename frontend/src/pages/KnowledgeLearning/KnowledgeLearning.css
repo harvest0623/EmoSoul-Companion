@@ -1,634 +1,634 @@
 /* 知识学习页面样式 */
 .knowledge-page {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
-  color: #333;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+    color: #333;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
 }
 
 .knowledge-page.dark-mode {
-  background: linear-gradient(135deg, #4a148c 0%, #311b92 100%);
-  color: #e0e0e0;
+    background: linear-gradient(135deg, #4a148c 0%, #311b92 100%);
+    color: #e0e0e0;
 }
 
 /* 顶部导航 */
 .knowledge-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 24px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .knowledge-page.dark-mode .knowledge-header {
-  background: rgba(30, 30, 60, 0.95);
-  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+    background: rgba(30, 30, 60, 0.95);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.2);
 }
 
 .knowledge-back-btn {
-  background: rgba(156, 39, 176, 0.1);
-  border: 1px solid rgba(156, 39, 176, 0.2);
-  color: #9c27b0;
-  border-radius: 10px;
-  padding: 8px 10px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
+    background: rgba(156, 39, 176, 0.1);
+    border: 1px solid rgba(156, 39, 176, 0.2);
+    color: #9c27b0;
+    border-radius: 10px;
+    padding: 8px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
 }
 
 .knowledge-back-btn:hover {
-  background: rgba(156, 39, 176, 0.2);
-  border-color: rgba(156, 39, 176, 0.4);
+    background: rgba(156, 39, 176, 0.2);
+    border-color: rgba(156, 39, 176, 0.4);
 }
 
 .knowledge-title {
-  font-size: 20px;
-  font-weight: 600;
-  background: linear-gradient(135deg, #9c27b0, #7b1fa2);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+    font-size: 20px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 /* 学习进度 */
 .progress-section {
-  padding: 20px 24px;
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 20px 24px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .knowledge-page.dark-mode .progress-section {
-  background: rgba(30, 30, 60, 0.5);
-  border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+    background: rgba(30, 30, 60, 0.5);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.1);
 }
 
 .progress-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
 }
 
 .progress-header h3 {
-  font-size: 18px;
-  color: #333;
+    font-size: 18px;
+    color: #333;
 }
 
 .knowledge-page.dark-mode .progress-header h3 {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 .progress-percentage {
-  font-size: 16px;
-  font-weight: 600;
-  color: #9c27b0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #9c27b0;
 }
 
 .progress-bar {
-  width: 100%;
-  height: 12px;
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 6px;
-  overflow: hidden;
-  margin-bottom: 8px;
+    width: 100%;
+    height: 12px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 8px;
 }
 
 .knowledge-page.dark-mode .progress-bar {
-  background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #9c27b0, #ba68c8);
-  transition: width 0.3s ease;
+    height: 100%;
+    background: linear-gradient(90deg, #9c27b0, #ba68c8);
+    transition: width 0.3s ease;
 }
 
 .progress-text {
-  font-size: 14px;
-  color: #666;
-  text-align: center;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
 }
 
 .knowledge-page.dark-mode .progress-text {
-  color: #999;
+    color: #999;
 }
 
 /* 标签切换 */
 .knowledge-tabs {
-  display: flex;
-  gap: 8px;
-  padding: 16px 24px;
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  overflow-x: auto;
+    display: flex;
+    gap: 8px;
+    padding: 16px 24px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
 }
 
 .knowledge-page.dark-mode .knowledge-tabs {
-  background: rgba(30, 30, 60, 0.5);
-  border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+    background: rgba(30, 30, 60, 0.5);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.1);
 }
 
 .knowledge-tab {
-  flex: 1;
-  min-width: 100px;
-  padding: 12px 16px;
-  border: none;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #666;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  white-space: nowrap;
+    flex: 1;
+    min-width: 100px;
+    padding: 12px 16px;
+    border: none;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    white-space: nowrap;
 }
 
 .knowledge-page.dark-mode .knowledge-tab {
-  background: rgba(255, 255, 255, 0.05);
-  color: #999;
+    background: rgba(255, 255, 255, 0.05);
+    color: #999;
 }
 
 .knowledge-tab.active {
-  background: linear-gradient(135deg, #9c27b0, #7b1fa2);
-  color: white;
-  box-shadow: 0 4px 14px rgba(156, 39, 176, 0.35);
+    background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+    color: white;
+    box-shadow: 0 4px 14px rgba(156, 39, 176, 0.35);
 }
 
 .knowledge-tab:hover:not(.active) {
-  background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.8);
 }
 
 .knowledge-page.dark-mode .knowledge-tab:hover:not(.active) {
-  background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .knowledge-tab-icon {
-  font-size: 18px;
+    font-size: 18px;
 }
 
 /* 主体内容 */
 .knowledge-content {
-  flex: 1;
-  padding: 20px 24px;
-  overflow-y: auto;
+    flex: 1;
+    padding: 20px 24px;
+    overflow-y: auto;
 }
 
 /* 学科辅导 */
 .subjects-container,
 .languages-container,
 .skills-container {
-  max-width: 1200px;
-  margin: 0 auto;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .section-header {
-  text-align: center;
-  margin-bottom: 24px;
+    text-align: center;
+    margin-bottom: 24px;
 }
 
 .section-header h3 {
-  font-size: 24px;
-  margin-bottom: 8px;
-  color: #333;
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: #333;
 }
 
 .knowledge-page.dark-mode .section-header h3 {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 .section-header p {
-  font-size: 16px;
-  color: #666;
+    font-size: 16px;
+    color: #666;
 }
 
 .knowledge-page.dark-mode .section-header p {
-  color: #999;
+    color: #999;
 }
 
 .subjects-grid,
 .languages-grid,
 .skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
 }
 
 .subject-card,
 .language-card,
 .skill-card {
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  text-align: center;
-  transition: all 0.2s ease;
-  position: relative;
-  overflow: hidden;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    text-align: center;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
 }
 
 .knowledge-page.dark-mode .subject-card,
 .knowledge-page.dark-mode .language-card,
 .knowledge-page.dark-mode .skill-card {
-  background: rgba(30, 30, 60, 0.8);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    background: rgba(30, 30, 60, 0.8);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .subject-card:hover,
 .language-card:hover,
 .skill-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 }
 
 .knowledge-page.dark-mode .subject-card:hover,
 .knowledge-page.dark-mode .language-card:hover,
 .knowledge-page.dark-mode .skill-card:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
 .subject-card.completed,
 .language-card.completed,
 .skill-card.completed {
-  border: 2px solid #4caf50;
-  background: rgba(76, 175, 80, 0.05);
+    border: 2px solid #4caf50;
+    background: rgba(76, 175, 80, 0.05);
 }
 
 .knowledge-page.dark-mode .subject-card.completed,
 .knowledge-page.dark-mode .language-card.completed,
 .knowledge-page.dark-mode .skill-card.completed {
-  background: rgba(76, 175, 80, 0.1);
+    background: rgba(76, 175, 80, 0.1);
 }
 
 .subject-icon,
 .language-icon,
 .skill-icon {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 40px;
-  margin: 0 auto 16px;
-  background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    margin: 0 auto 16px;
+    background: linear-gradient(135deg, #f3e5f5, #e1bee7);
 }
 
 .knowledge-page.dark-mode .subject-icon,
 .knowledge-page.dark-mode .language-icon,
 .knowledge-page.dark-mode .skill-icon {
-  background: linear-gradient(135deg, #4a148c, #311b92);
+    background: linear-gradient(135deg, #4a148c, #311b92);
 }
 
 .subject-card h4,
 .language-card h4,
 .skill-card h4 {
-  font-size: 20px;
-  margin-bottom: 12px;
-  color: #333;
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: #333;
 }
 
 .knowledge-page.dark-mode .subject-card h4,
 .knowledge-page.dark-mode .language-card h4,
 .knowledge-page.dark-mode .skill-card h4 {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 .subject-info,
 .language-info,
 .skill-info {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 12px;
-  flex-wrap: wrap;
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
 }
 
 .level-tag {
-  padding: 4px 12px;
-  background: rgba(156, 39, 176, 0.1);
-  color: #9c27b0;
-  border-radius: 16px;
-  font-size: 12px;
-  font-weight: 500;
+    padding: 4px 12px;
+    background: rgba(156, 39, 176, 0.1);
+    color: #9c27b0;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 500;
 }
 
 .lessons-count {
-  padding: 4px 12px;
-  background: rgba(0, 0, 0, 0.1);
-  color: #666;
-  border-radius: 16px;
-  font-size: 12px;
-  font-weight: 500;
+    padding: 4px 12px;
+    background: rgba(0, 0, 0, 0.1);
+    color: #666;
+    border-radius: 16px;
+    font-size: 12px;
+    font-weight: 500;
 }
 
 .knowledge-page.dark-mode .lessons-count {
-  background: rgba(255, 255, 255, 0.1);
-  color: #999;
+    background: rgba(255, 255, 255, 0.1);
+    color: #999;
 }
 
 .subject-card p,
 .language-card p,
 .skill-card p {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 16px;
-  line-height: 1.5;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 16px;
+    line-height: 1.5;
 }
 
 .knowledge-page.dark-mode .subject-card p,
 .knowledge-page.dark-mode .language-card p,
 .knowledge-page.dark-mode .skill-card p {
-  color: #999;
+    color: #999;
 }
 
 .start-btn {
-  padding: 12px 24px;
-  background: linear-gradient(135deg, #9c27b0, #7b1fa2);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 14px rgba(156, 39, 176, 0.35);
-  width: 100%;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 14px rgba(156, 39, 176, 0.35);
+    width: 100%;
 }
 
 .start-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(156, 39, 176, 0.45);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(156, 39, 176, 0.45);
 }
 
 .completed-btn {
-  padding: 12px 24px;
-  background: rgba(76, 175, 80, 0.1);
-  color: #4caf50;
-  border: 1px solid #4caf50;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: not-allowed;
-  width: 100%;
+    padding: 12px 24px;
+    background: rgba(76, 175, 80, 0.1);
+    color: #4caf50;
+    border: 1px solid #4caf50;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: not-allowed;
+    width: 100%;
 }
 
 /* 学习详情 */
 .learning-detail {
-  max-width: 800px;
-  margin: 0 auto;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 20px;
-  padding: 24px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .knowledge-page.dark-mode .learning-detail {
-  background: rgba(30, 30, 60, 0.8);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    background: rgba(30, 30, 60, 0.8);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .detail-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 24px;
-  gap: 16px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 24px;
+    gap: 16px;
 }
 
 .back-btn {
-  background: rgba(156, 39, 176, 0.1);
-  border: 1px solid rgba(156, 39, 176, 0.2);
-  color: #9c27b0;
-  border-radius: 8px;
-  padding: 8px 12px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
+    background: rgba(156, 39, 176, 0.1);
+    border: 1px solid rgba(156, 39, 176, 0.2);
+    color: #9c27b0;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
 }
 
 .back-btn:hover {
-  background: rgba(156, 39, 176, 0.2);
-  border-color: rgba(156, 39, 176, 0.4);
+    background: rgba(156, 39, 176, 0.2);
+    border-color: rgba(156, 39, 176, 0.4);
 }
 
 .detail-header h3 {
-  font-size: 20px;
-  color: #333;
+    font-size: 20px;
+    color: #333;
 }
 
 .knowledge-page.dark-mode .detail-header h3 {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 .detail-info {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-bottom: 24px;
-  padding: 20px;
-  background: rgba(243, 229, 245, 0.5);
-  border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 24px;
+    padding: 20px;
+    background: rgba(243, 229, 245, 0.5);
+    border-radius: 16px;
 }
 
 .knowledge-page.dark-mode .detail-info {
-  background: rgba(74, 20, 140, 0.3);
+    background: rgba(74, 20, 140, 0.3);
 }
 
 .detail-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 30px;
-  background: linear-gradient(135deg, #f3e5f5, #e1bee7);
-  flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    background: linear-gradient(135deg, #f3e5f5, #e1bee7);
+    flex-shrink: 0;
 }
 
 .knowledge-page.dark-mode .detail-icon {
-  background: linear-gradient(135deg, #4a148c, #311b92);
+    background: linear-gradient(135deg, #4a148c, #311b92);
 }
 
 .detail-text h4 {
-  font-size: 18px;
-  margin-bottom: 4px;
-  color: #333;
+    font-size: 18px;
+    margin-bottom: 4px;
+    color: #333;
 }
 
 .knowledge-page.dark-mode .detail-text h4 {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 .detail-text p {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 8px;
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 8px;
 }
 
 .knowledge-page.dark-mode .detail-text p {
-  color: #999;
+    color: #999;
 }
 
 .detail-meta {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
 .lesson-plan {
-  margin-top: 24px;
+    margin-top: 24px;
 }
 
 .lesson-plan h4 {
-  font-size: 18px;
-  margin-bottom: 16px;
-  color: #333;
+    font-size: 18px;
+    margin-bottom: 16px;
+    color: #333;
 }
 
 .knowledge-page.dark-mode .lesson-plan h4 {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 .lesson-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .lesson-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 12px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .knowledge-page.dark-mode .lesson-item {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 .lesson-number {
-  font-weight: 600;
-  color: #9c27b0;
-  min-width: 80px;
+    font-weight: 600;
+    color: #9c27b0;
+    min-width: 80px;
 }
 
 .lesson-title {
-  flex: 1;
-  color: #333;
+    flex: 1;
+    color: #333;
 }
 
 .knowledge-page.dark-mode .lesson-title {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 .complete-btn {
-  padding: 8px 16px;
-  background: linear-gradient(135deg, #9c27b0, #7b1fa2);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #9c27b0, #7b1fa2);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .complete-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 4px 12px rgba(156, 39, 176, 0.3);
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(156, 39, 176, 0.3);
 }
 
 /* 响应式适配 */
 @media (max-width: 768px) {
-  .knowledge-content {
-    padding: 16px;
-  }
+    .knowledge-content {
+        padding: 16px;
+    }
 
-  .subjects-grid,
-  .languages-grid,
-  .skills-grid {
-    grid-template-columns: 1fr;
-  }
+    .subjects-grid,
+    .languages-grid,
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
 
-  .detail-info {
-    flex-direction: column;
-    text-align: center;
-  }
+    .detail-info {
+        flex-direction: column;
+        text-align: center;
+    }
 
-  .lesson-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
+    .lesson-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
 
-  .complete-btn {
-    align-self: flex-end;
-  }
+    .complete-btn {
+        align-self: flex-end;
+    }
 }
 
 @media (max-width: 480px) {
-  .knowledge-header {
-    padding: 12px 16px;
-  }
+    .knowledge-header {
+        padding: 12px 16px;
+    }
 
-  .knowledge-title {
-    font-size: 18px;
-  }
+    .knowledge-title {
+        font-size: 18px;
+    }
 
-  .progress-section {
-    padding: 16px;
-  }
+    .progress-section {
+        padding: 16px;
+    }
 
-  .knowledge-tabs {
-    padding: 8px 12px;
-  }
+    .knowledge-tabs {
+        padding: 8px 12px;
+    }
 
-  .knowledge-tab {
-    font-size: 12px;
-    padding: 8px 10px;
-  }
+    .knowledge-tab {
+        font-size: 12px;
+        padding: 8px 10px;
+    }
 
-  .section-header h3 {
-    font-size: 20px;
-  }
+    .section-header h3 {
+        font-size: 20px;
+    }
 
-  .subject-card,
-  .language-card,
-  .skill-card {
-    padding: 20px;
-  }
+    .subject-card,
+    .language-card,
+    .skill-card {
+        padding: 20px;
+    }
 }
 
 /* 动画效果 */
 @keyframes knowledge-fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .subject-card,
 .language-card,
 .skill-card,
 .learning-detail {
-  animation: knowledge-fadeIn 0.3s ease;
+    animation: knowledge-fadeIn 0.3s ease;
 }

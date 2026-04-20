@@ -1,799 +1,709 @@
 /* 日常管理页面样式 */
 .daily-page {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  color: #333;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    color: #333;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
 }
 
 .daily-page.dark-mode {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  color: #e0e0e0;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #e0e0e0;
 }
 
 /* 顶部导航 */
 .daily-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 24px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .daily-page.dark-mode .daily-header {
-  background: rgba(30, 30, 60, 0.95);
-  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+    background: rgba(30, 30, 60, 0.95);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.2);
 }
 
 .daily-back-btn {
-  background: rgba(59, 130, 246, 0.1);
-  border: 1px solid rgba(59, 130, 246, 0.2);
-  color: #3B82F6;
-  border-radius: 10px;
-  padding: 8px 10px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    color: #3B82F6;
+    border-radius: 10px;
+    padding: 8px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
 }
 
 .daily-back-btn:hover {
-  background: rgba(59, 130, 246, 0.2);
-  border-color: rgba(59, 130, 246, 0.4);
+    background: rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.4);
 }
 
 .daily-title {
-  font-size: 20px;
-  font-weight: 600;
-  background: linear-gradient(135deg, #3B82F6, #60A5FA);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+    font-size: 20px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #3B82F6, #60A5FA);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 /* 标签切换 */
 .daily-tabs {
-  display: flex;
-  gap: 8px;
-  padding: 16px 24px;
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    gap: 8px;
+    padding: 16px 24px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .daily-page.dark-mode .daily-tabs {
-  background: rgba(30, 30, 60, 0.5);
-  border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+    background: rgba(30, 30, 60, 0.5);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.1);
 }
 
 .daily-tab {
-  flex: 1;
-  padding: 12px 16px;
-  border: none;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #666;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
+    flex: 1;
+    padding: 12px 16px;
+    border: none;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
 }
 
 .daily-page.dark-mode .daily-tab {
-  background: rgba(255, 255, 255, 0.05);
-  color: #999;
+    background: rgba(255, 255, 255, 0.05);
+    color: #999;
 }
 
 .daily-tab.active {
-  background: linear-gradient(135deg, #3B82F6, #2563EB);
-  color: white;
-  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+    background: linear-gradient(135deg, #3B82F6, #2563EB);
+    color: white;
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
 }
 
 .daily-tab:hover:not(.active) {
-  background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.8);
 }
 
 .daily-page.dark-mode .daily-tab:hover:not(.active) {
-  background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .daily-tab-icon {
-  font-size: 18px;
+    font-size: 18px;
 }
 
 /* 主体内容 */
 .daily-content {
-  flex: 1;
-  padding: 20px 24px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+    flex: 1;
+    padding: 20px 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 /* 卡片样式 */
 .daily-card {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 16px;
-  padding: 20px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .daily-page.dark-mode .daily-card {
-  background: rgba(30, 30, 60, 0.8);
-  border: 1px solid rgba(139, 92, 246, 0.1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    background: rgba(30, 30, 60, 0.8);
+    border: 1px solid rgba(139, 92, 246, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .daily-card h3 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 16px;
-  color: #333;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #333;
 }
 
 .daily-page.dark-mode .daily-card h3 {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 /* 日程日历 */
 .daily-calendar {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .daily-calendar-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
 }
 
 .daily-calendar-nav button {
-  background: rgba(59, 130, 246, 0.1);
-  border: 1px solid rgba(59, 130, 246, 0.2);
-  color: #3B82F6;
-  border-radius: 8px;
-  padding: 8px 12px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: all 0.2s ease;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    color: #3B82F6;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.2s ease;
 }
 
 .daily-calendar-nav button:hover {
-  background: rgba(59, 130, 246, 0.2);
-  border-color: rgba(59, 130, 246, 0.4);
+    background: rgba(59, 130, 246, 0.2);
+    border-color: rgba(59, 130, 246, 0.4);
 }
 
 .daily-calendar-nav span {
-  font-size: 18px;
-  font-weight: 600;
-  color: #333;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
 }
 
 .daily-page.dark-mode .daily-calendar-nav span {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 .daily-calendar-weekdays {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
-  margin-bottom: 8px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 8px;
 }
 
 .daily-weekday {
-  text-align: center;
-  font-size: 12px;
-  font-weight: 500;
-  color: #999;
-  padding: 8px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: #999;
+    padding: 8px;
 }
 
 .daily-calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 8px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
 }
 
 .daily-calendar-cell {
-  aspect-ratio: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  background: rgba(0, 0, 0, 0.03);
-  position: relative;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: rgba(0, 0, 0, 0.03);
+    position: relative;
 }
 
 .daily-page.dark-mode .daily-calendar-cell {
-  background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .daily-calendar-cell.empty {
-  background: transparent;
-  cursor: default;
+    background: transparent;
+    cursor: default;
 }
 
 .daily-calendar-cell.today {
-  border: 2px solid #3B82F6;
+    border: 2px solid #3B82F6;
 }
 
 .daily-calendar-cell.has-event {
-  background: rgba(59, 130, 246, 0.15);
+    background: rgba(59, 130, 246, 0.15);
 }
 
 .daily-calendar-cell:hover:not(.empty) {
-  background: rgba(59, 130, 246, 0.15);
-  transform: scale(1.05);
+    background: rgba(59, 130, 246, 0.15);
+    transform: scale(1.05);
 }
 
 .daily-cell-day {
-  font-size: 14px;
-  font-weight: 500;
-  color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
 }
 
 .daily-page.dark-mode .daily-cell-day {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 .daily-cell-events {
-  display: flex;
-  gap: 2px;
-  margin-top: 4px;
+    display: flex;
+    gap: 2px;
+    margin-top: 4px;
 }
 
 .daily-cell-event {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: #3B82F6;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #3B82F6;
 }
 
 .daily-cell-todo {
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  background: #10B981;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: #10B981;
 }
 
 .daily-calendar-cell.has-todo {
-  background: rgba(16, 185, 129, 0.1);
+    background: rgba(16, 185, 129, 0.1);
 }
 
 .daily-calendar-cell.has-event.has-todo {
-  background: linear-gradient(45deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.1));
+    background: linear-gradient(45deg, rgba(59, 130, 246, 0.1), rgba(16, 185, 129, 0.1));
 }
 
 .daily-cell-todo-text {
-  font-size: 10px;
-  color: #10B981;
-  margin-top: 2px;
-  text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 100%;
+    font-size: 10px;
+    color: #10B981;
+    margin-top: 2px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
 }
 
 /* 待办事项 */
 .daily-todo-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .daily-todo-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 12px;
-  transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    transition: all 0.2s ease;
 }
 
 .daily-page.dark-mode .daily-todo-item {
-  background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .daily-todo-item:hover {
-  background: rgba(255, 255, 255, 0.8);
-  transform: translateX(4px);
+    background: rgba(255, 255, 255, 0.8);
+    transform: translateX(4px);
 }
 
 .daily-page.dark-mode .daily-todo-item:hover {
-  background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .daily-todo-item.completed {
-  opacity: 0.6;
+    opacity: 0.6;
 }
 
 .daily-todo-item.completed .daily-todo-text {
-  text-decoration: line-through;
+    text-decoration: line-through;
 }
 
 .daily-todo-checkbox {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  accent-color: #3B82F6;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #3B82F6;
 }
 
 .daily-todo-text {
-  flex: 1;
-  font-size: 14px;
-  line-height: 1.4;
-  color: #333;
+    flex: 1;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #333;
 }
 
 .daily-page.dark-mode .daily-todo-text {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 .daily-todo-time {
-  font-size: 12px;
-  color: #999;
-  margin-left: 12px;
+    font-size: 12px;
+    color: #999;
+    margin-left: 12px;
 }
 
 .daily-page.dark-mode .daily-todo-time {
-  color: #666;
+    color: #666;
 }
 
 .daily-todo-delete {
-  background: none;
-  border: none;
-  color: #EF4444;
-  cursor: pointer;
-  padding: 4px;
-  opacity: 0.6;
-  transition: opacity 0.2s ease;
+    background: none;
+    border: none;
+    color: #EF4444;
+    cursor: pointer;
+    padding: 4px;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
 }
 
 .daily-todo-delete:hover {
-  opacity: 1;
+    opacity: 1;
 }
 
 /* 习惯养成 */
 .daily-habits {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .daily-habit-card {
-  background: rgba(255, 255, 255, 0.5);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 12px;
-  padding: 16px;
-  transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.2s ease;
 }
 
 .daily-page.dark-mode .daily-habit-card {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 .daily-habit-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
 .daily-page.dark-mode .daily-habit-card:hover {
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .daily-habit-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
 }
 
 .daily-habit-name {
-  font-size: 16px;
-  font-weight: 600;
-  color: #333;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
 }
 
 .daily-page.dark-mode .daily-habit-name {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 .daily-habit-streak {
-  font-size: 14px;
-  font-weight: 500;
-  color: #10B981;
-  background: rgba(16, 185, 129, 0.1);
-  padding: 4px 12px;
-  border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #10B981;
+    background: rgba(16, 185, 129, 0.1);
+    padding: 4px 12px;
+    border-radius: 12px;
 }
 
 .daily-habit-progress {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
 }
 
 .daily-habit-bar-wrapper {
-  flex: 1;
-  height: 8px;
-  background: rgba(0, 0, 0, 0.05);
-  border-radius: 4px;
-  overflow: hidden;
+    flex: 1;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    overflow: hidden;
 }
 
 .daily-page.dark-mode .daily-habit-bar-wrapper {
-  background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .daily-habit-bar {
-  height: 100%;
-  background: linear-gradient(90deg, #10B981, #34D399);
-  border-radius: 4px;
-  transition: width 0.5s ease;
+    height: 100%;
+    background: linear-gradient(90deg, #10B981, #34D399);
+    border-radius: 4px;
+    transition: width 0.5s ease;
 }
 
 .daily-habit-percentage {
-  font-size: 14px;
-  font-weight: 600;
-  color: #10B981;
-  min-width: 40px;
-  text-align: right;
+    font-size: 14px;
+    font-weight: 600;
+    color: #10B981;
+    min-width: 40px;
+    text-align: right;
 }
 
 .daily-habit-actions {
-  display: flex;
-  gap: 8px;
+    display: flex;
+    gap: 8px;
 }
 
 /* 表单样式 */
 .daily-form {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 16px;
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
 }
 
 .daily-input {
-  flex: 1;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  padding: 12px 16px;
-  font-size: 14px;
-  outline: none;
-  transition: all 0.2s ease;
-  background: rgba(255, 255, 255, 0.5);
-  color: #333;
+    flex: 1;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.5);
+    color: #333;
 }
 
 .daily-page.dark-mode .daily-input {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
-  color: #e0e0e0;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
 }
 
 .daily-input:focus {
-  border-color: #3B82F6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    border-color: #3B82F6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
-.daily-input::placeholder {
-  color: #999;
-}
-
-.daily-page.dark-mode .daily-input::placeholder {
-  color: #666;
-}
-
-/* 按钮样式 */
 .daily-btn {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
 }
 
 .daily-btn-primary {
-  background: linear-gradient(135deg, #3B82F6, #2563EB);
-  color: white;
-  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
+    background: linear-gradient(135deg, #3B82F6, #2563EB);
+    color: white;
+    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
 }
 
 .daily-btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(59, 130, 246, 0.45);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(59, 130, 246, 0.45);
 }
 
 .daily-btn-secondary {
-  background: rgba(255, 255, 255, 0.5);
-  color: #666;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.5);
+    color: #666;
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .daily-page.dark-mode .daily-btn-secondary {
-  background: rgba(255, 255, 255, 0.05);
-  color: #999;
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-.daily-btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.8);
-}
-
-.daily-page.dark-mode .daily-btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-/* 弹窗样式 */
-.daily-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  animation: daily-fadeIn 0.2s ease;
-}
-
-@keyframes daily-fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.daily-modal {
-  background: white;
-  border-radius: 20px;
-  padding: 24px;
-  max-width: 400px;
-  width: 90%;
-  max-height: 80vh;
-  overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  animation: daily-slideUp 0.3s ease;
-}
-
-.daily-page.dark-mode .daily-modal {
-  background: #1e1e3c;
-}
-
-@keyframes daily-slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-.daily-modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
-}
-
-.daily-modal-header h3 {
-  font-size: 20px;
-  font-weight: 600;
-  color: #333;
-  margin: 0;
-}
-
-.daily-page.dark-mode .daily-modal-header h3 {
-  color: #e0e0e0;
-}
-
-.daily-close-btn {
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: #999;
-  cursor: pointer;
-  padding: 4px;
-  line-height: 1;
-  transition: color 0.2s ease;
-}
-
-.daily-close-btn:hover {
-  color: #EF4444;
-}
-
-.daily-form-group {
-  margin-bottom: 16px;
-}
-
-.daily-form-label {
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 8px;
-}
-
-.daily-page.dark-mode .daily-form-label {
-  color: #e0e0e0;
-}
-
-.daily-form-input {
-  width: 100%;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  padding: 12px 16px;
-  font-size: 14px;
-  outline: none;
-  transition: all 0.2s ease;
-  background: rgba(255, 255, 255, 0.5);
-  color: #333;
-  font-family: inherit;
-}
-
-.daily-page.dark-mode .daily-form-input {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
-  color: #e0e0e0;
-}
-
-.daily-form-input:focus {
-  border-color: #3B82F6;
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-}
-
-.daily-form-input::placeholder {
-  color: #999;
-}
-
-.daily-page.dark-mode .daily-form-input::placeholder {
-  color: #666;
-}
-
-.daily-modal-actions {
-  display: flex;
-  gap: 12px;
-  margin-top: 24px;
-}
-
-/* FAB 按钮 */
-.daily-fab-btn {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #3B82F6, #2563EB);
-  color: white;
-  border: none;
-  font-size: 28px;
-  font-weight: 300;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.35);
-  transition: all 0.2s ease;
-  z-index: 99;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.daily-fab-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 18px rgba(59, 130, 246, 0.45);
+    background: rgba(255, 255, 255, 0.05);
+    color: #e0e0e0;
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 /* 空状态 */
 .daily-empty-state {
-  text-align: center;
-  padding: 48px 24px;
-  color: #999;
-}
-
-.daily-page.dark-mode .daily-empty-state {
-  color: #666;
+    text-align: center;
+    padding: 40px 20px;
 }
 
 .daily-empty-icon {
-  font-size: 48px;
-  margin-bottom: 16px;
+    font-size: 48px;
+    margin-bottom: 12px;
+    opacity: 0.5;
 }
 
 .daily-empty-text {
-  font-size: 16px;
-  margin-bottom: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.daily-page.dark-mode .daily-empty-text {
+    color: #999;
 }
 
 .daily-empty-subtext {
-  font-size: 14px;
-  opacity: 0.8;
+    font-size: 14px;
+    color: #999;
 }
 
-/* 响应式适配 */
-@media (max-width: 768px) {
-  .daily-content {
-    padding: 16px;
-  }
-  
-  .daily-tabs {
-    padding: 12px 16px;
-  }
-  
-  .daily-tab {
-    font-size: 13px;
-    padding: 10px 12px;
-  }
-  
-  .daily-card {
-    padding: 16px;
-  }
-  
-  .daily-form {
-    flex-direction: column;
-  }
-  
-  .daily-fab-btn {
-    width: 52px;
-    height: 52px;
-    font-size: 24px;
-  }
+.daily-page.dark-mode .daily-empty-subtext {
+    color: #666;
 }
 
-@media (max-width: 480px) {
-  .daily-header {
-    padding: 12px 16px;
-  }
-  
-  .daily-title {
+/* 弹窗样式 */
+.daily-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.daily-modal {
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    width: 90%;
+    max-width: 400px;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.dark-mode .daily-modal {
+    background: #1a1a2e;
+}
+
+.daily-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.daily-modal-header h3 {
     font-size: 18px;
-  }
-  
-  .daily-tabs {
-    padding: 8px 12px;
-  }
-  
-  .daily-tab {
-    font-size: 12px;
-    padding: 8px 10px;
-  }
-  
-  .daily-content {
-    padding: 12px;
-    gap: 16px;
-  }
-  
-  .daily-card {
-    padding: 14px;
-  }
-  
-  .daily-calendar-cell {
+    font-weight: 600;
+    color: #333;
+}
+
+.dark-mode .daily-modal-header h3 {
+    color: #e0e0e0;
+}
+
+.daily-close-btn {
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #999;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+}
+
+.daily-close-btn:hover {
+    color: #666;
+}
+
+.dark-mode .daily-close-btn:hover {
+    color: #e0e0e0;
+}
+
+.daily-form-group {
+    margin-bottom: 16px;
+}
+
+.daily-form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 6px;
+}
+
+.dark-mode .daily-form-label {
+    color: #e0e0e0;
+}
+
+.daily-form-input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
     border-radius: 10px;
-  }
-  
-  .daily-fab-btn {
-    width: 48px;
-    height: 48px;
-    font-size: 24px;
-  }
+    font-size: 14px;
+    outline: none;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.5);
+    color: #333;
+    box-sizing: border-box;
+}
+
+.dark-mode .daily-form-input {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
+}
+
+.daily-form-input:focus {
+    border-color: #3B82F6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.daily-form-input textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.daily-modal-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.daily-modal-actions .daily-btn {
+    flex: 1;
+}
+
+/* 模式切换按钮 */
+.mode-toggle-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 8px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.mode-toggle-btn:hover {
+    background: rgba(139, 92, 246, 0.2);
+    border-color: rgba(139, 92, 246, 0.4);
+}
+
+.mode-icon {
+    font-size: 18px;
 }

@@ -20,500 +20,500 @@ document.head.appendChild(link);
  * 个人中心页面
  */
 const Profile = () => {
-  const navigate = useNavigate();
-  const { user, logout, updateUser } = useAuthStore();
-  const { companionSettings, loadCompanionSettings, updateCompanionSettings } = useChatStore();
-  const fileInputRef = useRef(null);
-  const debounceTimerRef = useRef(null);
-  
-  const [nickname, setNickname] = useState('');
-  const [isEditingNickname, setIsEditingNickname] = useState(false);
-  const [avatar, setAvatar] = useState('');
-  const [cropImage, setCropImage] = useState(null);
-  const [showPasswordModal, setShowPasswordModal] = useState(false);
-  const [passwordForm, setPasswordForm] = useState({
-    oldPassword: '',
-    newPassword: ''
-  });
-  const [loading, setLoading] = useState(false);
-  const [localCompanionName, setLocalCompanionName] = useState('');
+    const navigate = useNavigate();
+    const { user, logout, updateUser } = useAuthStore();
+    const { companionSettings, loadCompanionSettings, updateCompanionSettings } = useChatStore();
+    const fileInputRef = useRef(null);
+    const debounceTimerRef = useRef(null);
 
-  // 从全局主题状态获取
-  const { darkMode, toggleDarkMode } = useThemeStore();
+    const [nickname, setNickname] = useState('');
+    const [isEditingNickname, setIsEditingNickname] = useState(false);
+    const [avatar, setAvatar] = useState('');
+    const [cropImage, setCropImage] = useState(null);
+    const [showPasswordModal, setShowPasswordModal] = useState(false);
+    const [passwordForm, setPasswordForm] = useState({
+        oldPassword: '',
+        newPassword: ''
+    });
+    const [loading, setLoading] = useState(false);
+    const [localCompanionName, setLocalCompanionName] = useState('');
 
-  // 数字人性格选项
-  const personalities = [
-    { value: 'lively', label: '活泼', desc: '充满活力，俏皮可爱', icon: '🌟' },
-    { value: 'calm', label: '沉稳', desc: '温和内敛，善于倾听', icon: '🌊' },
-    { value: 'humorous', label: '幽默', desc: '风趣诩谐，轻松愉快', icon: '😄' },
-    { value: 'warm', label: '温暖', desc: '善解人意，充满关怀', icon: '🌸' },
-    { value: 'wise', label: '睿智', desc: '博学多才，深刻洞察', icon: '📚' },
-  ];
+    // 从全局主题状态获取
+    const { darkMode, toggleDarkMode } = useThemeStore();
 
-  // 对话风格选项
-  const chatStyles = [
-    { value: 'professional', label: '专业', desc: '严谨准确，条理清晰', icon: '💼' },
-    { value: 'friendly', label: '亲和', desc: '亲切友好，自然轻松', icon: '🤝' },
-    { value: 'literary', label: '文艺', desc: '优美浪漫，诗意表达', icon: '🎨' },
-    { value: 'casual', label: '日常', desc: '轻松随意，口语化', icon: '☕' },
-  ];
+    // 数字人性格选项
+    const personalities = [
+        { value: 'lively', label: '活泼', desc: '充满活力，俏皮可爱', icon: '🌟' },
+        { value: 'calm', label: '沉稳', desc: '温和内敛，善于倾听', icon: '🌊' },
+        { value: 'humorous', label: '幽默', desc: '风趣诩谐，轻松愉快', icon: '😄' },
+        { value: 'warm', label: '温暖', desc: '善解人意，充满关怀', icon: '🌸' },
+        { value: 'wise', label: '睿智', desc: '博学多才，深刻洞察', icon: '📚' },
+    ];
 
-  // 初始化用户信息
-  useEffect(() => {
-    if (user) {
-      setNickname(user.nickname || '');
-      setAvatar(user.avatar || '');
-    }
-  }, [user]);
+    // 对话风格选项
+    const chatStyles = [
+        { value: 'professional', label: '专业', desc: '严谨准确，条理清晰', icon: '💼' },
+        { value: 'friendly', label: '亲和', desc: '亲切友好，自然轻松', icon: '🤝' },
+        { value: 'literary', label: '文艺', desc: '优美浪漫，诗意表达', icon: '🎨' },
+        { value: 'casual', label: '日常', desc: '轻松随意，口语化', icon: '☕' },
+    ];
 
-  // 加载最新用户信息
-  useEffect(() => {
-    const loadUserInfo = async () => {
-      try {
-        const result = await userApi.getProfile();
-        if (result.code === 200) {
-          updateUser(result.data);
+    // 初始化用户信息
+    useEffect(() => {
+        if (user) {
+            setNickname(user.nickname || '');
+            setAvatar(user.avatar || '');
         }
-      } catch (error) {
-        console.error('加载用户信息失败:', error);
-      }
+    }, [user]);
+
+    // 加载最新用户信息
+    useEffect(() => {
+        const loadUserInfo = async () => {
+            try {
+                const result = await userApi.getProfile();
+                if (result.code === 200) {
+                    updateUser(result.data);
+                }
+            } catch (error) {
+                console.error('加载用户信息失败:', error);
+            }
+        };
+
+        loadUserInfo();
+    }, [updateUser]);
+
+    // 加载数字人设置
+    useEffect(() => {
+        loadCompanionSettings();
+    }, [loadCompanionSettings]);
+
+    // 同步 companionSettings 到本地名称状态
+    useEffect(() => {
+        setLocalCompanionName(companionSettings.companion_name || '');
+    }, [companionSettings.companion_name]);
+
+    // 组件卸载时清除防抖定时器
+    useEffect(() => {
+        return () => {
+            if (debounceTimerRef.current) {
+                clearTimeout(debounceTimerRef.current);
+            }
+        };
+    }, []);
+
+    // 修改昵称
+    const handleUpdateNickname = async () => {
+        const validation = validator.validateNickname(nickname);
+        if (!validation.valid) {
+            toast.error(validation.message);
+            return;
+        }
+
+        if (nickname === user?.nickname) {
+            setIsEditingNickname(false);
+            return;
+        }
+
+        setLoading(true);
+        try {
+            const result = await userApi.updateNickname(nickname);
+            if (result.code === 200) {
+                updateUser({ nickname: result.data.nickname });
+                toast.success('昵称修改成功');
+                setIsEditingNickname(false);
+            }
+        } catch (error) {
+            // 错误已在拦截器中处理
+        } finally {
+            setLoading(false);
+        }
     };
-    
-    loadUserInfo();
-  }, [updateUser]);
 
-  // 加载数字人设置
-  useEffect(() => {
-    loadCompanionSettings();
-  }, [loadCompanionSettings]);
-
-  // 同步 companionSettings 到本地名称状态
-  useEffect(() => {
-    setLocalCompanionName(companionSettings.companion_name || '');
-  }, [companionSettings.companion_name]);
-
-  // 组件卸载时清除防抖定时器
-  useEffect(() => {
-    return () => {
-      if (debounceTimerRef.current) {
-        clearTimeout(debounceTimerRef.current);
-      }
+    // 触发文件选择
+    const handleAvatarClick = () => {
+        fileInputRef.current?.click();
     };
-  }, []);
 
-  // 修改昵称
-  const handleUpdateNickname = async () => {
-    const validation = validator.validateNickname(nickname);
-    if (!validation.valid) {
-      toast.error(validation.message);
-      return;
-    }
+    // 处理文件选择
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
 
-    if (nickname === user?.nickname) {
-      setIsEditingNickname(false);
-      return;
-    }
+        // 验证文件类型
+        if (!file.type.startsWith('image/')) {
+            toast.error('请选择图片文件');
+            return;
+        }
 
-    setLoading(true);
-    try {
-      const result = await userApi.updateNickname(nickname);
-      if (result.code === 200) {
-        updateUser({ nickname: result.data.nickname });
-        toast.success('昵称修改成功');
-        setIsEditingNickname(false);
-      }
-    } catch (error) {
-      // 错误已在拦截器中处理
-    } finally {
-      setLoading(false);
-    }
-  };
+        // 验证文件大小（2MB）
+        if (file.size > 2 * 1024 * 1024) {
+            toast.error('图片大小不能超过2MB');
+            return;
+        }
 
-  // 触发文件选择
-  const handleAvatarClick = () => {
-    fileInputRef.current?.click();
-  };
+        // 读取文件并显示裁剪器
+        const reader = new FileReader();
+        reader.onload = () => {
+            setCropImage(reader.result);
+        };
+        reader.readAsDataURL(file);
 
-  // 处理文件选择
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    // 验证文件类型
-    if (!file.type.startsWith('image/')) {
-      toast.error('请选择图片文件');
-      return;
-    }
-
-    // 验证文件大小（2MB）
-    if (file.size > 2 * 1024 * 1024) {
-      toast.error('图片大小不能超过2MB');
-      return;
-    }
-
-    // 读取文件并显示裁剪器
-    const reader = new FileReader();
-    reader.onload = () => {
-      setCropImage(reader.result);
+        // 清空input，允许重复选择同一文件
+        e.target.value = '';
     };
-    reader.readAsDataURL(file);
 
-    // 清空input，允许重复选择同一文件
-    e.target.value = '';
-  };
+    // 处理裁剪完成
+    const handleCropComplete = async (croppedImage) => {
+        setCropImage(null);
+        setLoading(true);
 
-  // 处理裁剪完成
-  const handleCropComplete = async (croppedImage) => {
-    setCropImage(null);
-    setLoading(true);
-    
-    try {
-      const result = await userApi.updateAvatar(croppedImage);
-      if (result.code === 200) {
-        updateUser({ avatar: result.data.avatar });
-        setAvatar(croppedImage);
-        toast.success('头像更新成功');
-      }
-    } catch (error) {
-      // 错误已在拦截器中处理
-    } finally {
-      setLoading(false);
-    }
-  };
+        try {
+            const result = await userApi.updateAvatar(croppedImage);
+            if (result.code === 200) {
+                updateUser({ avatar: result.data.avatar });
+                setAvatar(croppedImage);
+                toast.success('头像更新成功');
+            }
+        } catch (error) {
+            // 错误已在拦截器中处理
+        } finally {
+            setLoading(false);
+        }
+    };
 
-  // 修改密码
-  const handleUpdatePassword = async () => {
-    if (!passwordForm.oldPassword) {
-      toast.error('请输入原密码');
-      return;
-    }
+    // 修改密码
+    const handleUpdatePassword = async () => {
+        if (!passwordForm.oldPassword) {
+            toast.error('请输入原密码');
+            return;
+        }
 
-    const validation = validator.validatePassword(passwordForm.newPassword);
-    if (!validation.valid) {
-      toast.error(validation.message);
-      return;
-    }
+        const validation = validator.validatePassword(passwordForm.newPassword);
+        if (!validation.valid) {
+            toast.error(validation.message);
+            return;
+        }
 
-    setLoading(true);
-    try {
-      const result = await userApi.updatePassword(
-        passwordForm.oldPassword,
-        passwordForm.newPassword
-      );
-      if (result.code === 200) {
-        toast.success('密码修改成功，请重新登录');
-        setShowPasswordModal(false);
-        setPasswordForm({ oldPassword: '', newPassword: '' });
-        // 退出登录
-        handleLogout();
-      }
-    } catch (error) {
-      // 错误已在拦截器中处理
-    } finally {
-      setLoading(false);
-    }
-  };
+        setLoading(true);
+        try {
+            const result = await userApi.updatePassword(
+                passwordForm.oldPassword,
+                passwordForm.newPassword
+            );
+            if (result.code === 200) {
+                toast.success('密码修改成功，请重新登录');
+                setShowPasswordModal(false);
+                setPasswordForm({ oldPassword: '', newPassword: '' });
+                // 退出登录
+                handleLogout();
+            }
+        } catch (error) {
+            // 错误已在拦截器中处理
+        } finally {
+            setLoading(false);
+        }
+    };
 
-  // 数字人名称修改（防抖500ms）
-  const handleNameChange = useCallback((value) => {
-    setLocalCompanionName(value);
-    if (debounceTimerRef.current) {
-      clearTimeout(debounceTimerRef.current);
-    }
-    debounceTimerRef.current = setTimeout(async () => {
-      try {
-        await updateCompanionSettings({ companion_name: value });
-        toast.success('名称已保存');
-      } catch (error) {
-        toast.error('保存失败，请重试');
-      }
-    }, 500);
-  }, [updateCompanionSettings]);
+    // 数字人名称修改（防抖500ms）
+    const handleNameChange = useCallback((value) => {
+        setLocalCompanionName(value);
+        if (debounceTimerRef.current) {
+            clearTimeout(debounceTimerRef.current);
+        }
+        debounceTimerRef.current = setTimeout(async () => {
+            try {
+                await updateCompanionSettings({ companion_name: value });
+                toast.success('名称已保存');
+            } catch (error) {
+                toast.error('保存失败，请重试');
+            }
+        }, 500);
+    }, [updateCompanionSettings]);
 
-  // 数字人设置选项修改
-  const handleSettingChange = useCallback(async (key, value) => {
-    try {
-      await updateCompanionSettings({ [key]: value });
-      toast.success('设置已保存');
-    } catch (error) {
-      toast.error('保存失败，请重试');
-    }
-  }, [updateCompanionSettings]);
+    // 数字人设置选项修改
+    const handleSettingChange = useCallback(async (key, value) => {
+        try {
+            await updateCompanionSettings({ [key]: value });
+            toast.success('设置已保存');
+        } catch (error) {
+            toast.error('保存失败，请重试');
+        }
+    }, [updateCompanionSettings]);
 
-  // 退出登录
-  const handleLogout = async () => {
-    try {
-      await authApi.logout();
-    } catch (error) {
-      // 忽略退出接口的错误
-    } finally {
-      logout();
-      toast.success('已退出登录');
-      navigate('/login');
-    }
-  };
+    // 退出登录
+    const handleLogout = async () => {
+        try {
+            await authApi.logout();
+        } catch (error) {
+            // 忽略退出接口的错误
+        } finally {
+            logout();
+            toast.success('已退出登录');
+            navigate('/login');
+        }
+    };
 
-  return (
-    <div className={`profile-page ${darkMode ? 'dark-mode' : ''}`}>
-      {/* 顶部导航 */}
-      <header className="profile-header">
-        <div className="header-brand">
-          <h1>语你相伴</h1>
-        </div>
-        <nav className="header-nav">
-          <button className="nav-btn" onClick={() => navigate('/')}>
-            对话
-          </button>
-          <button className="nav-btn active">我的</button>
-          <button className="mode-toggle-btn" onClick={toggleDarkMode} aria-label={darkMode ? '切换到白天模式' : '切换到夜间模式'}>
-            <span className={`mode-icon iconfont ${darkMode ? 'icon-taiyang' : 'icon-ansemoshi'}`}></span>
-          </button>
-        </nav>
-      </header>
-
-      <div className="profile-content">
-        <div className="profile-card">
-          {/* 头像区域 */}
-          <div className="profile-avatar-section">
-            <div className="avatar-upload" onClick={handleAvatarClick}>
-              {avatar ? (
-                <img src={avatar} alt="头像" className="avatar-preview" />
-              ) : (
-                <div className="avatar-placeholder">
-                  {user?.nickname?.charAt(0)?.toUpperCase() || '?'}
+    return (
+        <div className={`profile-page ${darkMode ? 'dark-mode' : ''}`}>
+            {/* 顶部导航 */}
+            <header className="profile-header">
+                <div className="header-brand">
+                    <h1>语你相伴</h1>
                 </div>
-              )}
-              <div className="avatar-overlay">
-                <span>更换头像</span>
-              </div>
-            </div>
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/jpeg,image/png"
-              onChange={handleFileChange}
-              style={{ display: 'none' }}
-            />
-            <p className="avatar-hint">点击更换头像（支持 JPG/PNG，最大 2MB）</p>
-          </div>
-
-          {/* 信息表单 */}
-          <div className="profile-form">
-            {/* 账号 */}
-            <div className="profile-field">
-              <div className="field-value read-only">
-                <span className="field-icon iconfont icon-dianhua"></span>
-                <span>{user?.account || '-'}</span>
-                <span className="field-tag">不可修改</span>
-              </div>
-            </div>
-
-            {/* 昵称 */}
-            <div className="profile-field">
-              {isEditingNickname ? (
-                <div className="field-edit">
-                  <div className="input-with-icon">
-                    <span className="input-icon iconfont icon-zhanghao"></span>
-                    <input
-                      type="text"
-                      className="input"
-                      value={nickname}
-                      onChange={(e) => setNickname(e.target.value)}
-                      maxLength={16}
-                      autoFocus
-                    />
-                  </div>
-                  <div className="field-actions">
-                    <button 
-                      className="btn btn-secondary"
-                      onClick={() => {
-                        setIsEditingNickname(false);
-                        setNickname(user?.nickname || '');
-                      }}
-                    >
-                      取消
+                <nav className="header-nav">
+                    <button className="nav-btn" onClick={() => navigate('/')}>
+                        对话
                     </button>
-                    <button 
-                      className="btn btn-primary"
-                      onClick={handleUpdateNickname}
-                      disabled={loading}
-                    >
-                      保存
+                    <button className="nav-btn active">我的</button>
+                    <button className="mode-toggle-btn" onClick={toggleDarkMode} aria-label={darkMode ? '切换到白天模式' : '切换到夜间模式'}>
+                        <span className={`mode-icon iconfont ${darkMode ? 'icon-taiyang' : 'icon-ansemoshi'}`}></span>
                     </button>
-                  </div>
+                </nav>
+            </header>
+
+            <div className="profile-content">
+                <div className="profile-card">
+                    {/* 头像区域 */}
+                    <div className="profile-avatar-section">
+                        <div className="avatar-upload" onClick={handleAvatarClick}>
+                            {avatar ? (
+                                <img src={avatar} alt="头像" className="avatar-preview" />
+                            ) : (
+                                <div className="avatar-placeholder">
+                                    {user?.nickname?.charAt(0)?.toUpperCase() || '?'}
+                                </div>
+                            )}
+                            <div className="avatar-overlay">
+                                <span>更换头像</span>
+                            </div>
+                        </div>
+                        <input
+                            ref={fileInputRef}
+                            type="file"
+                            accept="image/jpeg,image/png"
+                            onChange={handleFileChange}
+                            style={{ display: 'none' }}
+                        />
+                        <p className="avatar-hint">点击更换头像（支持 JPG/PNG，最大 2MB）</p>
+                    </div>
+
+                    {/* 信息表单 */}
+                    <div className="profile-form">
+                        {/* 账号 */}
+                        <div className="profile-field">
+                            <div className="field-value read-only">
+                                <span className="field-icon iconfont icon-dianhua"></span>
+                                <span>{user?.account || '-'}</span>
+                                <span className="field-tag">不可修改</span>
+                            </div>
+                        </div>
+
+                        {/* 昵称 */}
+                        <div className="profile-field">
+                            {isEditingNickname ? (
+                                <div className="field-edit">
+                                    <div className="input-with-icon">
+                                        <span className="input-icon iconfont icon-zhanghao"></span>
+                                        <input
+                                            type="text"
+                                            className="input"
+                                            value={nickname}
+                                            onChange={(e) => setNickname(e.target.value)}
+                                            maxLength={16}
+                                            autoFocus
+                                        />
+                                    </div>
+                                    <div className="field-actions">
+                                        <button
+                                            className="btn btn-secondary"
+                                            onClick={() => {
+                                                setIsEditingNickname(false);
+                                                setNickname(user?.nickname || '');
+                                            }}
+                                        >
+                                            取消
+                                        </button>
+                                        <button
+                                            className="btn btn-primary"
+                                            onClick={handleUpdateNickname}
+                                            disabled={loading}
+                                        >
+                                            保存
+                                        </button>
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="field-value">
+                                    <span className="field-icon iconfont icon-zhanghao"></span>
+                                    <span>{user?.nickname || '-'}</span>
+                                    <button
+                                        className="edit-btn"
+                                        onClick={() => setIsEditingNickname(true)}
+                                    >
+                                        修改
+                                    </button>
+                                </div>
+                            )}
+                        </div>
+
+                        {/* 注册时间 */}
+                        <div className="profile-field">
+                            <div className="field-value read-only">
+                                <span className="field-label">注册时间</span>
+                                <span>
+                                    {user?.created_at
+                                        ? new Date(user.created_at).toLocaleDateString('zh-CN')
+                                        : '-'
+                                    }
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* 操作按钮 */}
+                    <div className="profile-actions">
+                        <button
+                            className="btn btn-secondary action-btn"
+                            onClick={() => setShowPasswordModal(true)}
+                        >
+                            <span className="btn-icon iconfont icon-mima"></span>
+                            修改密码
+                        </button>
+                        <button
+                            className="btn btn-secondary action-btn logout-btn"
+                            onClick={handleLogout}
+                        >
+                            <span className="btn-icon iconfont icon-tuichudenglu"></span>
+                            退出登录
+                        </button>
+                    </div>
                 </div>
-              ) : (
-                <div className="field-value">
-                  <span className="field-icon iconfont icon-zhanghao"></span>
-                  <span>{user?.nickname || '-'}</span>
-                  <button 
-                    className="edit-btn"
-                    onClick={() => setIsEditingNickname(true)}
-                  >
-                    修改
-                  </button>
+
+                {/* 数字人设置区域 */}
+                <div className="companion-settings-section">
+                    <h3 className="section-title">数字人设置</h3>
+
+                    {/* 名称输入 */}
+                    <div className="setting-group">
+                        <label>数字人名称</label>
+                        <input
+                            type="text"
+                            value={localCompanionName}
+                            onChange={(e) => handleNameChange(e.target.value)}
+                            placeholder="给你的数字人起个名字"
+                            maxLength={32}
+                        />
+                    </div>
+
+                    {/* 性格选择 */}
+                    <div className="setting-group">
+                        <label>性格设定</label>
+                        <div className="option-cards">
+                            {personalities.map(p => (
+                                <div
+                                    key={p.value}
+                                    className={`option-card ${companionSettings.companion_personality === p.value ? 'active' : ''}`}
+                                    onClick={() => handleSettingChange('companion_personality', p.value)}
+                                >
+                                    <span className="option-icon">{p.icon}</span>
+                                    <span className="option-name">{p.label}</span>
+                                    <span className="option-desc">{p.desc}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* 对话风格选择 */}
+                    <div className="setting-group">
+                        <label>对话风格</label>
+                        <div className="option-cards">
+                            {chatStyles.map(s => (
+                                <div
+                                    key={s.value}
+                                    className={`option-card ${companionSettings.chat_style === s.value ? 'active' : ''}`}
+                                    onClick={() => handleSettingChange('chat_style', s.value)}
+                                >
+                                    <span className="option-icon">{s.icon}</span>
+                                    <span className="option-name">{s.label}</span>
+                                    <span className="option-desc">{s.desc}</span>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
-              )}
             </div>
 
-            {/* 注册时间 */}
-            <div className="profile-field">
-              <div className="field-value read-only">
-                <span className="field-label">注册时间</span>
-                <span>
-                  {user?.created_at 
-                    ? new Date(user.created_at).toLocaleDateString('zh-CN')
-                    : '-'
-                  }
-                </span>
-              </div>
-            </div>
-          </div>
+            {/* 头像裁剪弹窗 */}
+            {cropImage && (
+                <AvatarCropper
+                    image={cropImage}
+                    onCrop={handleCropComplete}
+                    onCancel={() => setCropImage(null)}
+                />
+            )}
 
-          {/* 操作按钮 */}
-          <div className="profile-actions">
-            <button 
-              className="btn btn-secondary action-btn"
-              onClick={() => setShowPasswordModal(true)}
-            >
-              <span className="btn-icon iconfont icon-mima"></span>
-              修改密码
-            </button>
-            <button 
-              className="btn btn-secondary action-btn logout-btn"
-              onClick={handleLogout}
-            >
-              <span className="btn-icon iconfont icon-tuichudenglu"></span>
-              退出登录
-            </button>
-          </div>
+            {/* 修改密码弹窗 */}
+            {showPasswordModal && (
+                <div className="modal-overlay">
+                    <div className="modal-content">
+                        <h3>修改密码</h3>
+                        <div className="modal-form">
+                            <div className="form-group">
+                                <label>原密码</label>
+                                <div className="input-with-icon">
+                                    <span className="input-icon iconfont icon-mima"></span>
+                                    <input
+                                        type="password"
+                                        className="input"
+                                        placeholder="请输入原密码"
+                                        value={passwordForm.oldPassword}
+                                        onChange={(e) => setPasswordForm(prev => ({
+                                            ...prev,
+                                            oldPassword: e.target.value
+                                        }))}
+                                    />
+                                </div>
+                            </div>
+                            <div className="form-group">
+                                <label>新密码</label>
+                                <div className="input-with-icon">
+                                    <span className="input-icon iconfont icon-mima"></span>
+                                    <input
+                                        type="password"
+                                        className="input"
+                                        placeholder="至少8位，包含字母和数字/特殊字符"
+                                        value={passwordForm.newPassword}
+                                        onChange={(e) => setPasswordForm(prev => ({
+                                            ...prev,
+                                            newPassword: e.target.value
+                                        }))}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                        <div className="modal-actions">
+                            <button
+                                className="btn btn-secondary"
+                                onClick={() => {
+                                    setShowPasswordModal(false);
+                                    setPasswordForm({ oldPassword: '', newPassword: '' });
+                                }}
+                            >
+                                取消
+                            </button>
+                            <button
+                                className="btn btn-primary"
+                                onClick={handleUpdatePassword}
+                                disabled={loading}
+                            >
+                                确认修改
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
-
-        {/* 数字人设置区域 */}
-        <div className="companion-settings-section">
-          <h3 className="section-title">数字人设置</h3>
-
-          {/* 名称输入 */}
-          <div className="setting-group">
-            <label>数字人名称</label>
-            <input
-              type="text"
-              value={localCompanionName}
-              onChange={(e) => handleNameChange(e.target.value)}
-              placeholder="给你的数字人起个名字"
-              maxLength={32}
-            />
-          </div>
-
-          {/* 性格选择 */}
-          <div className="setting-group">
-            <label>性格设定</label>
-            <div className="option-cards">
-              {personalities.map(p => (
-                <div
-                  key={p.value}
-                  className={`option-card ${companionSettings.companion_personality === p.value ? 'active' : ''}`}
-                  onClick={() => handleSettingChange('companion_personality', p.value)}
-                >
-                  <span className="option-icon">{p.icon}</span>
-                  <span className="option-name">{p.label}</span>
-                  <span className="option-desc">{p.desc}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* 对话风格选择 */}
-          <div className="setting-group">
-            <label>对话风格</label>
-            <div className="option-cards">
-              {chatStyles.map(s => (
-                <div
-                  key={s.value}
-                  className={`option-card ${companionSettings.chat_style === s.value ? 'active' : ''}`}
-                  onClick={() => handleSettingChange('chat_style', s.value)}
-                >
-                  <span className="option-icon">{s.icon}</span>
-                  <span className="option-name">{s.label}</span>
-                  <span className="option-desc">{s.desc}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* 头像裁剪弹窗 */}
-      {cropImage && (
-        <AvatarCropper
-          image={cropImage}
-          onCrop={handleCropComplete}
-          onCancel={() => setCropImage(null)}
-        />
-      )}
-
-      {/* 修改密码弹窗 */}
-      {showPasswordModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h3>修改密码</h3>
-            <div className="modal-form">
-              <div className="form-group">
-                <label>原密码</label>
-                <div className="input-with-icon">
-                  <span className="input-icon iconfont icon-mima"></span>
-                  <input
-                    type="password"
-                    className="input"
-                    placeholder="请输入原密码"
-                    value={passwordForm.oldPassword}
-                    onChange={(e) => setPasswordForm(prev => ({
-                      ...prev,
-                      oldPassword: e.target.value
-                    }))}
-                  />
-                </div>
-              </div>
-              <div className="form-group">
-                <label>新密码</label>
-                <div className="input-with-icon">
-                  <span className="input-icon iconfont icon-mima"></span>
-                  <input
-                    type="password"
-                    className="input"
-                    placeholder="至少8位，包含字母和数字/特殊字符"
-                    value={passwordForm.newPassword}
-                    onChange={(e) => setPasswordForm(prev => ({
-                      ...prev,
-                      newPassword: e.target.value
-                    }))}
-                  />
-                </div>
-              </div>
-            </div>
-            <div className="modal-actions">
-              <button 
-                className="btn btn-secondary"
-                onClick={() => {
-                  setShowPasswordModal(false);
-                  setPasswordForm({ oldPassword: '', newPassword: '' });
-                }}
-              >
-                取消
-              </button>
-              <button 
-                className="btn btn-primary"
-                onClick={handleUpdatePassword}
-                disabled={loading}
-              >
-                确认修改
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-    </div>
-  );
+    );
 };
 
 export default Profile;

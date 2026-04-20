@@ -1,1283 +1,1302 @@
 /* 健康管理页面样式 */
 .health-page {
-  min-height: 100vh;
-  background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
-  color: #333;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: flex;
-  flex-direction: column;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8ec 100%);
+    color: #333;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
 }
 
 .health-page.dark-mode {
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  color: #e0e0e0;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    color: #e0e0e0;
 }
 
 /* 顶部导航 */
 .health-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 16px 24px;
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 24px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .health-page.dark-mode .health-header {
-  background: rgba(30, 30, 60, 0.95);
-  border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+    background: rgba(30, 30, 60, 0.95);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.2);
 }
 
 .health-back-btn {
-  background: rgba(139, 92, 246, 0.1);
-  border: 1px solid rgba(139, 92, 246, 0.2);
-  color: #8B5CF6;
-  border-radius: 10px;
-  padding: 8px 10px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    color: #8B5CF6;
+    border-radius: 10px;
+    padding: 8px 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
 }
 
 .health-back-btn:hover {
-  background: rgba(139, 92, 246, 0.2);
-  border-color: rgba(139, 92, 246, 0.4);
+    background: rgba(139, 92, 246, 0.2);
+    border-color: rgba(139, 92, 246, 0.4);
 }
 
 .health-title {
-  font-size: 20px;
-  font-weight: 600;
-  background: linear-gradient(135deg, #8B5CF6, #F472B6);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+    font-size: 20px;
+    font-weight: 600;
+    background: linear-gradient(135deg, #8B5CF6, #F472B6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 /* 标签切换 */
 .health-tabs {
-  display: flex;
-  gap: 8px;
-  padding: 16px 24px;
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    gap: 8px;
+    padding: 16px 24px;
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .health-page.dark-mode .health-tabs {
-  background: rgba(30, 30, 60, 0.5);
-  border-bottom: 1px solid rgba(139, 92, 246, 0.1);
+    background: rgba(30, 30, 60, 0.5);
+    border-bottom: 1px solid rgba(139, 92, 246, 0.1);
 }
 
 .health-tab {
-  flex: 1;
-  padding: 12px 16px;
-  border: none;
-  background: rgba(255, 255, 255, 0.5);
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #666;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
+    flex: 1;
+    padding: 12px 16px;
+    border: none;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
 }
 
 .health-page.dark-mode .health-tab {
-  background: rgba(255, 255, 255, 0.05);
-  color: #999;
+    background: rgba(255, 255, 255, 0.05);
+    color: #999;
 }
 
 .health-tab.active {
-  background: linear-gradient(135deg, #8B5CF6, #7C3AED);
-  color: white;
-  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35);
+    background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+    color: white;
+    box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35);
 }
 
 .health-tab:hover:not(.active) {
-  background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.8);
 }
 
 .health-page.dark-mode .health-tab:hover:not(.active) {
-  background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .health-tab-icon {
-  font-size: 18px;
+    font-size: 18px;
 }
 
 /* 主体内容 */
 .health-content {
-  flex: 1;
-  padding: 20px 24px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+    flex: 1;
+    padding: 20px 24px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 /* 统计周期切换 */
 .health-period-tabs {
-  display: flex;
-  gap: 8px;
-  background: rgba(255, 255, 255, 0.5);
-  padding: 6px;
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
+    display: flex;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 6px;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
 }
 
 .health-page.dark-mode .health-period-tabs {
-  background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .health-period-tab {
-  flex: 1;
-  padding: 10px 16px;
-  border: none;
-  background: transparent;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
-  color: #666;
-  cursor: pointer;
-  transition: all 0.2s ease;
+    flex: 1;
+    padding: 10px 16px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .health-page.dark-mode .health-period-tab {
-  color: #999;
+    color: #999;
 }
 
 .health-period-tab.active {
-  background: white;
-  color: #8B5CF6;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    background: white;
+    color: #8B5CF6;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
 .health-page.dark-mode .health-period-tab.active {
-  background: rgba(139, 92, 246, 0.2);
-  color: #8B5CF6;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    background: rgba(139, 92, 246, 0.2);
+    color: #8B5CF6;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* 统计卡片 */
 .health-stats-section {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .health-stats-card {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 16px;
-  padding: 20px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .health-page.dark-mode .health-stats-card {
-  background: rgba(30, 30, 60, 0.8);
-  border: 1px solid rgba(139, 92, 246, 0.1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    background: rgba(30, 30, 60, 0.8);
+    border: 1px solid rgba(139, 92, 246, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .health-stats-card h3 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 16px;
-  color: #333;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #333;
 }
 
 .health-page.dark-mode .health-stats-card h3 {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 /* 趋势指示器 */
 .health-trend-indicator {
-  padding: 16px 20px;
-  border-radius: 12px;
-  text-align: center;
-  font-weight: 500;
-  font-size: 16px;
+    padding: 16px 20px;
+    border-radius: 12px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 16px;
 }
 
 .health-trend-up {
-  background: rgba(16, 185, 129, 0.15);
-  color: #10B981;
-  border: 1px solid rgba(16, 185, 129, 0.3);
+    background: rgba(16, 185, 129, 0.15);
+    color: #10B981;
+    border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 .health-trend-down {
-  background: rgba(239, 68, 68, 0.15);
-  color: #EF4444;
-  border: 1px solid rgba(239, 68, 68, 0.3);
+    background: rgba(239, 68, 68, 0.15);
+    color: #EF4444;
+    border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
 .health-trend-stable {
-  background: rgba(251, 191, 36, 0.15);
-  color: #F59E0B;
-  border: 1px solid rgba(251, 191, 36, 0.3);
+    background: rgba(251, 191, 36, 0.15);
+    color: #F59E0B;
+    border: 1px solid rgba(251, 191, 36, 0.3);
 }
 
 /* 情绪分布 */
 .health-emotion-distribution {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .health-dist-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .health-dist-bar-wrapper {
-  flex: 1;
-  height: 8px;
-  background: rgba(0, 0, 0, 0.05);
-  border-radius: 4px;
-  overflow: hidden;
+    flex: 1;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    overflow: hidden;
 }
 
 .health-page.dark-mode .health-dist-bar-wrapper {
-  background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .health-dist-bar {
-  height: 100%;
-  border-radius: 4px;
-  transition: width 0.5s ease;
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
 }
 
 .health-dist-emoji {
-  font-size: 20px;
+    font-size: 20px;
 }
 
 .health-dist-label {
-  font-size: 14px;
-  font-weight: 500;
-  min-width: 60px;
+    font-size: 14px;
+    font-weight: 500;
+    min-width: 60px;
 }
 
 .health-dist-percent {
-  font-size: 14px;
-  font-weight: 600;
-  color: #8B5CF6;
-  min-width: 40px;
-  text-align: right;
+    font-size: 14px;
+    font-weight: 600;
+    color: #8B5CF6;
+    min-width: 40px;
+    text-align: right;
 }
 
 /* 日历 */
 .health-calendar-section {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 16px;
-  padding: 20px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .health-page.dark-mode .health-calendar-section {
-  background: rgba(30, 30, 60, 0.8);
-  border: 1px solid rgba(139, 92, 246, 0.1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    background: rgba(30, 30, 60, 0.8);
+    border: 1px solid rgba(139, 92, 246, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .health-calendar-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
 }
 
 .health-calendar-nav button {
-  background: rgba(139, 92, 246, 0.1);
-  border: 1px solid rgba(139, 92, 246, 0.2);
-  color: #8B5CF6;
-  border-radius: 8px;
-  padding: 8px 12px;
-  cursor: pointer;
-  font-size: 18px;
-  transition: all 0.2s ease;
+    background: rgba(139, 92, 246, 0.1);
+    border: 1px solid rgba(139, 92, 246, 0.2);
+    color: #8B5CF6;
+    border-radius: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.2s ease;
 }
 
 .health-calendar-nav button:hover {
-  background: rgba(139, 92, 246, 0.2);
-  border-color: rgba(139, 92, 246, 0.4);
+    background: rgba(139, 92, 246, 0.2);
+    border-color: rgba(139, 92, 246, 0.4);
 }
 
 .health-calendar-nav span {
-  font-size: 18px;
-  font-weight: 600;
-  color: #333;
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
 }
 
 .health-page.dark-mode .health-calendar-nav span {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 .health-calendar-weekdays {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
-  margin-bottom: 8px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 4px;
+    margin-bottom: 8px;
 }
 
 .health-weekday {
-  text-align: center;
-  font-size: 12px;
-  font-weight: 500;
-  color: #999;
-  padding: 8px;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 500;
+    color: #999;
+    padding: 8px;
 }
 
 .health-calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 8px;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
 }
 
 .health-calendar-cell {
-  aspect-ratio: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  background: rgba(0, 0, 0, 0.03);
-  position: relative;
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: rgba(0, 0, 0, 0.03);
+    position: relative;
 }
 
 .health-page.dark-mode .health-calendar-cell {
-  background: rgba(255, 255, 255, 0.03);
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .health-calendar-cell.empty {
-  background: transparent;
-  cursor: default;
+    background: transparent;
+    cursor: default;
 }
 
 .health-calendar-cell.today {
-  border: 2px solid #8B5CF6;
+    border: 2px solid #8B5CF6;
 }
 
 .health-calendar-cell.has-data {
-  background: var(--emotion-color, rgba(139, 92, 246, 0.15));
+    background: var(--emotion-color, rgba(139, 92, 246, 0.15));
 }
 
 .health-calendar-cell:hover:not(.empty) {
-  background: rgba(139, 92, 246, 0.15);
-  transform: scale(1.05);
+    background: rgba(139, 92, 246, 0.15);
+    transform: scale(1.05);
 }
 
 .health-cell-day {
-  font-size: 14px;
-  font-weight: 500;
-  color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
 }
 
 .health-page.dark-mode .health-cell-day {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 .health-cell-indicators {
-  display: flex;
-  gap: 2px;
-  margin-top: 4px;
+    display: flex;
+    gap: 2px;
+    margin-top: 4px;
 }
 
 .health-cell-emoji,
 .health-cell-sleep,
 .health-cell-exercise {
-  font-size: 12px;
+    font-size: 12px;
 }
 
 /* 睡眠统计 */
 .health-sleep-section {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
 .health-sleep-stats {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .health-sleep-avg {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  padding: 20px;
-  background: linear-gradient(135deg, #8B5CF6, #7C3AED);
-  border-radius: 16px;
-  color: white;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 20px;
+    background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+    border-radius: 16px;
+    color: white;
 }
 
 .health-sleep-icon {
-  font-size: 48px;
+    font-size: 48px;
 }
 
 .health-sleep-value {
-  font-size: 32px;
-  font-weight: 700;
-  margin-bottom: 4px;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 4px;
 }
 
 .health-sleep-label {
-  font-size: 14px;
-  opacity: 0.9;
+    font-size: 14px;
+    opacity: 0.9;
 }
 
 .health-sleep-quality {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .health-sleep-item {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .health-sleep-emoji {
-  font-size: 24px;
+    font-size: 24px;
 }
 
 .health-sleep-name {
-  font-size: 14px;
-  font-weight: 500;
-  min-width: 60px;
+    font-size: 14px;
+    font-weight: 500;
+    min-width: 60px;
 }
 
 .health-sleep-bar-wrapper {
-  flex: 1;
-  height: 8px;
-  background: rgba(0, 0, 0, 0.05);
-  border-radius: 4px;
-  overflow: hidden;
+    flex: 1;
+    height: 8px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    overflow: hidden;
 }
 
 .health-page.dark-mode .health-sleep-bar-wrapper {
-  background: rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .health-sleep-bar {
-  height: 100%;
-  border-radius: 4px;
-  transition: width 0.5s ease;
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
 }
 
 .health-sleep-percent {
-  font-size: 14px;
-  font-weight: 600;
-  color: #8B5CF6;
-  min-width: 40px;
-  text-align: right;
+    font-size: 14px;
+    font-weight: 600;
+    color: #8B5CF6;
+    min-width: 40px;
+    text-align: right;
 }
 
 /* 睡眠建议 */
 .health-sleep-tips {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 16px;
-  padding: 20px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .health-page.dark-mode .health-sleep-tips {
-  background: rgba(30, 30, 60, 0.8);
-  border: 1px solid rgba(139, 92, 246, 0.1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    background: rgba(30, 30, 60, 0.8);
+    border: 1px solid rgba(139, 92, 246, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .health-sleep-tips h3 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 16px;
-  color: #333;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #333;
 }
 
 .health-page.dark-mode .health-sleep-tips h3 {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 .health-sleep-tips-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .health-sleep-tip {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  padding: 12px;
-  background: rgba(139, 92, 246, 0.05);
-  border-radius: 12px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px;
+    background: rgba(139, 92, 246, 0.05);
+    border-radius: 12px;
 }
 
 .health-page.dark-mode .health-sleep-tip {
-  background: rgba(139, 92, 246, 0.1);
+    background: rgba(139, 92, 246, 0.1);
 }
 
 .health-tip-icon {
-  font-size: 24px;
-  flex-shrink: 0;
+    font-size: 24px;
+    flex-shrink: 0;
 }
 
 .health-sleep-tip p {
-  font-size: 14px;
-  line-height: 1.6;
-  color: #666;
-  margin: 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #666;
+    margin: 0;
 }
 
 .health-page.dark-mode .health-sleep-tip p {
-  color: #999;
+    color: #999;
 }
 
 /* 减压建议 */
 .health-stress-section {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .health-stress-header {
-  text-align: center;
+    text-align: center;
 }
 
 .health-stress-header h3 {
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: #333;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
 }
 
 .health-page.dark-mode .health-stress-header h3 {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 .health-stress-desc {
-  font-size: 14px;
-  color: #999;
-  margin: 0;
+    font-size: 14px;
+    color: #999;
+    margin: 0;
 }
 
 .health-page.dark-mode .health-stress-desc {
-  color: #666;
+    color: #666;
 }
 
 .health-stress-suggestions {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
 }
 
 .health-stress-card {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 16px;
-  padding: 20px;
-  text-align: center;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
+    padding: 20px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
 }
 
 .health-page.dark-mode .health-stress-card {
-  background: rgba(30, 30, 60, 0.8);
-  border: 1px solid rgba(139, 92, 246, 0.1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    background: rgba(30, 30, 60, 0.8);
+    border: 1px solid rgba(139, 92, 246, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .health-stress-card:hover {
-  transform: translateY(-4px);
+    transform: translateY(-4px);
 }
 
 .health-stress-icon {
-  font-size: 48px;
-  margin-bottom: 12px;
+    font-size: 48px;
+    margin-bottom: 12px;
 }
 
 .health-stress-card h4 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 8px;
-  color: #333;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
 }
 
 .health-page.dark-mode .health-stress-card h4 {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 .health-stress-card p {
-  font-size: 14px;
-  line-height: 1.6;
-  color: #666;
-  margin-bottom: 16px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #666;
+    margin-bottom: 16px;
 }
 
 .health-page.dark-mode .health-stress-card p {
-  color: #999;
+    color: #999;
 }
 
 .health-stress-btn {
-  background: linear-gradient(135deg, #8B5CF6, #7C3AED);
-  color: white;
-  border: none;
-  border-radius: 10px;
-  padding: 10px 20px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
+    background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .health-stress-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35);
 }
 
 /* 呼吸练习 */
 .health-breathing-section {
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 16px;
-  padding: 24px;
-  text-align: center;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .health-page.dark-mode .health-breathing-section {
-  background: rgba(30, 30, 60, 0.8);
-  border: 1px solid rgba(139, 92, 246, 0.1);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    background: rgba(30, 30, 60, 0.8);
+    border: 1px solid rgba(139, 92, 246, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
 
 .health-breathing-section h3 {
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 20px;
-  color: #333;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #333;
 }
 
 .health-page.dark-mode .health-breathing-section h3 {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 .health-breathing-guide {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
 .health-breathing-circle {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #8B5CF6, #7C3AED);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: breathe 8s ease-in-out infinite;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: breathe 8s ease-in-out infinite;
 }
 
 @keyframes breathe {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.15); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.15);
+    }
 }
 
 .health-breathing-text {
-  text-align: center;
-  color: white;
+    text-align: center;
+    color: white;
 }
 
 .health-breathing-text p {
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 4px;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 4px;
 }
 
 .health-breathing-text small {
-  font-size: 14px;
-  opacity: 0.9;
+    font-size: 14px;
+    opacity: 0.9;
 }
 
 .health-breathing-btn {
-  background: linear-gradient(135deg, #8B5CF6, #7C3AED);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  padding: 12px 32px;
-  font-size: 16px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
+    background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 32px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .health-breathing-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35);
 }
 
 /* 记录弹窗 */
 .health-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-  animation: health-fadeIn 0.2s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: health-fadeIn 0.2s ease;
 }
 
 @keyframes health-fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .health-record-modal {
-  background: white;
-  border-radius: 20px;
-  padding: 24px;
-  max-width: 440px;
-  width: 90%;
-  max-height: 90vh;
-  overflow-y: auto;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-  animation: health-slideUp 0.3s ease;
+    background: white;
+    border-radius: 20px;
+    padding: 24px;
+    max-width: 440px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    animation: health-slideUp 0.3s ease;
 }
 
 .health-page.dark-mode .health-record-modal {
-  background: #1e1e3c;
+    background: #1e1e3c;
 }
 
 @keyframes health-slideUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .health-modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .health-modal-header h3 {
-  font-size: 20px;
-  font-weight: 600;
-  color: #333;
-  margin: 0;
+    font-size: 20px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
 }
 
 .health-page.dark-mode .health-modal-header h3 {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 .health-close-btn {
-  background: none;
-  border: none;
-  font-size: 24px;
-  color: #999;
-  cursor: pointer;
-  padding: 4px;
-  line-height: 1;
-  transition: color 0.2s ease;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #999;
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+    transition: color 0.2s ease;
 }
 
 .health-close-btn:hover {
-  color: #EF4444;
+    color: #EF4444;
 }
 
 /* 情绪选择 */
 .health-section-label {
-  font-size: 14px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 12px;
-  display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 12px;
+    display: block;
 }
 
 .health-page.dark-mode .health-section-label {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 .health-emotion-selector {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-  margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
 }
 
 .health-emotion-option {
-  aspect-ratio: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  background: rgba(255, 255, 255, 0.5);
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.5);
 }
 
 .health-page.dark-mode .health-emotion-option {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 .health-emotion-option.active {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .health-emo-emoji {
-  font-size: 28px;
-  margin-bottom: 4px;
+    font-size: 28px;
+    margin-bottom: 4px;
 }
 
 .health-emo-label {
-  font-size: 12px;
-  font-weight: 500;
-  color: #666;
+    font-size: 12px;
+    font-weight: 500;
+    color: #666;
 }
 
 .health-page.dark-mode .health-emo-label {
-  color: #999;
+    color: #999;
 }
 
 /* 情绪强度 */
 .health-intensity-slider {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .health-slider-label {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
 }
 
 .health-slider-label span:first-child {
-  font-size: 14px;
-  font-weight: 500;
-  color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
 }
 
 .health-page.dark-mode .health-slider-label span:first-child {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 .health-intensity-value {
-  font-size: 16px;
-  font-weight: 600;
-  color: #8B5CF6;
+    font-size: 16px;
+    font-weight: 600;
+    color: #8B5CF6;
 }
 
 .health-intensity-slider input[type="range"] {
-  width: 100%;
-  height: 8px;
-  border-radius: 4px;
-  background: linear-gradient(90deg, #8B5CF6, #F472B6);
-  outline: none;
-  -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, #8B5CF6, #F472B6);
+    outline: none;
+    -webkit-appearance: none;
 }
 
 .health-intensity-slider input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: white;
-  cursor: pointer;
-  box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
-  transition: transform 0.2s ease;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: white;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
+    transition: transform 0.2s ease;
 }
 
 .health-intensity-slider input[type="range"]::-webkit-slider-thumb:hover {
-  transform: scale(1.15);
+    transform: scale(1.15);
 }
 
 .health-intensity-labels {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
 }
 
 .health-intensity-labels span {
-  font-size: 12px;
-  color: #999;
+    font-size: 12px;
+    color: #999;
 }
 
 .health-page.dark-mode .health-intensity-labels span {
-  color: #666;
+    color: #666;
 }
 
 /* 睡眠选择 */
 .health-sleep-selector {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 6px;
-  margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    margin-bottom: 20px;
 }
 
 .health-sleep-option {
-  aspect-ratio: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  background: rgba(255, 255, 255, 0.5);
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.5);
 }
 
 .health-page.dark-mode .health-sleep-option {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 .health-sleep-option.active {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
 .health-sleep-emoji {
-  font-size: 24px;
-  margin-bottom: 2px;
+    font-size: 24px;
+    margin-bottom: 2px;
 }
 
 .health-sleep-label {
-  font-size: 11px;
-  font-weight: 500;
-  color: #666;
+    font-size: 11px;
+    font-weight: 500;
+    color: #666;
 }
 
 .health-page.dark-mode .health-sleep-label {
-  color: #999;
+    color: #999;
 }
 
 /* 睡眠时长 */
 .health-sleep-hours {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .health-hours-label {
-  font-size: 14px;
-  font-weight: 600;
-  color: #333;
-  margin-bottom: 12px;
-  display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 12px;
+    display: block;
 }
 
 .health-page.dark-mode .health-hours-label {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 .health-hours-selector {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 6px;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 6px;
 }
 
 .health-hour-btn {
-  aspect-ratio: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  background: rgba(255, 255, 255, 0.5);
-  font-size: 14px;
-  font-weight: 500;
-  color: #333;
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.5);
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
 }
 
 .health-page.dark-mode .health-hour-btn {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
-  color: #e0e0e0;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
 }
 
 .health-hour-btn.active {
-  background: linear-gradient(135deg, #8B5CF6, #7C3AED);
-  border-color: #8B5CF6;
-  color: white;
-  transform: scale(1.05);
+    background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+    border-color: #8B5CF6;
+    color: white;
+    transform: scale(1.05);
 }
 
 /* 运动记录 */
 .health-exercise-section {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .health-exercise-label {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 16px;
-  background: rgba(139, 92, 246, 0.05);
-  border-radius: 12px;
-  cursor: pointer;
-  transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: rgba(139, 92, 246, 0.05);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .health-page.dark-mode .health-exercise-label {
-  background: rgba(139, 92, 246, 0.1);
+    background: rgba(139, 92, 246, 0.1);
 }
 
 .health-exercise-label:hover {
-  background: rgba(139, 92, 246, 0.1);
+    background: rgba(139, 92, 246, 0.1);
 }
 
 .health-exercise-label input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-  accent-color: #8B5CF6;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: #8B5CF6;
 }
 
 .health-exercise-icon {
-  font-size: 24px;
+    font-size: 24px;
 }
 
 .health-exercise-label span:last-child {
-  font-size: 14px;
-  font-weight: 500;
-  color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
 }
 
 .health-page.dark-mode .health-exercise-label span:last-child {
-  color: #e0e0e0;
+    color: #e0e0e0;
 }
 
 /* 心情笔记 */
 .health-note-input {
-  width: 100%;
-  border: 2px solid rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  padding: 14px;
-  font-size: 14px;
-  resize: none;
-  outline: none;
-  transition: all 0.2s ease;
-  background: rgba(255, 255, 255, 0.5);
-  color: #333;
-  font-family: inherit;
-  margin-bottom: 20px;
+    width: 100%;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 14px;
+    resize: none;
+    outline: none;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.5);
+    color: #333;
+    font-family: inherit;
+    margin-bottom: 20px;
 }
 
 .health-page.dark-mode .health-note-input {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
-  color: #e0e0e0;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #e0e0e0;
 }
 
 .health-note-input:focus {
-  border-color: #8B5CF6;
-  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+    border-color: #8B5CF6;
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
 }
 
 .health-note-input::placeholder {
-  color: #999;
+    color: #999;
 }
 
 .health-page.dark-mode .health-note-input::placeholder {
-  color: #666;
+    color: #666;
 }
 
 /* 弹窗按钮 */
 .health-modal-actions {
-  display: flex;
-  gap: 12px;
+    display: flex;
+    gap: 12px;
 }
 
 /* FAB 按钮 */
 .health-fab-btn {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #8B5CF6, #7C3AED);
-  color: white;
-  border: none;
-  font-size: 28px;
-  font-weight: 300;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35);
-  transition: all 0.2s ease;
-  z-index: 99;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+    color: white;
+    border: none;
+    font-size: 28px;
+    font-weight: 300;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35);
+    transition: all 0.2s ease;
+    z-index: 99;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .health-fab-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 18px rgba(139, 92, 246, 0.45);
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(139, 92, 246, 0.45);
 }
 
 /* 加载状态 */
 .health-loading {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 18px;
-  z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    z-index: 1000;
 }
 
 /* 空状态 */
 .health-empty-stats {
-  text-align: center;
-  padding: 32px;
-  color: #999;
-  font-size: 14px;
+    text-align: center;
+    padding: 32px;
+    color: #999;
+    font-size: 14px;
 }
 
 .health-page.dark-mode .health-empty-stats {
-  color: #666;
+    color: #666;
 }
 
 /* 按钮通用样式 */
 .btn {
-  flex: 1;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
+    flex: 1;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, #8B5CF6, #7C3AED);
-  color: white;
-  box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35);
+    background: linear-gradient(135deg, #8B5CF6, #7C3AED);
+    color: white;
+    box-shadow: 0 4px 14px rgba(139, 92, 246, 0.35);
 }
 
 .btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(139, 92, 246, 0.45);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(139, 92, 246, 0.45);
 }
 
 .btn-secondary {
-  background: rgba(255, 255, 255, 0.5);
-  color: #666;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.5);
+    color: #666;
+    border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .health-page.dark-mode .btn-secondary {
-  background: rgba(255, 255, 255, 0.05);
-  color: #999;
-  border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    color: #999;
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.8);
 }
 
 .health-page.dark-mode .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 /* 响应式适配 */
 @media (max-width: 768px) {
-  .health-content {
-    padding: 16px;
-  }
-  
-  .health-tabs {
-    padding: 12px 16px;
-  }
-  
-  .health-stress-suggestions {
-    grid-template-columns: 1fr;
-  }
-  
-  .health-emotion-selector {
-    grid-template-columns: repeat(4, 1fr);
-  }
-  
-  .health-sleep-selector {
-    grid-template-columns: repeat(5, 1fr);
-  }
-  
-  .health-hours-selector {
-    grid-template-columns: repeat(3, 1fr);
-  }
+    .health-content {
+        padding: 16px;
+    }
+
+    .health-tabs {
+        padding: 12px 16px;
+    }
+
+    .health-stress-suggestions {
+        grid-template-columns: 1fr;
+    }
+
+    .health-emotion-selector {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .health-sleep-selector {
+        grid-template-columns: repeat(5, 1fr);
+    }
+
+    .health-hours-selector {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 @media (max-width: 480px) {
-  .health-header {
-    padding: 12px 16px;
-  }
-  
-  .health-title {
-    font-size: 18px;
-  }
-  
-  .health-tabs {
-    padding: 8px 12px;
-  }
-  
-  .health-tab {
-    padding: 10px 12px;
-    font-size: 13px;
-  }
-  
-  .health-content {
-    padding: 12px;
-    gap: 16px;
-  }
-  
-  .health-calendar-cell {
-    border-radius: 10px;
-  }
-  
-  .health-breathing-circle {
-    width: 160px;
-    height: 160px;
-  }
-  
-  .health-breathing-text p {
-    font-size: 18px;
-  }
+    .health-header {
+        padding: 12px 16px;
+    }
+
+    .health-title {
+        font-size: 18px;
+    }
+
+    .health-tabs {
+        padding: 8px 12px;
+    }
+
+    .health-tab {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+
+    .health-content {
+        padding: 12px;
+        gap: 16px;
+    }
+
+    .health-calendar-cell {
+        border-radius: 10px;
+    }
+
+    .health-breathing-circle {
+        width: 160px;
+        height: 160px;
+    }
+
+    .health-breathing-text p {
+        font-size: 18px;
+    }
 }

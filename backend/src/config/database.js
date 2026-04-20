@@ -121,95 +121,95 @@ const initDatabase = async () => {
         // 创建登录失败记录表
         await query(`
         CREATE TABLE IF NOT EXISTS login_attempts (
-          id INT AUTO_INCREMENT PRIMARY KEY,
-          account VARCHAR(255) NOT NULL COMMENT '账号',
-          attempts INT DEFAULT 0 COMMENT '失败次数',
-          last_attempt TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '最后尝试时间',
-          locked_until TIMESTAMP NULL COMMENT '锁定截止时间',
-          INDEX idx_account (account),
-          INDEX idx_locked (locked_until)
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            account VARCHAR(255) NOT NULL COMMENT '账号',
+            attempts INT DEFAULT 0 COMMENT '失败次数',
+            last_attempt TIMESTAMP DEFAULT CURRENT_TIMESTAMP COMMENT '最后尝试时间',
+            locked_until TIMESTAMP NULL COMMENT '锁定截止时间',
+            INDEX idx_account (account),
+            INDEX idx_locked (locked_until)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='登录失败记录表'
       `);
 
         // 创建对话记录表
         await query(`
         CREATE TABLE IF NOT EXISTS conversations (
-          id INT AUTO_INCREMENT PRIMARY KEY,
-          user_id INT NOT NULL COMMENT '用户ID',
-          message TEXT NOT NULL COMMENT '用户消息',
-          response TEXT COMMENT 'AI回复',
-          emotion VARCHAR(20) DEFAULT 'gentle' COMMENT '情绪标签',
-          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-          INDEX idx_user_id (user_id),
-          INDEX idx_created_at (created_at),
-          FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            user_id INT NOT NULL COMMENT '用户ID',
+            message TEXT NOT NULL COMMENT '用户消息',
+            response TEXT COMMENT 'AI回复',
+            emotion VARCHAR(20) DEFAULT 'gentle' COMMENT '情绪标签',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            INDEX idx_user_id (user_id),
+            INDEX idx_created_at (created_at),
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='对话记录表'
       `);
 
         // 创建Token黑名单表
         await query(`
         CREATE TABLE IF NOT EXISTS token_blacklist (
-          id INT AUTO_INCREMENT PRIMARY KEY,
-          token TEXT NOT NULL COMMENT 'Token',
-          expired_at TIMESTAMP NOT NULL COMMENT '过期时间',
-          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-          INDEX idx_expired (expired_at)
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            token TEXT NOT NULL COMMENT 'Token',
+            expired_at TIMESTAMP NOT NULL COMMENT '过期时间',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            INDEX idx_expired (expired_at)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='Token黑名单表'
       `);
 
         // 创建情绪日记表
         await query(`
         CREATE TABLE IF NOT EXISTS emotion_diary (
-          id INT AUTO_INCREMENT PRIMARY KEY,
-          user_id INT NOT NULL,
-          date DATE NOT NULL,
-          emotion VARCHAR(20) NOT NULL DEFAULT 'calm',
-          intensity INT DEFAULT 3 COMMENT '情绪强度 1-5',
-          note TEXT COMMENT '备注',
-          source VARCHAR(10) DEFAULT 'auto' COMMENT 'auto=对话自动记录, manual=手动记录',
-          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-          INDEX idx_user_date (user_id, date),
-          INDEX idx_emotion (emotion),
-          FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            user_id INT NOT NULL,
+            date DATE NOT NULL,
+            emotion VARCHAR(20) NOT NULL DEFAULT 'calm',
+            intensity INT DEFAULT 3 COMMENT '情绪强度 1-5',
+            note TEXT COMMENT '备注',
+            source VARCHAR(10) DEFAULT 'auto' COMMENT 'auto=对话自动记录, manual=手动记录',
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            INDEX idx_user_date (user_id, date),
+            INDEX idx_emotion (emotion),
+            FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='情绪日记表'
       `);
 
         // 为 conversations 表添加 source 字段
         const [sourceCol] = await getPool().execute(
-          `SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS 
-           WHERE TABLE_SCHEMA = ? AND TABLE_NAME = 'conversations' AND COLUMN_NAME = 'source'`,
-          [process.env.DB_NAME || 'yu_ni_xiang_ban']
+            `SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS 
+            WHERE TABLE_SCHEMA = ? AND TABLE_NAME = 'conversations' AND COLUMN_NAME = 'source'`,
+            [process.env.DB_NAME || 'yu_ni_xiang_ban']
         );
         if (sourceCol.length === 0) {
-          await query("ALTER TABLE conversations ADD COLUMN source VARCHAR(10) DEFAULT 'user'");
-          console.log('Added column source to conversations table');
+            await query("ALTER TABLE conversations ADD COLUMN source VARCHAR(10) DEFAULT 'user'");
+            console.log('Added column source to conversations table');
         }
 
         // 创建待办事项表
         await query(`
         CREATE TABLE IF NOT EXISTS todos (
-          id INT PRIMARY KEY AUTO_INCREMENT,
-          user_id INT NOT NULL,
-          title VARCHAR(200) NOT NULL,
-          description TEXT,
-          due_date DATETIME,
-          priority ENUM('low','medium','high') DEFAULT 'medium',
-          completed BOOLEAN DEFAULT FALSE,
-          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-          FOREIGN KEY (user_id) REFERENCES users(id)
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            user_id INT NOT NULL,
+            title VARCHAR(200) NOT NULL,
+            description TEXT,
+            due_date DATETIME,
+            priority ENUM('low','medium','high') DEFAULT 'medium',
+            completed BOOLEAN DEFAULT FALSE,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users(id)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='待办事项表'
       `);
 
         // 创建心情动态表
         await query(`
         CREATE TABLE IF NOT EXISTS moments (
-          id INT PRIMARY KEY AUTO_INCREMENT,
-          user_id INT NOT NULL,
-          content TEXT NOT NULL,
-          emotion VARCHAR(20),
-          likes_count INT DEFAULT 0,
-          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-          FOREIGN KEY (user_id) REFERENCES users(id)
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            user_id INT NOT NULL,
+            content TEXT NOT NULL,
+            emotion VARCHAR(20),
+            likes_count INT DEFAULT 0,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users(id)
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='心情动态表'
       `);
 
