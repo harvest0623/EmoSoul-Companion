@@ -87,22 +87,20 @@
 
 | 功能模块 | 描述 |
 |---------|------|
-| 🔐 用户系统 | 手机号/邮箱注册登录、JWT 认证、密码加密存储 |
-| 🎭 数字人对话 | 虚拟数字人根据对话内容展示不同情绪表情，支持实时对话 |
-| 👤 个人中心 | 支持头像裁剪上传、昵称修改、密码修改 |
-| 📝 情绪日记 | 记录用户情感状态，提供情感分析 |
-| ✅ 待办事项 | 管理日常任务，提高用户 productivity |
-| 📊 情感分析 | 分析用户情感趋势，提供情感洞察 |
-| 🌟 成就系统 | 记录用户使用成就，增强用户粘性 |
-| 🌐 社交分享 | 分享心情和成就，增强社交互动 |
-| 🔍 自我探索 | 人格测试、价值观探索、目标设定功能 |
-| 🧠 思维训练 | 思维训练题目、学习进度跟踪、类别选择 |
-| 🤝 社交连接 | 虚拟朋友圈、兴趣社群、数字人社交 |
-| ✍️ 内容创作 | 内容生成、历史记录管理 |
-| 🎮 休闲互动 | 休闲游戏、互动活动 |
-| 📚 知识学习 | 知识内容学习、学习进度跟踪 |
-| 🩺 健康管理 | 健康数据记录、健康建议 |
-| 📅 日常管理 | 日程安排、习惯养成 |
+| 🔐 用户系统 | 手机号/邮箱注册登录、JWT 认证、密码加密存储、登录防刷机制 |
+| 🎭 数字人对话 | 虚拟数字人根据对话内容展示不同情绪表情，支持实时对话，采用 Live2D 技术实现生动形象 |
+| 👤 个人中心 | 支持头像裁剪上传、昵称修改、密码修改、个人信息管理 |
+| 📝 情绪日记 | 记录用户情感状态，提供情感分析和可视化展示 |
+| 📊 情感分析 | 分析用户情感趋势，提供情感洞察和建议 |
+| 🌐 社交分享 | 分享心情和成就，增强社交互动，支持情绪卡片生成 |
+| 🔍 自我探索 | 人格测试（MBTI）、价值观探索、目标设定功能，帮助用户了解自我 |
+| 🧠 思维训练 | 思维训练题目、学习进度跟踪、多种思维类型选择（批判性思维、创造性思维等） |
+| 🤝 社交连接 | 虚拟朋友圈、兴趣社群、数字人社交，构建虚拟社交网络 |
+| ✍️ 内容创作 | 内容生成、历史记录管理，支持多种内容类型创作 |
+| 🎮 休闲互动 | 休闲游戏、互动活动，提供轻松愉快的娱乐体验 |
+| 📚 知识学习 | 知识内容学习、学习进度跟踪，支持多种知识领域 |
+| 🩺 健康管理 | 健康数据记录、健康建议，关注用户身心健康 |
+| 📅 日常管理 | 日程安排、习惯养成，帮助用户规划和管理日常生活 |
 
 ## 🛠️ 技术栈
 
@@ -158,26 +156,24 @@ EmoSoul-Companion/
 │   │   ├── constants/          # 常量定义
 │   │   ├── hooks/              # 自定义 Hooks
 │   │   ├── pages/              # 页面层
-│   │   │   ├── Achievement/        # 成就系统
-│   │   │   ├── Chat/               # 数字人对话
-│   │   │   ├── ContentCreation/    # 内容创作
-│   │   │   ├── DailyManagement/    # 日常管理
-│   │   │   ├── DigitalHuman/       # 数字人管理
-│   │   │   ├── EmotionAnalysis/    # 情感分析
-│   │   │   ├── ForgotPassword/     # 忘记密码
-│   │   │   ├── HealthManagement/   # 健康管理
-│   │   │   ├── Home/               # 首页
-│   │   │   ├── KnowledgeLearning/  # 知识学习
-│   │   │   ├── LeisureInteraction/ # 休闲互动
-│   │   │   ├── Login/              # 登录
-│   │   │   ├── Profile/            # 个人中心
-│   │   │   ├── Register/           # 注册
-│   │   │   ├── ResetPassword/      # 重置密码   
-│   │   │   ├── SelfExploration/    # 自我探索
-│   │   │   ├── Share/              # 分享功能
-│   │   │   ├── SocialConnection/   # 社交连接
-│   │   │   ├── ThinkingTraining/   # 思维训练
-│   │   │   └── Todo/               # 待办事项
+│   │   │   ├── Chat/               # 数字人对话 - 实时情感对话，Live2D数字人交互
+│   │   │   ├── ContentCreation/    # 内容创作 - 内容生成、历史记录管理
+│   │   │   ├── DailyManagement/    # 日常管理 - 日程安排、习惯养成
+│   │   │   ├── DigitalHuman/       # 数字人管理 - 数字人设置、情绪配置
+│   │   │   ├── EmotionAnalysis/    # 情感分析 - 情感趋势分析、数据可视化
+│   │   │   ├── ForgotPassword/     # 忘记密码 - 密码找回功能
+│   │   │   ├── HealthManagement/   # 健康管理 - 健康数据记录、健康建议
+│   │   │   ├── Home/               # 首页 - 功能导航、用户概览
+│   │   │   ├── KnowledgeLearning/  # 知识学习 - 知识内容学习、学习进度跟踪
+│   │   │   ├── LeisureInteraction/ # 休闲互动 - 休闲游戏、互动活动
+│   │   │   ├── Login/              # 登录 - 用户登录、JWT认证
+│   │   │   ├── Profile/            # 个人中心 - 个人信息管理、头像上传
+│   │   │   ├── Register/           # 注册 - 用户注册、密码加密
+│   │   │   ├── ResetPassword/      # 重置密码 - 密码修改功能
+│   │   │   ├── SelfExploration/    # 自我探索 - 人格测试、价值观探索、目标设定
+│   │   │   ├── Share/              # 分享功能 - 心情分享、情绪卡片生成
+│   │   │   ├── SocialConnection/   # 社交连接 - 虚拟朋友圈、兴趣社群、数字人社交
+│   │   │   └── ThinkingTraining/   # 思维训练 - 思维训练题目、学习进度跟踪
 │   │   ├── services/           # API 服务
 │   │   ├── store/              # 状态管理
 │   │   ├── styles/             # 样式
@@ -471,6 +467,14 @@ const personalityQuestions = [
         { text: '只与少数熟悉的人交谈', value: 'I' }
         ]
     },
+    {
+        id: 2,
+        question: '你更关注：',
+        options: [
+        { text: '具体的事实和细节', value: 'S' },
+        { text: '整体的模式和可能性', value: 'N' }
+        ]
+    },
     // 更多问题...
 ];
 
@@ -506,6 +510,8 @@ const calculateResult = () => {
 // frontend/src/pages/ThinkingTraining/index.jsx
 const [selectedCategory, setSelectedCategory] = useState('critical');
 const [progress, setProgress] = useState(0);
+const [currentQuestion, setCurrentQuestion] = useState(0);
+const [answers, setAnswers] = useState({});
 
 const categories = [
     { id: 'critical', name: '批判性思维', icon: '🧠' },
@@ -519,6 +525,19 @@ useEffect(() => {
     // 模拟学习进度
     setProgress(65);
 }, []);
+
+// 回答问题
+const answerQuestion = (value) => {
+    const question = questions[currentQuestion];
+    setAnswers(prev => ({ ...prev, [question.id]: value }));
+
+    if (currentQuestion < questions.length - 1) {
+        setCurrentQuestion(prev => prev + 1);
+    } else {
+        // 完成训练
+        completeTraining();
+    }
+};
 ```
 
 ### 7. 社交连接功能
@@ -530,6 +549,8 @@ useEffect(() => {
 const [activeTab, setActiveTab] = useState('friends');
 const [posts, setPosts] = useState([]);
 const [newPost, setNewPost] = useState('');
+const [communities, setCommunities] = useState([]);
+const [selectedCommunity, setSelectedCommunity] = useState(null);
 
 const createPost = () => {
     if (!newPost.trim()) return;
@@ -543,9 +564,43 @@ const createPost = () => {
         likes: 0,
         comments: 0
     };
-  
+    
     setPosts([post, ...posts]);
     setNewPost('');
+};
+
+const joinCommunity = (communityId) => {
+    setCommunities(prev => prev.map(community => 
+        community.id === communityId 
+        ? { ...community, joined: true } 
+        : community
+    ));
+};
+```
+
+### 8. 内容创作功能
+
+**前端 - 内容创作实现**
+
+```jsx
+// frontend/src/pages/ContentCreation/index.jsx
+const [activeTab, setActiveTab] = useState('story');
+const [content, setContent] = useState('');
+const [history, setHistory] = useState([]);
+
+const generateContent = async () => {
+    // 模拟内容生成
+    const generatedContent = "这是生成的内容...";
+    setContent(generatedContent);
+    
+    // 保存到历史记录
+    const historyItem = {
+        id: Date.now(),
+        type: activeTab,
+        content: generatedContent,
+        timestamp: new Date().toISOString()
+    };
+    setHistory([historyItem, ...history]);
 };
 ```
 
@@ -553,17 +608,33 @@ const createPost = () => {
 
 ### 添加新页面
 
-1. 在 `frontend/src/pages/` 下创建页面文件夹，包含 `index.jsx` 和对应的 CSS 文件
-2. 在 `frontend/src/App.jsx` 中添加路由配置
-3. 为页面添加页面特定的类名，避免样式冲突
-4. 实现页面功能，包括状态管理和用户交互
-5. 确保页面支持暗黑模式
+1. **创建页面文件夹**：在 `frontend/src/pages/` 下创建页面文件夹，包含 `index.jsx` 和对应的 CSS 文件
+2. **添加路由配置**：在 `frontend/src/App.jsx` 中添加路由配置，确保路由路径与页面功能匹配
+3. **实现页面结构**：
+   - 使用 React 函数式组件
+   - 添加页面特定的类名，避免样式冲突
+   - 实现页面布局和基本结构
+4. **添加状态管理**：
+   - 使用 React useState 和 useEffect 钩子
+   - 对于复杂状态，考虑使用 Zustand 进行全局状态管理
+5. **实现用户交互**：
+   - 添加事件处理函数
+   - 实现表单提交和数据处理
+   - 添加动画和过渡效果
+6. **支持暗黑模式**：
+   - 使用 CSS 变量或条件类名实现暗黑模式
+   - 确保所有元素在暗黑模式下都有良好的显示效果
+7. **测试和优化**：
+   - 测试页面在不同设备上的显示效果
+   - 优化页面性能和用户体验
 
 ### 添加新接口
 
-1. 在 `backend/src/controllers/` 下创建控制器
-2. 在 `backend/src/services/` 下创建服务
-3. 在 `backend/src/routes/index.js` 中注册路由
+1. **创建控制器**：在 `backend/src/controllers/` 下创建控制器，处理请求逻辑
+2. **创建服务**：在 `backend/src/services/` 下创建服务，实现业务逻辑
+3. **注册路由**：在 `backend/src/routes/index.js` 中注册路由，定义 API 路径
+4. **添加中间件**：根据需要添加认证、日志等中间件
+5. **测试接口**：使用 Postman 或其他工具测试接口功能
 
 ### 数据库操作
 
@@ -584,10 +655,47 @@ class UserModel {
         );
         return result;
     }
+    
+    async update(id, userData) {
+        const [result] = await db.execute(
+            'UPDATE users SET nickname = ?, avatar = ? WHERE id = ?',
+            [userData.nickname, userData.avatar, id]
+        );
+        return result;
+    }
 }
 
 export default new UserModel();
 ```
+
+### 样式开发
+
+1. **使用 CSS 模块化**：为每个页面创建独立的 CSS 文件
+2. **使用 CSS 变量**：定义颜色、字体等变量，方便主题切换
+3. **响应式设计**：使用媒体查询适配不同屏幕尺寸
+4. **动画效果**：添加适当的动画和过渡效果，提升用户体验
+5. **暗黑模式**：实现支持暗黑模式的样式
+
+### 状态管理
+
+1. **局部状态**：使用 React useState 管理组件内部状态
+2. **全局状态**：使用 Zustand 管理跨组件的全局状态
+3. **状态持久化**：使用 localStorage 或 sessionStorage 持久化状态
+4. **状态更新**：使用不可变数据模式更新状态，避免直接修改状态
+
+### 性能优化
+
+1. **组件优化**：使用 React.memo 和 useCallback 优化组件渲染
+2. **数据优化**：合理使用 useEffect 依赖项，避免不必要的重渲染
+3. **资源优化**：优化图片和其他静态资源
+4. **网络优化**：使用缓存和请求合并优化网络请求
+
+### 代码规范
+
+1. **命名规范**：使用语义化的变量和函数名
+2. **代码风格**：保持一致的代码风格，使用 ESLint 进行代码检查
+3. **注释规范**：添加适当的注释，提高代码可读性
+4. **文件结构**：保持清晰的文件结构，便于维护和扩展
 
 ## 📦 依赖说明
 
