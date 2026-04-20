@@ -1,389 +1,389 @@
 /* 注册页面样式 */
 .register-page {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, #FAE8FF 0%, #FDF4FF 50%, #F5D0FE 100%);
-  padding: 20px;
-  position: relative;
-  overflow: hidden;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #FAE8FF 0%, #FDF4FF 50%, #F5D0FE 100%);
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
 }
 
 .register-container {
-  display: flex;
-  width: 100%;
-  max-width: 900px;
-  position: relative;
-  z-index: 1;
-  background: white;
-  border-radius: 24px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(139, 92, 246, 0.15);
+    display: flex;
+    width: 100%;
+    max-width: 900px;
+    position: relative;
+    z-index: 1;
+    background: white;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(139, 92, 246, 0.15);
 }
 
 /* 左侧品牌区域 */
 .register-brand {
-  flex: 0 0 45%;
-  background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
-  color: white;
-  padding: 60px 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  position: relative;
-  overflow: hidden;
+    flex: 0 0 45%;
+    background: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+    color: white;
+    padding: 60px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    position: relative;
+    overflow: hidden;
 }
 
 .register-brand::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  right: -50%;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  z-index: 0;
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 0;
 }
 
 .register-brand::after {
-  content: '';
-  position: absolute;
-  bottom: -50%;
-  left: -50%;
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.1);
-  z-index: 0;
+    content: '';
+    position: absolute;
+    bottom: -50%;
+    left: -50%;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    z-index: 0;
 }
 
 .brand-content {
-  position: relative;
-  z-index: 1;
-  width: 100%;
+    position: relative;
+    z-index: 1;
+    width: 100%;
 }
 
 .brand-title {
-  font-size: 36px;
-  font-weight: 700;
-  margin-bottom: 16px;
-  line-height: 1.2;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    line-height: 1.2;
 }
 
 .brand-subtitle {
-  font-size: 18px;
-  margin-bottom: 32px;
-  opacity: 0.9;
-  line-height: 1.4;
+    font-size: 18px;
+    margin-bottom: 32px;
+    opacity: 0.9;
+    line-height: 1.4;
 }
 
 .brand-features {
-  margin-bottom: 40px;
+    margin-bottom: 40px;
 }
 
 .feature-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 16px;
-  opacity: 0.9;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+    opacity: 0.9;
 }
 
 .feature-icon {
-  font-size: 20px;
-  margin-top: 2px;
+    font-size: 20px;
+    margin-top: 2px;
 }
 
 .feature-text {
-  font-size: 14px;
-  line-height: 1.4;
+    font-size: 14px;
+    line-height: 1.4;
 }
 
 .brand-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
 }
 
 .brand-tag {
-  background: rgba(255, 255, 255, 0.2);
-  padding: 6px 16px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 500;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
 }
 
 /* 右侧注册区域 */
 .register-form-container {
-  flex: 1;
-  padding: 32px 40px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow-y: auto;
+    flex: 1;
+    padding: 32px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-y: auto;
 }
 
 .register-header {
-  text-align: center;
-  position: relative;
+    text-align: center;
+    position: relative;
 }
 
 .register-header h1 {
-  font-size: 36px;
-  font-weight: 700;
-  background: linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  margin-bottom: 8px;
+    font-size: 36px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #EC4899 0%, #8B5CF6 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
 }
 
 .register-header p {
-  color: var(--text-secondary);
-  font-size: 16px;
+    color: var(--text-secondary);
+    font-size: 16px;
 }
 
 .register-card {
-  background: white;
-  border-radius: 24px;
-  padding: 12px 40px;
-  box-shadow: 0 20px 60px rgba(139, 92, 246, 0.15);
-  margin-top: 4px;
+    background: white;
+    border-radius: 24px;
+    padding: 12px 40px;
+    box-shadow: 0 20px 60px rgba(139, 92, 246, 0.15);
+    margin-top: 4px;
 }
 
 .register-card h2 {
-  font-size: 24px;
-  font-weight: 600;
-  margin: 4px 0 4px;
-  text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    margin: 4px 0 4px;
+    text-align: center;
 }
 
 .register-subtitle {
-  color: var(--text-secondary);
-  text-align: center;
-  margin-bottom: 16px;
-  font-size: 14px;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: 16px;
+    font-size: 14px;
 }
 
 .register-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
 .form-group label {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--text-primary);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
 }
 
 .register-btn {
-  margin-top: 4px;
-  padding: 14px;
-  font-size: 16px;
-  font-weight: 600;
+    margin-top: 4px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
 }
 
 .register-footer {
-  margin-top: 12px;
-  text-align: center;
-  font-size: 14px;
-  color: var(--text-secondary);
+    margin-top: 12px;
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-secondary);
 }
 
 .register-footer a {
-  color: var(--primary-color);
-  font-weight: 600;
-  text-decoration: none;
+    color: var(--primary-color);
+    font-weight: 600;
+    text-decoration: none;
 }
 
 .register-footer a:hover {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 /* 装饰元素 */
 .register-decoration {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 0;
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .floating-shape {
-  position: absolute;
-  border-radius: 50%;
-  opacity: 0.3;
-  animation: float 6s ease-in-out infinite;
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: float 6s ease-in-out infinite;
 }
 
 .register-decoration .shape-1 {
-  width: 280px;
-  height: 280px;
-  background: linear-gradient(135deg, #EC4899 0%, #F472B6 100%);
-  top: -80px;
-  left: -80px;
-  animation-delay: 0s;
+    width: 280px;
+    height: 280px;
+    background: linear-gradient(135deg, #EC4899 0%, #F472B6 100%);
+    top: -80px;
+    left: -80px;
+    animation-delay: 0s;
 }
 
 .register-decoration .shape-2 {
-  width: 180px;
-  height: 180px;
-  background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
-  bottom: -40px;
-  right: -40px;
-  animation-delay: 2s;
+    width: 180px;
+    height: 180px;
+    background: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+    bottom: -40px;
+    right: -40px;
+    animation-delay: 2s;
 }
 
 .register-decoration .shape-3 {
-  width: 120px;
-  height: 120px;
-  background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
-  top: 40%;
-  left: 8%;
-  animation-delay: 4s;
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #3B82F6 0%, #60A5FA 100%);
+    top: 40%;
+    left: 8%;
+    animation-delay: 4s;
 }
 
 /* 响应式 */
 @media (max-width: 480px) {
-  .register-card {
-    padding: 24px 20px;
-  }
-  
-  .register-header h1 {
-    font-size: 28px;
-  }
-  
-  .register-form {
-    gap: 12px;
-  }
+    .register-card {
+        padding: 24px 20px;
+    }
+
+    .register-header h1 {
+        font-size: 28px;
+    }
+
+    .register-form {
+        gap: 12px;
+    }
 }
 
 /* 密码强度指示器 */
 .password-strength {
-  margin-top: 8px;
+    margin-top: 8px;
 }
 
 .strength-meter {
-  width: 100%;
-  height: 6px;
-  background-color: var(--bg-secondary);
-  border-radius: 3px;
-  overflow: hidden;
-  margin-bottom: 6px;
+    width: 100%;
+    height: 6px;
+    background-color: var(--bg-secondary);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 6px;
 }
 
 .strength-bar {
-  height: 100%;
-  transition: all 0.3s ease;
-  border-radius: 3px;
+    height: 100%;
+    transition: all 0.3s ease;
+    border-radius: 3px;
 }
 
 .strength-bar.weak {
-  background-color: #EF4444;
+    background-color: #EF4444;
 }
 
 .strength-bar.medium {
-  background-color: #F59E0B;
+    background-color: #F59E0B;
 }
 
 .strength-bar.strong {
-  background-color: #10B981;
+    background-color: #10B981;
 }
 
 .strength-info {
-  font-size: 12px;
-  color: var(--text-secondary);
+    font-size: 12px;
+    color: var(--text-secondary);
 }
 
 .strength-text {
-  font-weight: 500;
+    font-weight: 500;
 }
 
 .strength-text.weak {
-  color: #EF4444;
+    color: #EF4444;
 }
 
 .strength-text.medium {
-  color: #F59E0B;
+    color: #F59E0B;
 }
 
 .strength-text.strong {
-  color: #10B981;
+    color: #10B981;
 }
 
 .strength-suggestions {
-  margin-top: 4px;
+    margin-top: 4px;
 }
 
 .suggestion-item {
-  display: block;
-  margin-top: 2px;
-  font-size: 11px;
-  color: var(--text-muted);
+    display: block;
+    margin-top: 2px;
+    font-size: 11px;
+    color: var(--text-muted);
 }
 
 /* 输入框样式 */
 .input-with-icon {
-  position: relative;
-  width: 100%;
+    position: relative;
+    width: 100%;
 }
 
 .input-icon {
-  position: absolute;
-  left: 16px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--text-secondary);
-  font-size: 18px;
-  pointer-events: none;
-  z-index: 1;
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-secondary);
+    font-size: 18px;
+    pointer-events: none;
+    z-index: 1;
 }
 
 .iconfont {
-  font-family: "iconfont" !important;
-  font-style: normal;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    font-family: "iconfont" !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 .input {
-  width: 100%;
-  padding: 14px 16px 14px 44px;
-  border: 2px solid #e0e0e0;
-  border-radius: 16px;
-  font-size: 16px;
-  transition: all 0.3s ease;
-  background: white;
-  color: var(--text-primary);
-  box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.1);
+    width: 100%;
+    padding: 14px 16px 14px 44px;
+    border: 2px solid #e0e0e0;
+    border-radius: 16px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: white;
+    color: var(--text-primary);
+    box-shadow: 0 0 0 0 rgba(139, 92, 246, 0.1);
 }
 
 .input:focus {
-  outline: none;
-  border-color: #8B5CF6;
-  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2), 0 0 16px rgba(139, 92, 246, 0.3);
+    outline: none;
+    border-color: #8B5CF6;
+    box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.2), 0 0 16px rgba(139, 92, 246, 0.3);
 }
 
 .input::placeholder {
-  color: var(--text-secondary);
-  opacity: 0.7;
+    color: var(--text-secondary);
+    opacity: 0.7;
 }
 
 .input-error {
-  border-color: #EF4444;
-  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2), 0 0 16px rgba(239, 68, 68, 0.3);
+    border-color: #EF4444;
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2), 0 0 16px rgba(239, 68, 68, 0.3);
 }
 
 .input-error:focus {
-  border-color: #EF4444;
-  box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2), 0 0 16px rgba(239, 68, 68, 0.3);
+    border-color: #EF4444;
+    box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2), 0 0 16px rgba(239, 68, 68, 0.3);
 }
